@@ -1,10 +1,11 @@
-import { Link, useCatch } from '@remix-run/react'
+import { Link, isRouteErrorResponse, useRouteError } from '@remix-run/react'
 
 export function DefaultCatchBoundary({ isRoot }: { isRoot?: boolean }) {
-  let caught = useCatch()
-
+  const error = useRouteError();
+  
+  if (isRouteErrorResponse(error)) {
   let message
-  switch (caught.status) {
+  switch (error.status) {
     case 401:
       message = (
         <p>
@@ -26,9 +27,9 @@ export function DefaultCatchBoundary({ isRoot }: { isRoot?: boolean }) {
   return (
     <div className="flex-1 p-4 flex flex-col items-center justify-center gap-6">
       <h1 className="opacity-10 flex flex-col text-center font-black">
-        <div className="text-7xl leading-none">{caught.status}</div>
-        {caught.statusText ? (
-          <div className="text-3xl leading-none">{caught.statusText}</div>
+        <div className="text-7xl leading-none">{error.status}</div>
+        {error.statusText ? (
+          <div className="text-3xl leading-none">{error.statusText}</div>
         ) : null}
       </h1>
       {message ? <div className="text-lg">{message}</div> : null}
@@ -42,4 +43,5 @@ export function DefaultCatchBoundary({ isRoot }: { isRoot?: boolean }) {
       ) : null}
     </div>
   )
+  }
 }

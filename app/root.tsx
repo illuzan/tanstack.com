@@ -1,4 +1,4 @@
-import * as React from 'react'
+import type { LinksFunction, MetaFunction } from "@remix-run/node";
 import {
   Links,
   LiveReload,
@@ -6,32 +6,35 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-  useCatch,
+  isRouteErrorResponse,
   useMatches,
-  useTransition,
-} from '@remix-run/react'
-import type { LinksFunction, MetaFunction } from '@remix-run/node'
+  useNavigation,
+  useRouteError,
+} from "@remix-run/react";
 
-import styles from './styles/app.generated.css'
+import styles from "./styles/app.css";
+import carbon from './styles/carbon.css'
 import prismThemeLight from './styles/prismThemeLight.css'
 import prismThemeDark from './styles/prismThemeDark.css'
 import docSearchStyles from '@docsearch/css/dist/style.css'
 import { CgSpinner } from 'react-icons/cg'
 
+
+
 import { seo } from './utils/seo'
 import { DefaultCatchBoundary } from './components/DefaultCatchBoundary'
 
-export const meta: MetaFunction = () => ({
-  charset: 'utf-8',
-  viewport: 'width=device-width,initial-scale=1',
-  ...seo({
-    title: 'TanStack | High Quality Open-Source Software for Web Developers',
-    description: `Headless, type-safe, powerful utilities for complex workflows like Data Management, Data Visualization, Charts, Tables, and UI Components.`,
-    image: require('./images/og.png'),
-    keywords:
-      'tanstack,react,reactjs,react query,react table,open source,open source software,oss,software',
-  }),
-})
+// export const meta: MetaFunction = () => ({
+//   charset: 'utf-8',
+//   viewport: 'width=device-width,initial-scale=1',
+//   ...seo({
+//     title: 'TanStack | High Quality Open-Source Software for Web Developers',
+//     description: `Headless, type-safe, powerful utilities for complex workflows like Data Management, Data Visualization, Charts, Tables, and UI Components.`,
+//     image: require('./images/og.png'),
+//     keywords:
+//       'tanstack,react,reactjs,react query,react table,open source,open source software,oss,software',
+//   }),
+// })
 
 export let links: LinksFunction = () => {
   return [
@@ -52,7 +55,7 @@ export let links: LinksFunction = () => {
     },
     {
       rel: 'stylesheet',
-      href: require('./styles/carbon.css'),
+      href: carbon,
     },
     {
       rel: 'apple-touch-icon',
@@ -91,16 +94,13 @@ function Document({
   children: React.ReactNode
   title?: string
 }) {
-  const transition = useTransition()
+  const navigation = useNavigation()
   const matches = useMatches()
-  // const styles = useStylesLink()
 
   return (
-    // <html lang="en" className={cx(getGlobalStyles())}>
-    <html lang='en'>
+    <html lang="en">
       <head>
-        {/* {styles} */}
-        {matches.find((d) => d.handle?.baseParent) ? (
+        {matches.find((d:any) => d.handle?.baseParent) ? (
           <base target='_parent' />
         ) : null}
         {title ? <title>{title}</title> : null}
@@ -144,7 +144,7 @@ function Document({
           className={`absolute top-2 left-1/2 -translate-1/2 p-2 bg-white dark:bg-gray-800
           rounded-lg shadow-lg transition-opacity duration-300 hover:opacity-0 pointer-events-none
           z-30 delay-300 ${
-            transition.state !== 'idle' ? 'opacity-1' : 'opacity-0'
+            navigation.state !== 'idle' ? 'opacity-1' : 'opacity-0'
           }`}
         >
           <CgSpinner className='text-2xl animate-spin' />
@@ -154,19 +154,21 @@ function Document({
   )
 }
 
-export function CatchBoundary() {
-  let caught = useCatch()
-
-  return (
-    <Document title={`${caught.status} ${caught.statusText}`}>
-      <div className="h-[50vh] flex flex-col items-center justify-center gap-6">
-        <DefaultCatchBoundary isRoot />
-      </div>
-    </Document>
-  )
-}
-
 export function ErrorBoundary({ error }: { error: Error }) {
+  const caught = useRouteError();
+
+  // CatchBoundary
+  if (isRouteErrorResponse(caught)) {
+    return (
+      <Document title={`${caught.status} ${caught.statusText}`}>
+        <div className="h-[50vh] flex flex-col items-center justify-center gap-6">
+          <DefaultCatchBoundary isRoot />
+        </div>
+      </Document>
+    )
+  }
+
+  // ErrorBoundary
   console.error(error)
   return (
     <Document title="Error!">

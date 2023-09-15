@@ -3,7 +3,7 @@ import {
   Link,
   useActionData,
   useLoaderData,
-  useTransition,
+  useNavigation,
 } from '@remix-run/react'
 import type { ActionFunction } from '@remix-run/node'
 import { json, LoaderArgs } from '@remix-run/node'
@@ -211,8 +211,8 @@ function sample(arr: any[], random = Math.random()) {
 export default function Index() {
   const data = useActionData()
   const { sponsors, randomNumber } = useLoaderData<typeof loader>()
-  const transition = useTransition()
-  const isLoading = transition.state === 'submitting'
+  const navigation = useNavigation()
+  const isLoading = navigation.state === 'submitting'
   const hasSubmitted = data?.status === 'success'
   const hasError = data?.status === 'error'
 
