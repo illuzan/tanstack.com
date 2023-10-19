@@ -7,15 +7,15 @@ import { useMatchesData } from "~/utils/utils";
 export const repo = "tanstack/query";
 
 const latestBranch = "main";
-export const latestVersion = "v4";
+export const latestVersion = "v5";
 export const availableVersions = [
   {
     name: "v5",
-    branch: "beta",
+    branch: latestBranch,
   },
   {
     name: "v4",
-    branch: latestBranch,
+    branch: "v4",
   },
   {
     name: "v3",
@@ -64,7 +64,7 @@ export let meta: MetaFunction = (meta) => {
     title: "TanStack Query | React Query, Solid Query, Svelte Query, Vue Query",
     description:
       "Powerful asynchronous state management, server-state utilities and  data fetching for TS/JS, React, Solid, Svelte and Vue",
-    image: "https://github.com/tanstack/query/raw/beta/media/repo-header.png",
+    image: "https://github.com/tanstack/query/raw/main/media/repo-header.png",
   });
 };
 
