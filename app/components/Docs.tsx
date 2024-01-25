@@ -1,4 +1,4 @@
-import { DocSearch } from '@docsearch/react'
+import DocSearch from '@docsearch/react'
 import * as React from 'react'
 import { CgClose, CgMenuLeft } from 'react-icons/cg'
 import { FaArrowLeft, FaArrowRight, FaTimes } from 'react-icons/fa'

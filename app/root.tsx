@@ -9,6 +9,7 @@ import { RootDocument } from '~/components/RootDocument'
 import { DefaultCatchBoundary } from '~/components/DefaultCatchBoundary'
 import type { LinksFunction, MetaFunction } from '@remix-run/node'
 import ogImage from '~/images/og.png'
+import "./tailwind.css";
 
 export const meta: MetaFunction = () => {
   return seo({
