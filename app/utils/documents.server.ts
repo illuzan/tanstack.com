@@ -1,6 +1,6 @@
 import fsp from 'node:fs/promises'
 import path from 'node:path'
-// import { fileURLToPath } from 'node:url'
+import { fileURLToPath } from 'node:url'
 import * as graymatter from 'gray-matter'
 import { fetchCached } from '~/utils/cache.server'
 
@@ -43,11 +43,19 @@ async function fetchRemote(
  * Return text content of file from local file system
  */
 async function fetchFs(repo: string, filepath: string) {
-  // const __dirname = fileURLToPath(new URL('.', import.meta.url))
-  const dirname = import.meta.url.split('://').at(-1)!
-  const localFilePath = path.resolve(dirname, `../../../../${repo}`, filepath)
-  const file = await fsp.readFile(localFilePath)
-  return file.toString()
+  try {
+    const dirname = path.dirname(fileURLToPath(import.meta.url))
+    const localFilePath = path.join(dirname, '..', '..', '..', repo, filepath)
+
+    const file = await fsp.readFile(localFilePath, 'utf-8')
+    return file
+  } catch (error) {
+    throw new Error(
+      `Failed to read file ${filepath} from repo ${repo}: ${
+        error instanceof Error ? error.message : String(error)
+      }`
+    )
+  }
 }
 
 /**
