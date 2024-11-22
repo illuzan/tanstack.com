@@ -14,9 +14,6 @@
     "linkAll": "node scripts/link.js"
   },
   "dependencies": {
-    "@builder.io/react-hydration-overlay": "^0.0.8",
-    "@docsearch/css": "^3.5.2",
-    "@docsearch/react": "^3.5.2",
     "@headlessui/react": "1.7.18",
     "@octokit/graphql": "^7.0.2",
     "@octokit/rest": "^20.0.2",
@@ -41,7 +38,6 @@
     "eslint-config-react-app": "^7.0.1",
     "gray-matter": "^4.0.3",
     "html-react-parser": "^5.1.10",
-    "import-meta-resolve": "^4.0.0",
     "lru-cache": "^7.13.1",
     "marked": "^13.0.2",
     "marked-alert": "^2.0.1",
@@ -62,7 +58,6 @@
     "zustand": "^4.5.2"
   },
   "devDependencies": {
-    "@orama/orama": "^2.0.16",
     "@shikijs/transformers": "^1.10.3",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
@@ -70,7 +65,6 @@
     "autoprefixer": "^10.4.18",
     "eslint": "^8.57.0",
     "eslint-plugin-unicorn": "^49.0.0",
-    "npm-run-all": "^4.1.5",
     "postcss": "^8.4.35",
     "prettier": "^2.8.8",
     "tailwindcss": "^3.4.1",

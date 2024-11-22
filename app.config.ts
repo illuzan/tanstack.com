@@ -8,7 +8,9 @@ export default defineConfig({
   },
   vite: {
     plugins: [
-      tsConfigPaths(),
+      tsConfigPaths({
+        projects: ['./tsconfig.json'],
+      }),
       (() => {
         const replacements = [
           // replace `throw Error(p(418))` with `console.error(p(418))`
