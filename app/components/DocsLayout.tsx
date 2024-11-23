@@ -566,29 +566,29 @@ export function DocsLayout({
         )}
       >
         {children}
-        <div className="fixed flex items-center flex-wrap bottom-2 left-0 lg:left-[250px] z-10 right-0 text-xs md:text-sm px-1">
-          <div className="w-1/2 px-1 flex justify-end flex-wrap">
+        <div className="fixed bottom-3 z-10 flex flex-wrap items-center px-1 text-xs md:text-sm">
+          <div className="flex flex-wrap justify-end px-1">
             {prevItem ? (
               <Link
                 to={prevItem.to}
                 params
-                className="py-1 px-2 bg-white/70 text-black dark:bg-gray-500/40 dark:text-white shadow-lg shadow-black/20 flex items-center justify-center backdrop-blur-sm z-20 rounded-lg overflow-hidden"
+                className="z-20 flex items-center justify-center overflow-hidden rounded-lg bg-white/70 px-2 py-1 text-black shadow-lg shadow-black/20 backdrop-blur-sm dark:bg-gray-500/40 dark:text-white"
               >
-                <div className="flex gap-2 items-center font-bold">
+                <div className="flex items-center gap-2 font-bold">
                   <FaArrowLeft />
                   {prevItem.label}
                 </div>
               </Link>
             ) : null}
           </div>
-          <div className="w-1/2 px-1 flex justify-start flex-wrap">
+          <div className="flex flex-wrap justify-start px-1">
             {nextItem ? (
               <Link
                 to={nextItem.to}
                 params
-                className="py-1 px-2 bg-white/70 text-black dark:bg-gray-500/40 dark:text-white shadow-lg shadow-black/20 flex items-center justify-center backdrop-blur-sm z-20 rounded-lg overflow-hidden"
+                className="z-20 flex items-center justify-center overflow-hidden rounded-lg bg-white/70 px-2 py-1 text-black shadow-lg shadow-black/20 backdrop-blur-sm dark:bg-gray-500/40 dark:text-white"
               >
-                <div className="flex gap-2 items-center font-bold">
+                <div className="flex items-center gap-2 font-bold">
                   <span
                     className={`bg-gradient-to-r ${colorFrom} ${colorTo} bg-clip-text text-transparent`}
                   >
