@@ -1,6 +1,9 @@
-import { Fragment } from 'react'
-import { Listbox, Transition } from '@headlessui/react'
-
+import {
+  Listbox,
+  ListboxButton,
+  ListboxOption,
+  ListboxOptions,
+} from '@headlessui/react'
 import { HiCheck, HiChevronDown } from 'react-icons/hi'
 
 export type SelectOption = {
@@ -36,7 +39,7 @@ export function Select<T extends SelectOption>({
 
   return (
     <div className={`top-16 w-full flex-1 ${className}`}>
-      <div className="text-[.8em] uppercase font-black">{label}</div>
+      <div className="text-[.8em] font-black uppercase">{label}</div>
       <form
         onSubmit={(e) => {
           e.preventDefault()
@@ -44,7 +47,7 @@ export function Select<T extends SelectOption>({
       >
         <Listbox name="framework" value={selectedOption} onChange={onSelect}>
           <div className="relative mt-1">
-            <Listbox.Button className="relative items-center  w-full gap-2 flex hover:bg-gray-100/70 dark:hover:bg-gray-800 cursor-default border-2 dark:border-gray-700/80 rounded-md py-2 pl-2 pr-10 text-left focus:outline-none focus-visible:border-indigo-500  sm:text-sm">
+            <ListboxButton className="relative flex w-full cursor-default items-center gap-2 rounded-md border-2 py-2 pl-2 pr-10 text-left hover:bg-gray-100/70 focus:outline-none focus-visible:border-indigo-500 sm:text-sm dark:border-gray-700/80 dark:hover:bg-gray-800">
               {selectedOption.logo ? (
                 <figure className="flex">
                   <img
@@ -62,56 +65,46 @@ export function Select<T extends SelectOption>({
                   aria-hidden="true"
                 />
               </span>
-            </Listbox.Button>
-            <Transition
-              as={Fragment}
-              leave="transition ease-in duration-100"
-              leaveFrom="opacity-100"
-              leaveTo="opacity-0"
+            </ListboxButton>
+            <ListboxOptions
+              transition
+              className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md border-gray-600/70 bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none data-[closed]:data-[leave]:opacity-0 data-[leave]:transition data-[leave]:duration-100 data-[leave]:ease-in sm:text-sm dark:border-2 dark:bg-gray-800"
             >
-              <Listbox.Options className="absolute z-10 dark:bg-gray-800 dark:border-2 border-gray-600/70 mt-1 max-h-60 w-fit overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                {Object.values(available).map((option) => (
-                  <Listbox.Option
-                    key={option.value}
-                    className={({ active }) =>
-                      `relative cursor-default select-none py-2 pr-10 ${
-                        active
-                          ? 'bg-gray-100 dark:bg-gray-700'
-                          : 'text-gray-900 dark:text-gray-300'
-                      } ${option.logo ? 'pl-10' : 'pl-2'}`
-                    }
-                    value={option}
-                  >
-                    {({ selected }) => (
-                      <>
-                        {option.logo ? (
-                          <figure className="absolute inset-y-0 left-0 flex items-center pl-2 text-gray-800">
-                            <img
-                              height={18}
-                              width={18}
-                              src={option.logo}
-                              alt={`${option.label} logo`}
-                            />
-                          </figure>
-                        ) : null}
-                        <span
-                          className={`block truncate ${
-                            selected ? 'font-medium' : 'font-normal'
-                          }`}
-                        >
-                          {option.label}
+              {Object.values(available).map((option) => (
+                <ListboxOption
+                  key={option.value}
+                  className={`relative cursor-default select-none py-2 pr-10 text-gray-900 data-[focus]:bg-gray-100 data-[selectedOption]:bg-gray-100 dark:text-gray-300 dark:data-[focus]:bg-gray-700 dark:data-[selectedOption]:bg-gray-700 ${option.logo ? 'pl-10' : 'pl-2'}`}
+                  value={option}
+                >
+                  {({ selected }) => (
+                    <>
+                      {option.logo ? (
+                        <figure className="absolute inset-y-0 left-0 flex items-center pl-2 text-gray-800">
+                          <img
+                            height={18}
+                            width={18}
+                            src={option.logo}
+                            alt={`${option.label} logo`}
+                          />
+                        </figure>
+                      ) : null}
+                      <span
+                        className={`block truncate ${
+                          selected ? 'font-medium' : 'font-normal'
+                        }`}
+                      >
+                        {option.label}
+                      </span>
+                      {selected ? (
+                        <span className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-800 dark:text-gray-400">
+                          <HiCheck className="h-5 w-5" aria-hidden="true" />
                         </span>
-                        {selected ? (
-                          <span className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-800 dark:text-gray-400">
-                            <HiCheck className="h-5 w-5" aria-hidden="true" />
-                          </span>
-                        ) : null}
-                      </>
-                    )}
-                  </Listbox.Option>
-                ))}
-              </Listbox.Options>
-            </Transition>
+                      ) : null}
+                    </>
+                  )}
+                </ListboxOption>
+              ))}
+            </ListboxOptions>
           </div>
         </Listbox>
       </form>

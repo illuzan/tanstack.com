@@ -14,7 +14,7 @@
     "linkAll": "node scripts/link.js"
   },
   "dependencies": {
-    "@headlessui/react": "1.7.18",
+    "@headlessui/react": "2.2.0",
     "@octokit/graphql": "^7.0.2",
     "@octokit/rest": "^20.0.2",
     "@orama/react-components": "^0.0.25",
