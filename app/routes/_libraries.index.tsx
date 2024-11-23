@@ -20,6 +20,7 @@ import bytesImage from '~/images/bytes.svg'
 // import waves from '~/images/waves.png'
 // import background from '~/images/background.jpg'
 import { partners } from '../utils/partners'
+import { FaBox, FaCube, FaDownload, FaStar, FaUsers } from 'react-icons/fa'
 
 export const textColors = [
   `text-rose-500`,
@@ -91,7 +92,7 @@ function Index() {
         className="-bottom-[50px] -right-[100px] z-0 fixed opacity-20"
       /> */}
       <div className="max-w-full z-10">
-        <div className="flex flex-col items-center gap-6 text-center px-4 py-12 lg:py-24">
+        <div className="flex flex-col items-center gap-6 text-center px-4 pt-12 lg:pt-24">
           <div className="flex gap-2 lg:gap-4 items-center">
             <img
               src={logoColor}
@@ -117,8 +118,8 @@ function Index() {
           </div>
           <h2
             className="font-bold text-2xl max-w-md
-            md:text-3xl
-            lg:text-5xl lg:max-w-2xl"
+            md:text-4xl
+            lg:text-5xl lg:max-w-2xl text-balance"
           >
             High-quality open-source software for{' '}
             <span className="underline decoration-dashed decoration-yellow-500 decoration-3 underline-offset-2">
@@ -127,7 +128,7 @@ function Index() {
           </h2>
           <p
             className="text opacity-90 max-w-sm
-            lg:text-xl lg:max-w-2xl"
+            lg:text-xl lg:max-w-2xl text-balance"
           >
             Headless, type-safe, & powerful utilities for Web Applications,
             Routing, State Management, Data Visualization, Datagrids/Tables, and
@@ -135,6 +136,45 @@ function Index() {
           </p>
         </div>
         <div className="h-8" />
+        <div className="p-8 w-fit mx-auto grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-8 items-center justify-center place-items-center bg-white/50 dark:bg-gray-700/30 dark:shadow-none rounded-xl shadow-xl">
+          <div className="flex gap-4 items-center">
+            <FaDownload className="text-2xl" />
+            <div className="">
+              <div className="text-2xl font-bold opacity-80">352,749,203</div>
+              <div className="text-sm opacity-50 font-medium italic">
+                NPM Downloads
+              </div>
+            </div>
+          </div>
+          <div className="flex gap-4 items-center">
+            <FaStar className="text-2xl" />
+            <div className="">
+              <div className="text-2xl font-bold opacity-80">91,478</div>
+              <div className="text-sm opacity-50 font-medium italic">
+                Stars on Github
+              </div>
+            </div>
+          </div>
+          <div className="flex gap-4 items-center">
+            <FaUsers className="text-2xl" />
+            <div className="">
+              <div className="text-2xl font-bold opacity-80">1,959</div>
+              <div className="text-sm opacity-50 font-medium italic">
+                Contributors on GitHub
+              </div>
+            </div>
+          </div>
+          <div className="flex gap-4 items-center">
+            <FaCube className="text-2xl" />
+            <div className="">
+              <div className="text-2xl font-bold opacity-80">1,126,523</div>
+              <div className="text-sm opacity-50 font-medium italic">
+                Dependents on GitHub
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="h-24" />
         <div className="px-4 lg:max-w-screen-lg md:mx-auto">
           <h3 className={`text-4xl font-light`}>Open Source Libraries</h3>
           <div
