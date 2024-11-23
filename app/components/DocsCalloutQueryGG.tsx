@@ -31,7 +31,7 @@ export function DocsCalloutQueryGG() {
             </p>
           </>
         )}
-        <button className="block m-1 w-full mx-auto px-4 py-2 rounded uppercase font-bold text-sm text-center hover:bg-gray-100/70 dark:hover:bg-gray-800 cursor-default border-2 dark:border-gray-700/80">
+        <button className="block m-1 w-full mx-auto px-4 py-2 rounded-sm uppercase font-bold text-sm text-center hover:bg-gray-100/70 dark:hover:bg-gray-800 cursor-default border-2 dark:border-gray-700/80">
           {ppp ? ` Get ${ppp.discount * 100}% off ${ppp.flag}` : 'Learn More'}
         </button>
       </div>

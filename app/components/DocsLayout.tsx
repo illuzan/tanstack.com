@@ -372,7 +372,7 @@ export function DocsLayout({
         <div className="h-2" />
         <ul className="ml-2 text-[.85em] list-none">
           {group?.children?.map((child, i) => {
-            const linkClasses = `cursor-pointer flex gap-2 items-center justify-between group px-2 py-[.1rem] rounded-lg hover:bg-gray-500 hover:bg-opacity-10`
+            const linkClasses = `cursor-pointer flex gap-2 items-center justify-between group px-2 py-[.1rem] rounded-lg hover:bg-gray-500/10`
 
             return (
               <li key={i}>
@@ -390,7 +390,7 @@ export function DocsLayout({
                     activeOptions={{
                       exact: true,
                     }}
-                    className="!cursor-pointer relative"
+                    className="cursor-pointer! relative"
                   >
                     {(props) => {
                       return (
@@ -399,7 +399,7 @@ export function DocsLayout({
                             className={twMerge(
                               'overflow-auto w-full',
                               props.isActive
-                                ? `font-bold text-transparent bg-clip-text bg-gradient-to-r ${colorFrom} ${colorTo}`
+                                ? `font-bold text-transparent bg-clip-text bg-linear-to-r ${colorFrom} ${colorTo}`
                                 : ''
                             )}
                           >
@@ -465,7 +465,7 @@ export function DocsLayout({
       <details
         ref={detailsRef as any}
         id="docs-details"
-        className="border-b border-gray-500 border-opacity-20"
+        className="border-b border-gray-500/20"
       >
         <summary className="p-4 flex gap-2 items-center justify-between">
           <div className="flex gap-2 items-center text-xl md:text-2xl">
@@ -476,7 +476,7 @@ export function DocsLayout({
         </summary>
         <div
           className="flex flex-col gap-4 p-4 whitespace-nowrap h-[0vh] overflow-y-auto
-          border-t border-gray-500 border-opacity-20 bg-gray-100 text-lg
+          border-t border-gray-500/20 bg-gray-100 text-lg
           dark:bg-gray-900"
         >
           <div className="flex gap-4">
@@ -590,7 +590,7 @@ export function DocsLayout({
               >
                 <div className="flex items-center gap-2 font-bold">
                   <span
-                    className={`bg-gradient-to-r ${colorFrom} ${colorTo} bg-clip-text text-transparent`}
+                    className={`bg-linear-to-r ${colorFrom} ${colorTo} bg-clip-text text-transparent`}
                   >
                     {nextItem.label}
                   </span>{' '}
@@ -679,8 +679,8 @@ export function DocsLayout({
           <div className="bg-white dark:bg-gray-900/20 border-gray-500/20 shadow-xl flex flex-col border-t border-l border-b p-4 space-y-2 rounded-l-lg">
             <Carbon />
             <div
-              className="text-[.7rem] bg-gray-500 bg-opacity-10 py-1 px-2 rounded text-gray-500 italic
-                dark:bg-opacity-20 self-center opacity-50 hover:opacity-100 transition-opacity"
+              className="text-[.7rem] bg-gray-500/10 py-1 px-2 rounded text-gray-500 italic
+                dark:bg-gray-500/20 self-center opacity-50 hover:opacity-100 transition-opacity"
             >
               This ad helps to keep us from burning out and rage-quitting OSS
               just *that* much more, so chill. 😉

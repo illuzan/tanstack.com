@@ -42,7 +42,7 @@ function LibrariesLayout() {
   const library = libraryId ? getLibrary(libraryId) : undefined
   const detailsRef = React.useRef<HTMLElement>(null!)
 
-  const linkClasses = `flex items-center justify-between group px-2 py-1 rounded-lg hover:bg-gray-500 hover:bg-opacity-10 font-black`
+  const linkClasses = `flex items-center justify-between group px-2 py-1 rounded-lg hover:bg-gray-500/10 font-black`
 
   const [mounted, setMounted] = React.useState(false)
 
@@ -174,7 +174,7 @@ function LibrariesLayout() {
             className={twMerge(linkClasses, 'font-normal')}
             activeProps={{
               className: twMerge(
-                '!font-bold bg-gray-500/10 dark:bg-gray-500/30'
+                'font-bold! bg-gray-500/10 dark:bg-gray-500/30'
               ),
             }}
             target={item.to.startsWith('http') ? '_blank' : undefined}
@@ -223,7 +223,7 @@ function LibrariesLayout() {
       <details
         ref={detailsRef as any}
         id="docs-details"
-        className="border-b border-gray-500 border-opacity-20"
+        className="border-b border-gray-500/20"
       >
         <summary className="p-4 flex gap-2 items-center justify-between">
           <div className="flex gap-2 items-center text-xl md:text-2xl">
@@ -234,7 +234,7 @@ function LibrariesLayout() {
         </summary>
         <div
           className="flex flex-col gap-4 whitespace-nowrap h-[0vh] overflow-y-auto
-          border-t border-gray-500 border-opacity-20 bg-gray-100 text-lg
+          border-t border-gray-500/20 bg-gray-100 text-lg
           dark:bg-gray-900"
         >
           <div className="p-2 pb-0">
@@ -276,7 +276,7 @@ function LibrariesLayout() {
       {largeMenu}
       <div className="flex flex-1 min-h-0 relative justify-center overflow-x-hidden">
         <div
-          className="fixed inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-10 pointer-events-none blur-sm"
+          className="fixed inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-10 pointer-events-none blur-xs"
           style={{
             backgroundImage: `url(${background})`,
             backgroundSize: 'cover',

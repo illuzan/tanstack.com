@@ -100,12 +100,12 @@ export default function TableVersionIndex() {
     setIsDark(window.matchMedia?.(`(prefers-color-scheme: dark)`).matches)
   }, [])
 
-  const gradientText = `inline-block text-transparent bg-clip-text bg-gradient-to-r ${tableProject.colorFrom} ${tableProject.colorTo}`
+  const gradientText = `inline-block text-transparent bg-clip-text bg-linear-to-r ${tableProject.colorFrom} ${tableProject.colorTo}`
 
   return (
     <div className="flex flex-col gap-20 md:gap-32 max-w-full">
       <div
-        className="flex flex-wrap py-2 px-4 items-center justify-center text-sm max-w-screen-xl mx-auto
+        className="flex flex-wrap py-2 px-4 items-center justify-center text-sm max-w-(--breakpoint-xl) mx-auto
           md:text-base md:self-end"
       >
         {menu?.map((item, i) => {
@@ -166,7 +166,7 @@ export default function TableVersionIndex() {
         </p>
         <Link
           to="./docs/introduction"
-          className={`py-2 px-4 bg-teal-500 rounded text-white uppercase font-extrabold`}
+          className={`py-2 px-4 bg-teal-500 rounded-sm text-white uppercase font-extrabold`}
         >
           Get Started
         </Link>
@@ -324,7 +324,7 @@ export default function TableVersionIndex() {
         </marquee>
       </div>
 
-      <div className="px-4 lg:max-w-screen-lg md:mx-auto mx-auto">
+      <div className="px-4 lg:max-w-(--breakpoint-lg) md:mx-auto mx-auto">
         <h3 className="text-center text-3xl leading-8 font-extrabold tracking-tight sm:text-4xl sm:leading-10 lg:leading-none mt-8">
           Partners
         </h3>
@@ -341,7 +341,7 @@ export default function TableVersionIndex() {
                   className="bg-white shadow-xl shadow-gray-500/20 rounded-lg dark:border border-gray-500/20 dark:bg-gray-800 dark:shadow-none group overflow-hidden grid"
                   rel="noreferrer"
                 >
-                  <div className="z-0 row-start-1 col-start-1 bg-white flex items-center justify-center group-hover:blur-sm transition-all duration-200">
+                  <div className="z-0 row-start-1 col-start-1 bg-white flex items-center justify-center group-hover:blur-xs transition-all duration-200">
                     {partner.homepageImg}
                   </div>
                   <div className="z-10 row-start-1 col-start-1 max-w-full p-4 text-sm flex flex-col gap-4 items-start opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-white/70 dark:bg-gray-800/70">
@@ -358,7 +358,7 @@ export default function TableVersionIndex() {
           Sponsors
         </h3>
         <div
-          className="my-4 flex flex-wrap mx-auto max-w-screen-lg"
+          className="my-4 flex flex-wrap mx-auto max-w-(--breakpoint-lg)"
           style={{
             aspectRatio: '1/1',
           }}
@@ -386,8 +386,8 @@ export default function TableVersionIndex() {
           <Carbon />
         </div>
         <span
-          className="text-[.7rem] bg-gray-500 bg-opacity-10 py-1 px-2 rounded text-gray-500
-                dark:bg-opacity-20"
+          className="text-[.7rem] bg-gray-500/10 py-1 px-2 rounded text-gray-500
+                dark:bg-gray-500/20"
         >
           This ad helps us be happy about our invested time and not burn out and
           rage-quit OSS. Yay money! 😉
@@ -462,7 +462,7 @@ export default function TableVersionIndex() {
         <div>
           <Link
             to="./docs/introduction"
-            className={`inline-block py-2 px-4 bg-teal-500 rounded text-white uppercase font-extrabold`}
+            className={`inline-block py-2 px-4 bg-teal-500 rounded-sm text-white uppercase font-extrabold`}
           >
             Get Started!
           </Link>

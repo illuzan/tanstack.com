@@ -11,7 +11,7 @@ type Props = {
 export const DocsLogo = (props: Props) => {
   const { name, version, colorFrom, colorTo } = props
 
-  const gradientText = `inline-block text-transparent bg-clip-text bg-gradient-to-r ${colorFrom} ${colorTo}`
+  const gradientText = `inline-block text-transparent bg-clip-text bg-linear-to-r ${colorFrom} ${colorTo}`
 
   return (
     <>

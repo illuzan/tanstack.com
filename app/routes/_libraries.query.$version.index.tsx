@@ -97,7 +97,7 @@ export default function VersionIndex() {
     setIsDark(window.matchMedia?.(`(prefers-color-scheme: dark)`).matches)
   }, [])
 
-  const gradientText = `inline-block leading-snug text-transparent bg-clip-text bg-gradient-to-r ${queryProject.colorFrom} ${queryProject.colorTo}`
+  const gradientText = `inline-block leading-snug text-transparent bg-clip-text bg-linear-to-r ${queryProject.colorFrom} ${queryProject.colorTo}`
 
   return (
     <div className="flex flex-1 flex-col min-h-0 relative overflow-x-hidden">
@@ -105,7 +105,7 @@ export default function VersionIndex() {
       <div className="flex flex-1 min-h-0 relative justify-center overflow-x-hidden">
         <div className="flex flex-col gap-20 md:gap-32 max-w-full">
           <div
-            className="flex flex-wrap py-2 px-4 items-center justify-center text-sm max-w-screen-xl mx-auto
+            className="flex flex-wrap py-2 px-4 items-center justify-center text-sm max-w-(--breakpoint-xl) mx-auto
           md:text-base md:self-end"
           >
             {menu?.map((item, i) => {
@@ -174,7 +174,7 @@ export default function VersionIndex() {
             </p>
             <Link
               to="./docs/"
-              className={`py-2 px-4 bg-red-500 rounded text-white uppercase font-extrabold`}
+              className={`py-2 px-4 bg-red-500 rounded-sm text-white uppercase font-extrabold`}
             >
               Read the Docs
             </Link>
@@ -353,7 +353,7 @@ export default function VersionIndex() {
             <div
               className="flex-1 flex flex-col items-center text-sm text-center
                       bg-white shadow-xl shadow-gray-500/20 rounded-lg
-                        divide-y-2 divide-gray-500 divide-opacity-10 overflow-hidden
+                        divide-y-2 divide-gray-500/10 overflow-hidden
                         dark:bg-gray-800 dark:shadow-none"
             >
               <span className="flex items-center gap-2 p-12 text-4xl text-rose-500 font-black uppercase">
@@ -381,7 +381,7 @@ export default function VersionIndex() {
               Sponsors
             </h3>
             <div
-              className="my-4 flex flex-wrap mx-auto max-w-screen-lg"
+              className="my-4 flex flex-wrap mx-auto max-w-(--breakpoint-lg)"
               style={{
                 aspectRatio: '1/1',
               }}
@@ -409,8 +409,8 @@ export default function VersionIndex() {
               <Carbon />
             </div>
             <span
-              className="text-[.7rem] bg-gray-500 bg-opacity-10 py-1 px-2 rounded text-gray-500
-                dark:bg-opacity-20"
+              className="text-[.7rem] bg-gray-500/10 py-1 px-2 rounded text-gray-500
+                dark:bg-gray-500/20"
             >
               This ad helps us be happy about our invested time and not burn out
               and rage-quit OSS. Yay money! 😉
@@ -458,7 +458,7 @@ export default function VersionIndex() {
 
           {[''].includes(framework) ? (
             <div className="px-2">
-              <div className="p-8 text-center text-lg w-full max-w-screen-lg mx-auto bg-black text-white rounded-xl">
+              <div className="p-8 text-center text-lg w-full max-w-(--breakpoint-lg) mx-auto bg-black text-white rounded-xl">
                 Looking for the <strong>@tanstack/{framework}-query</strong>{' '}
                 example? We could use your help to build the{' '}
                 <strong>@tanstack/{framework}-query</strong> adapter! Join the{' '}
@@ -503,7 +503,7 @@ export default function VersionIndex() {
             <div>
               <Link
                 to="./docs/"
-                className={`inline-block py-2 px-4 bg-red-500 rounded text-white uppercase font-extrabold`}
+                className={`inline-block py-2 px-4 bg-red-500 rounded-sm text-white uppercase font-extrabold`}
               >
                 Read the Docs!
               </Link>

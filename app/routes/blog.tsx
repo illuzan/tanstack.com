@@ -12,7 +12,7 @@ const logo = (
     <Link to="." className={`font-bold`}>
       <span
         className="inline-block text-transparent bg-clip-text
-            bg-gradient-to-r from-rose-500 via-purple-500 to-yellow-500"
+            bg-linear-to-r from-rose-500 via-purple-500 to-yellow-500"
       >
         Blog
       </span>
@@ -52,7 +52,7 @@ export function PostNotFound() {
       <div className="text-lg">Post not found.</div>
       <Link
         to="/blog"
-        className={`py-2 px-4 bg-gray-600 dark:bg-gray-700 rounded text-white uppercase font-extrabold`}
+        className={`py-2 px-4 bg-gray-600 dark:bg-gray-700 rounded-sm text-white uppercase font-extrabold`}
       >
         Blog Home
       </Link>
@@ -78,7 +78,7 @@ function Blog() {
                   <Link
                     to={child.to}
                     activeProps={{
-                      className: `font-bold text-transparent bg-clip-text bg-gradient-to-r from-rose-500 to-violet-600`,
+                      className: `font-bold text-transparent bg-clip-text bg-linear-to-r from-rose-500 to-violet-600`,
                     }}
                     onClick={() => {
                       detailsRef.current.removeAttribute('open')
@@ -106,7 +106,7 @@ function Blog() {
       <details
         ref={detailsRef}
         id="docs-details"
-        className="border-b border-gray-500 border-opacity-20"
+        className="border-b border-gray-500/20"
       >
         <summary className="p-4 flex gap-2 items-center justify-between">
           <div className="flex gap-2 items-center text-xl md:text-2xl">
@@ -117,7 +117,7 @@ function Blog() {
         </summary>
         <div
           className="flex flex-col gap-4 p-4 whitespace-nowrap h-[0vh] overflow-y-auto
-          border-t border-gray-500 border-opacity-20 bg-gray-100 text-lg
+          border-t border-gray-500/20 bg-gray-100 text-lg
           dark:bg-gray-900"
         >
           {menuItems}

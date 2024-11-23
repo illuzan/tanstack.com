@@ -87,13 +87,13 @@ export default function FormVersionIndex() {
   //   setIsDark(window.matchMedia?.(`(prefers-color-scheme: dark)`).matches)
   // }, [])
 
-  const gradientText = `inline-block leading-snug text-transparent bg-clip-text bg-gradient-to-r ${configProject.colorFrom} ${configProject.colorTo}`
+  const gradientText = `inline-block leading-snug text-transparent bg-clip-text bg-linear-to-r ${configProject.colorFrom} ${configProject.colorTo}`
 
   return (
     <>
       <div className="flex flex-col gap-20 md:gap-32">
         <div
-          className="flex flex-wrap py-2 px-4 items-center justify-center text-sm max-w-screen-xl mx-auto
+          className="flex flex-wrap py-2 px-4 items-center justify-center text-sm max-w-(--breakpoint-xl) mx-auto
           md:text-base md:self-end"
         >
           {menu?.map((item, i) => {
@@ -146,7 +146,7 @@ export default function FormVersionIndex() {
           </h2>
           <Link
             to="./docs/"
-            className={`py-2 px-4 bg-gray-500 text-white rounded uppercase font-extrabold`}
+            className={`py-2 px-4 bg-gray-500 text-white rounded-sm uppercase font-extrabold`}
           >
             Get Started
           </Link>
@@ -257,7 +257,7 @@ export default function FormVersionIndex() {
           <div
             className="flex-1 flex flex-col items-center text-sm text-center
                       bg-white shadow-xl shadow-gray-500/20 rounded-lg
-                        divide-y-2 divide-gray-500 divide-opacity-10 overflow-hidden
+                        divide-y-2 divide-gray-500/10 overflow-hidden
                         dark:bg-gray-800 dark:shadow-none"
           >
             <span className="flex items-center gap-2 p-12 text-4xl text-rose-500 font-black uppercase">
@@ -284,7 +284,7 @@ export default function FormVersionIndex() {
             Sponsors
           </h3>
           <div
-            className="my-4 flex flex-wrap mx-auto max-w-screen-lg"
+            className="my-4 flex flex-wrap mx-auto max-w-(--breakpoint-lg)"
             style={{
               aspectRatio: '1/1',
             }}
@@ -312,8 +312,8 @@ export default function FormVersionIndex() {
             <Carbon />
           </div>
           <span
-            className="text-[.7rem] bg-gray-500 bg-opacity-10 py-1 px-2 rounded text-gray-500
-                dark:bg-opacity-20"
+            className="text-[.7rem] bg-gray-500/10 py-1 px-2 rounded text-gray-500
+                dark:bg-gray-500/20"
           >
             This ad helps us keep the lights on 😉
           </span>
@@ -329,7 +329,7 @@ export default function FormVersionIndex() {
           <div>
             <Link
               to="./docs/"
-              className={`inline-block py-2 px-4 bg-gray-500 text-white rounded uppercase font-extrabold`}
+              className={`inline-block py-2 px-4 bg-gray-500 text-white rounded-sm uppercase font-extrabold`}
             >
               Get Started!
             </Link>

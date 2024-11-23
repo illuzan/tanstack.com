@@ -1,8 +1,40 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+@plugin '@tailwindcss/typography';
 
+@theme {
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.03);
+  --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.03);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05),
+    0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.05),
+    0 4px 6px -2px rgba(0, 0, 0, 0.03);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.05),
+    0 10px 10px -5px rgba(0, 0, 0, 0.02);
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.2);
+  --shadow-3xl: 0 35px 60px -15px rgba(0, 0, 0, 0.25);
+  --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.04);
+  --shadow-none: none;
+
+  --color-discord: #536bbd;
+}
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
 @layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+
   html,
   body {
     @apply text-gray-900 bg-gray-50 dark:bg-gray-950 dark:text-gray-200;
@@ -126,15 +158,15 @@
   }
 
   .carbon-small .carbon-wrap .carbon-img {
-    @apply w-[50%] pt-2 !pointer-events-auto rounded-tr-lg border-t border-r border-gray-500 border-opacity-10 overflow-hidden;
+    @apply w-[50%] pt-2 pointer-events-auto! rounded-tr-lg border-t border-r border-gray-500/10 overflow-hidden;
   }
 
   .carbon-small .carbon-wrap .carbon-img img {
-    @apply w-full !max-w-full;
+    @apply w-full max-w-full!;
   }
 
   .carbon-small .carbon-wrap .carbon-text {
-    @apply bg-white dark:bg-gray-800 rounded-tr-lg !pb-6 !m-0 !pointer-events-auto border-t border-r border-gray-500 border-opacity-10;
+    @apply bg-white dark:bg-gray-800 rounded-tr-lg pb-6! m-0! pointer-events-auto! border-t border-r border-gray-500/10;
   }
 
   .carbon-small .carbon-wrap .carbon-poweredby {

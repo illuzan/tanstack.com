@@ -42,7 +42,7 @@ function LoginComp() {
             <Link
               to={'https://tlinz.com/discord' as string}
               target="_blank"
-              className="max-w-[300px] rounded-lg bg-gradient-to-br from-discord/60 to-discord text-white shadow-black/20 shadow-lg hover:shadow-2xl hover:shadow-black/20 divide-y divide-white/30 transition-all duration-200 hover:scale-105"
+              className="max-w-[300px] rounded-lg bg-linear-to-br from-discord/60 to-discord text-white shadow-black/20 shadow-lg hover:shadow-2xl hover:shadow-black/20 divide-y divide-white/30 transition-all duration-200 hover:scale-105"
             >
               <div className="p-4 text-lg md:text-xl lg:text-2xl font-bold text-center">
                 Discord
@@ -63,7 +63,7 @@ function LoginComp() {
             <Link
               to={'https://github.com/tanstack' as string}
               target="_blank"
-              className="max-w-[300px] rounded-lg bg-gradient-to-br from-gray-500 to-gray-900 text-white shadow-black/20 shadow-lg hover:shadow-2xl hover:shadow-black/20 divide-y divide-white/30 transition-all duration-200 hover:scale-105"
+              className="max-w-[300px] rounded-lg bg-linear-to-br from-gray-500 to-gray-900 text-white shadow-black/20 shadow-lg hover:shadow-2xl hover:shadow-black/20 divide-y divide-white/30 transition-all duration-200 hover:scale-105"
             >
               <div className="p-4 text-lg md:text-xl lg:text-2xl font-bold text-center">
                 GitHub
@@ -81,7 +81,7 @@ function LoginComp() {
             </Link>
             <Link
               to="/dedicated-support"
-              className="max-w-[300px] rounded-lg bg-gradient-to-br from-green-500 to-sky-500 text-white shadow-black/20 shadow-lg hover:shadow-2xl hover:shadow-black/20 divide-y divide-white/30 transition-all duration-200 hover:scale-105"
+              className="max-w-[300px] rounded-lg bg-linear-to-br from-green-500 to-sky-500 text-white shadow-black/20 shadow-lg hover:shadow-2xl hover:shadow-black/20 divide-y divide-white/30 transition-all duration-200 hover:scale-105"
             >
               <div className="p-4 text-lg md:text-xl lg:text-2xl font-bold text-center">
                 Dedicated Support
@@ -92,7 +92,7 @@ function LoginComp() {
                     key={d}
                     className="text-sm bg-white/90 rounded-full py-1 px-2 shadow-lg font-bold"
                   >
-                    <div className="text-transparent bg-clip-text bg-gradient-to-r to-green-600 from-sky-600">
+                    <div className="text-transparent bg-clip-text bg-linear-to-r to-green-600 from-sky-600">
                       {d}
                     </div>
                   </div>

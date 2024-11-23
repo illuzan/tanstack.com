@@ -50,7 +50,7 @@ function LoginComp() {
                 type="text"
                 name="username"
                 placeholder="tanner"
-                className="rounded py-1 px-2 shadow-lg"
+                className="rounded-sm py-1 px-2 shadow-lg"
               />
               {mutation.data?.errors?.username ? (
                 <div className="text-red-500 text-xs">
@@ -68,7 +68,7 @@ function LoginComp() {
                 type="password"
                 name="password"
                 placeholder="********"
-                className="rounded py-1 px-2 shadow-lg"
+                className="rounded-sm py-1 px-2 shadow-lg"
               />
               {mutation.data?.errors?.password ? (
                 <div className="text-red-500 text-xs">

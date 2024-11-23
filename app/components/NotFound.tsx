@@ -11,13 +11,13 @@ export function NotFound({ children }: { children?: any }) {
         <p className="flex items-center gap-2 flex-wrap">
           <button
             onClick={() => window.history.back()}
-            className="bg-emerald-500 text-white p-2 rounded uppercase font-black"
+            className="bg-emerald-500 text-white p-2 rounded-sm uppercase font-black"
           >
             Go back
           </button>
           <Link
             to="/"
-            className="bg-cyan-600 text-white p-2 rounded uppercase font-black"
+            className="bg-cyan-600 text-white p-2 rounded-sm uppercase font-black"
           >
             Start Over
           </Link>

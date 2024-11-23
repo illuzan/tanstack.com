@@ -100,12 +100,12 @@ export default function VersionIndex() {
     setIsDark(window.matchMedia?.(`(prefers-color-scheme: dark)`).matches)
   }, [])
 
-  const gradientText = `inline-block text-transparent bg-clip-text bg-gradient-to-r ${startProject.colorFrom} ${startProject.colorTo}`
+  const gradientText = `inline-block text-transparent bg-clip-text bg-linear-to-r ${startProject.colorFrom} ${startProject.colorTo}`
 
   return (
     <div className="flex flex-col gap-20 md:gap-32 max-w-full">
       <div
-        className="flex flex-wrap py-2 px-4 items-center justify-center text-sm max-w-screen-xl mx-auto
+        className="flex flex-wrap py-2 px-4 items-center justify-center text-sm max-w-(--breakpoint-xl) mx-auto
           md:text-base md:self-end"
       >
         {menu?.map((item, i) => {
@@ -173,7 +173,7 @@ export default function VersionIndex() {
         </p>
         <Link
           to="../../router/latest/docs/framework/react/start/overview"
-          className={`py-2 px-4 bg-cyan-500 rounded text-white uppercase font-extrabold`}
+          className={`py-2 px-4 bg-cyan-500 rounded-sm text-white uppercase font-extrabold`}
         >
           Get Started
         </Link>
@@ -306,19 +306,19 @@ export default function VersionIndex() {
         <div className="grid items-center gap-2 justify-center grid-cols-2 w-[600px] max-w-full mx-auto">
           <Link
             to="../../router/latest/docs/framework/react/examples/start-basic"
-            className={`flex items-center gap-2 py-2 px-4 bg-cyan-900 rounded text-white uppercase font-extrabold`}
+            className={`flex items-center gap-2 py-2 px-4 bg-cyan-900 rounded-sm text-white uppercase font-extrabold`}
           >
             <VscPreview /> See an Example
           </Link>
           <Link
             to="../../router/latest/docs/framework/react/start/overview"
-            className={`flex items-center gap-2 py-2 px-4 bg-cyan-800 rounded text-white uppercase font-extrabold`}
+            className={`flex items-center gap-2 py-2 px-4 bg-cyan-800 rounded-sm text-white uppercase font-extrabold`}
           >
             <FaBook /> Try the BETA
           </Link>
           <a
             href={`https://github.com/tanstack/tanstack.com`}
-            className={`flex items-center gap-2 py-2 px-4 bg-cyan-700 rounded text-white uppercase font-extrabold`}
+            className={`flex items-center gap-2 py-2 px-4 bg-cyan-700 rounded-sm text-white uppercase font-extrabold`}
           >
             <FaGithub /> TanStack.com Source
           </a>
@@ -327,7 +327,7 @@ export default function VersionIndex() {
               `TanStack Start is in BETA! It's a new full-stack React framework from @Tan_Stack and you can check it out at https://tanstack.com/start/`
             )}`}
             target="_blank"
-            className={`flex items-center gap-2 py-2 px-4 bg-cyan-500 rounded text-white uppercase font-extrabold`}
+            className={`flex items-center gap-2 py-2 px-4 bg-cyan-500 rounded-sm text-white uppercase font-extrabold`}
             rel="noreferrer"
           >
             <FaTwitter /> Tweet about it!
@@ -488,7 +488,7 @@ export default function VersionIndex() {
         </marquee>
       </div> */}
 
-      <div className="px-4 lg:max-w-screen-lg md:mx-auto mx-auto">
+      <div className="px-4 lg:max-w-(--breakpoint-lg) md:mx-auto mx-auto">
         <h3 className="text-center text-3xl leading-8 font-extrabold tracking-tight sm:text-4xl sm:leading-10 lg:leading-none mt-8">
           Partners
         </h3>
@@ -505,7 +505,7 @@ export default function VersionIndex() {
                   className="bg-white shadow-xl shadow-gray-500/20 rounded-lg dark:border border-gray-500/20 dark:bg-gray-800 dark:shadow-none group overflow-hidden grid"
                   rel="noreferrer"
                 >
-                  <div className="z-0 row-start-1 col-start-1 bg-white flex items-center justify-center group-hover:blur-sm transition-all duration-200">
+                  <div className="z-0 row-start-1 col-start-1 bg-white flex items-center justify-center group-hover:blur-xs transition-all duration-200">
                     {partner.homepageImg}
                   </div>
                   <div className="z-10 row-start-1 col-start-1 max-w-full p-4 text-sm flex flex-col gap-4 items-start opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-white/70 dark:bg-gray-800/70">
@@ -522,7 +522,7 @@ export default function VersionIndex() {
           Sponsors
         </h3>
         <div
-          className="my-4 flex flex-wrap mx-auto max-w-screen-lg"
+          className="my-4 flex flex-wrap mx-auto max-w-(--breakpoint-lg)"
           style={{
             aspectRatio: '1/1',
           }}
@@ -550,8 +550,8 @@ export default function VersionIndex() {
           <Carbon />
         </div>
         <span
-          className="text-[.7rem] bg-gray-500 bg-opacity-10 py-1 px-2 rounded text-gray-500
-                dark:bg-opacity-20"
+          className="text-[.7rem] bg-gray-500/10 py-1 px-2 rounded text-gray-500
+                dark:bg-gray-500/20"
         >
           This ad helps us be happy about our invested time and not burn out and
           rage-quit OSS. Yay money! 😉
@@ -599,7 +599,7 @@ export default function VersionIndex() {
 
       {/* {[''].includes(framework) ? (
         <div className="px-2">
-          <div className="p-8 text-center text-lg w-full max-w-screen-lg mx-auto bg-black text-white rounded-xl">
+          <div className="p-8 text-center text-lg w-full max-w-(--breakpoint-lg) mx-auto bg-black text-white rounded-xl">
             Looking for the <strong>@tanstack/{framework}-query</strong>{' '}
             example? We could use your help to build the{' '}
             <strong>@tanstack/{framework}-query</strong> adapter! Join the{' '}
@@ -642,7 +642,7 @@ export default function VersionIndex() {
         <div>
           <Link
             to="../../router/latest/docs/framework/react/start/overview"
-            className={`inline-block py-2 px-4 bg-cyan-500 rounded text-white uppercase font-extrabold`}
+            className={`inline-block py-2 px-4 bg-cyan-500 rounded-sm text-white uppercase font-extrabold`}
           >
             Get Started!
           </Link>

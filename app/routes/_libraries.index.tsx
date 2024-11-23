@@ -107,7 +107,7 @@ function Index() {
             >
               <span
                 className={`
-            inline-block text-transparent bg-clip-text bg-gradient-to-r ${gradient}
+            inline-block text-transparent bg-clip-text bg-linear-to-r ${gradient}
             underline decoration-4 md:decoration-8 underline-offset-[.5rem] md:underline-offset-[1rem] decoration-gray-200 dark:decoration-gray-800
             mb-2 uppercase [letter-spacing:-.05em]
             `}
@@ -175,7 +175,7 @@ function Index() {
           </div>
         </div>
         <div className="h-24" />
-        <div className="px-4 lg:max-w-screen-lg md:mx-auto">
+        <div className="px-4 lg:max-w-(--breakpoint-lg) md:mx-auto">
           <h3 className={`text-4xl font-light`}>Open Source Libraries</h3>
           <div
             className={`mt-4 grid grid-cols-1 gap-8
@@ -239,7 +239,7 @@ function Index() {
           </div>
         </div>
         <div className="h-12" />
-        <div className={`px-4 lg:max-w-screen-lg md:mx-auto`}>
+        <div className={`px-4 lg:max-w-(--breakpoint-lg) md:mx-auto`}>
           <h3 className={`text-4xl font-light mb-4`}>Partners</h3>
           <div className={`grid grid-cols-1 gap-6 sm:grid-cols-2`}>
             {partners.map((partner) => {
@@ -251,7 +251,7 @@ function Index() {
                   className="bg-white shadow-xl shadow-gray-500/20 rounded-lg dark:border border-gray-500/20 dark:bg-gray-800 dark:shadow-none group overflow-hidden grid"
                   rel="noreferrer"
                 >
-                  <div className="z-0 row-start-1 col-start-1 bg-white flex items-center justify-center group-hover:blur-sm transition-all duration-200">
+                  <div className="z-0 row-start-1 col-start-1 bg-white flex items-center justify-center group-hover:blur-xs transition-all duration-200">
                     {partner.homepageImg}
                   </div>
                   <div className="z-10 row-start-1 col-start-1 max-w-full p-4 text-sm flex flex-col gap-4 items-start opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-white/70 dark:bg-gray-800/70">
@@ -263,7 +263,7 @@ function Index() {
           </div>
         </div>
         <div className="h-20" />
-        <div className={`lg:max-w-screen-lg px-4 mx-auto`}>
+        <div className={`lg:max-w-(--breakpoint-lg) px-4 mx-auto`}>
           <h3 className={`text-4xl font-light`}>Courses</h3>
           <div className={`mt-4 grid grid-cols-1 gap-4`}>
             {courses.map((course) => (
@@ -287,7 +287,7 @@ function Index() {
                   </div>
                   <div className={`text-sm mt-2`}>{course.description}</div>
                   <div
-                    className={`inline-block mt-4 px-4 py-2 bg-green-500 text-white rounded shadow uppercase font-black text-sm`}
+                    className={`inline-block mt-4 px-4 py-2 bg-green-500 text-white rounded-sm shadow uppercase font-black text-sm`}
                   >
                     Check it out →
                   </div>
@@ -297,7 +297,7 @@ function Index() {
           </div>
         </div>
         <div className="h-12" />
-        <div className={`lg:max-w-screen-lg px-4 mx-auto`}>
+        <div className={`lg:max-w-(--breakpoint-lg) px-4 mx-auto`}>
           <h3 className={`text-4xl font-light`}>OSS Sponsors</h3>
           <div className="h-4" />
           <div
@@ -318,13 +318,13 @@ function Index() {
             <div>
               <a
                 href="https://github.com/sponsors/tannerlinsley"
-                className={`inline-block p-4 bg-green-500 rounded text-white uppercase font-black`}
+                className={`inline-block p-4 bg-green-500 rounded-sm text-white uppercase font-black`}
               >
                 Become a Sponsor!
               </a>
             </div>
             <div className={`h-4`} />
-            <p className={`italic mx-auto max-w-screen-sm text-gray-500`}>
+            <p className={`italic mx-auto max-w-(--breakpoint-sm) text-gray-500`}>
               Sponsors get special perks like{' '}
               <strong>
                 private discord channels, priority issue requests, direct
@@ -341,8 +341,8 @@ function Index() {
               <Carbon />
             </div>
             <span
-              className="text-[.7rem] bg-gray-500 bg-opacity-10 py-1 px-2 rounded text-gray-500
-                dark:bg-opacity-20 self-center"
+              className="text-[.7rem] bg-gray-500/10 py-1 px-2 rounded text-gray-500
+                dark:bg-gray-500/20 self-center"
             >
               This ad helps us be happy about our invested time and not burn out
               and rage-quit OSS. Yay money! 😉
@@ -350,7 +350,7 @@ function Index() {
           </div>
         </div>
         <div className="h-12" />
-        <div className="px-4 mx-auto max-w-screen-lg">
+        <div className="px-4 mx-auto max-w-(--breakpoint-lg)">
           <div
             className={`
           rounded-md p-4 grid gap-6
@@ -392,7 +392,7 @@ function Index() {
           </div>
         </div>
         <div className="h-4" />
-        <div className="px-4 mx-auto max-w-screen-lg relative">
+        <div className="px-4 mx-auto max-w-(--breakpoint-lg) relative">
           <div className="rounded-md p-8 bg-white shadow-xl shadow-gray-900/10 md:p-14 dark:bg-gray-800">
             {!bytesSignupMutation.submittedAt ? (
               <form
@@ -425,7 +425,7 @@ function Index() {
                 <div className={`grid grid-cols-3 mt-4 gap-2`}>
                   <input
                     disabled={bytesSignupMutation.status === 'pending'}
-                    className={`col-span-2 p-3 placeholder-gray-400 text-black bg-gray-200 rounded text-sm outline-none focus:outline-none w-full dark:(text-white bg-gray-700)`}
+                    className={`col-span-2 p-3 placeholder-gray-400 text-black bg-gray-200 rounded-sm text-sm outline-hidden focus:outline-hidden w-full dark:(text-white bg-gray-700)`}
                     name="email_address"
                     placeholder="Your email address"
                     type="text"
@@ -433,7 +433,7 @@ function Index() {
                   />
                   <button
                     type="submit"
-                    className={`bg-[#ED203D] text-white rounded uppercase font-black`}
+                    className={`bg-[#ED203D] text-white rounded-sm uppercase font-black`}
                   >
                     <span>
                       {bytesSignupMutation.status === 'pending'

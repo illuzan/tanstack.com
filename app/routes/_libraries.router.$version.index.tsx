@@ -90,12 +90,12 @@ function RouterVersionIndex() {
     setIsDark(window.matchMedia?.(`(prefers-color-scheme: dark)`).matches)
   }, [])
 
-  const gradientText = `inline-block text-transparent bg-clip-text bg-gradient-to-r ${routerProject.colorFrom} ${routerProject.colorTo}`
+  const gradientText = `inline-block text-transparent bg-clip-text bg-linear-to-r ${routerProject.colorFrom} ${routerProject.colorTo}`
 
   return (
     <div className="flex flex-col gap-20 md:gap-32 max-w-full">
       <div
-        className="flex flex-wrap py-2 px-4 items-center justify-center text-sm max-w-screen-xl mx-auto
+        className="flex flex-wrap py-2 px-4 items-center justify-center text-sm max-w-(--breakpoint-xl) mx-auto
           md:text-base md:self-end"
       >
         {menu?.map((item, i) => {
@@ -149,7 +149,7 @@ function RouterVersionIndex() {
         </p>
         <Link
           to="./docs/framework/react/overview"
-          className={`py-2 px-4 bg-emerald-500 rounded text-white uppercase font-extrabold`}
+          className={`py-2 px-4 bg-emerald-500 rounded-sm text-white uppercase font-extrabold`}
         >
           Get Started
         </Link>
@@ -229,7 +229,7 @@ function RouterVersionIndex() {
         </div>
       </div>
 
-      <div className="px-4 lg:max-w-screen-lg md:mx-auto mx-auto">
+      <div className="px-4 lg:max-w-(--breakpoint-lg) md:mx-auto mx-auto">
         <h3 className="text-center text-3xl leading-8 font-extrabold tracking-tight sm:text-4xl sm:leading-10 lg:leading-none mt-8">
           Partners
         </h3>
@@ -246,7 +246,7 @@ function RouterVersionIndex() {
                   className="bg-white shadow-xl shadow-gray-500/20 rounded-lg dark:border border-gray-500/20 dark:bg-gray-800 dark:shadow-none group overflow-hidden grid"
                   rel="noreferrer"
                 >
-                  <div className="z-0 row-start-1 col-start-1 bg-white flex items-center justify-center group-hover:blur-sm transition-all duration-200">
+                  <div className="z-0 row-start-1 col-start-1 bg-white flex items-center justify-center group-hover:blur-xs transition-all duration-200">
                     {partner.homepageImg}
                   </div>
                   <div className="z-10 row-start-1 col-start-1 max-w-full p-4 text-sm flex flex-col gap-4 items-start opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-white/70 dark:bg-gray-800/70">
@@ -301,8 +301,8 @@ function RouterVersionIndex() {
           <Carbon />
         </div>
         <span
-          className="text-[.7rem] bg-gray-500 bg-opacity-10 py-1 px-2 rounded text-gray-500
-                dark:bg-opacity-20"
+          className="text-[.7rem] bg-gray-500/10 py-1 px-2 rounded text-gray-500
+                dark:bg-gray-500/20"
         >
           This ad helps us be happy about our invested time and not burn out and
           rage-quit OSS. Yay money! 😉
@@ -314,7 +314,7 @@ function RouterVersionIndex() {
           Sponsors
         </h3>
         <div
-          className="my-4 flex flex-wrap mx-auto max-w-screen-lg w-full"
+          className="my-4 flex flex-wrap mx-auto max-w-(--breakpoint-lg) w-full"
           style={{
             aspectRatio: '1/1',
           }}
@@ -374,7 +374,7 @@ function RouterVersionIndex() {
 
         {/* {['preact', 'vue', 'solid', 'svelte'].includes(framework) ? (
         <div className="px-2">
-          <div className="p-8 text-center text-lg w-full max-w-screen-lg mx-auto bg-black text-white rounded-xl">
+          <div className="p-8 text-center text-lg w-full max-w-(--breakpoint-lg) mx-auto bg-black text-white rounded-xl">
             Looking for the <strong>@tanstack/{framework}-router</strong>{' '}
             example? The <strong>@tanstack/{framework}-router</strong> adapter
             is currently under development! Join the{' '}
@@ -419,7 +419,7 @@ function RouterVersionIndex() {
         <div>
           <Link
             to="./docs/framework/react/overview"
-            className={`inline-block py-2 px-4 bg-emerald-500 rounded text-white uppercase font-extrabold`}
+            className={`inline-block py-2 px-4 bg-emerald-500 rounded-sm text-white uppercase font-extrabold`}
           >
             Get Started!
           </Link>
