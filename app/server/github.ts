@@ -33,7 +33,7 @@ export async function exchangeGithubCodeForToken({ code, state, redirectUrl }) {
         headers: {
           Accept: 'application/json',
         },
-      }
+      },
     )
 
     return data.access_token

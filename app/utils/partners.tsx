@@ -42,7 +42,7 @@ export const partners: Partner[] = [
       sidebarImgDark: vercelDarkSvg,
       sidebarImgClass: 'py-4',
       homepageImg: (
-        <div className="dark:bg-gray-900 w-full h-full flex items-center justify-center px-4 py-12">
+        <div className="flex h-full w-full items-center justify-center px-4 py-12 dark:bg-gray-900">
           <img
             src={vercelLightSvg}
             alt="Vercel"
@@ -51,7 +51,7 @@ export const partners: Partner[] = [
           <img
             src={vercelDarkSvg}
             alt="Vercel"
-            className="w-[220px] max-w-full hidden dark:block"
+            className="hidden w-[220px] max-w-full dark:block"
           />
         </div>
       ),
@@ -67,7 +67,7 @@ export const partners: Partner[] = [
             also push the boundaries of what's possible with TanStack on the
             web.
           </div>
-          <span className="text-blue-500 uppercase font-black text-sm">
+          <span className="text-sm font-black text-blue-500 uppercase">
             Learn More
           </span>
         </>
@@ -86,7 +86,7 @@ export const partners: Partner[] = [
       sidebarImgDark: clerkDarkSvg,
       sidebarImgClass: 'py-4',
       homepageImg: (
-        <div className="dark:bg-gray-900 w-full h-full flex items-center justify-center px-4 py-12">
+        <div className="flex h-full w-full items-center justify-center px-4 py-12 dark:bg-gray-900">
           <img
             src={clerkLightSvg}
             alt="Clerk"
@@ -95,7 +95,7 @@ export const partners: Partner[] = [
           <img
             src={clerkDarkSvg}
             alt="Clerk"
-            className="w-[200px] max-w-full hidden dark:block"
+            className="hidden w-[200px] max-w-full dark:block"
           />
         </div>
       ),
@@ -109,7 +109,7 @@ export const partners: Partner[] = [
             effortlessly deliver top-notch experiences that your users can trust
             and your developers can rely on.
           </div>
-          <span className="text-blue-500 uppercase font-black text-sm">
+          <span className="text-sm font-black text-blue-500 uppercase">
             Learn More
           </span>
         </>
@@ -154,7 +154,7 @@ export const partners: Partner[] = [
             params={{
               _splat: 'ag-grid-partnership',
             }}
-            className="text-blue-500 uppercase font-black text-sm"
+            className="text-sm font-black text-blue-500 uppercase"
           >
             Learn More
           </Link>
@@ -174,7 +174,7 @@ export const partners: Partner[] = [
       sidebarImgClass: 'py-5 scale-[1.1]',
       href,
       homepageImg: (
-        <div className="dark:bg-gray-900 w-full h-full flex items-center justify-center px-4 py-6">
+        <div className="flex h-full w-full items-center justify-center px-4 py-6 dark:bg-gray-900">
           <img
             src={convexColorSvg}
             alt="Convex"
@@ -183,7 +183,7 @@ export const partners: Partner[] = [
           <img
             src={convexWhiteSvg}
             alt="Convex"
-            className="w-[300px] max-w-full hidden dark:block"
+            className="hidden w-[300px] max-w-full dark:block"
           />
         </div>
       ),
@@ -201,7 +201,7 @@ export const partners: Partner[] = [
             together, we're elevating what's possible with real-time React
             applications.
           </div>
-          <span className="text-blue-500 uppercase font-black text-sm">
+          <span className="text-sm font-black text-blue-500 uppercase">
             Learn More
           </span>
         </>
@@ -220,7 +220,7 @@ export const partners: Partner[] = [
       sidebarImgClass: 'py-4 scale-[1.1]',
       href,
       homepageImg: (
-        <div className="dark:bg-gray-900 w-full h-full flex items-center justify-center px-4 py-6">
+        <div className="flex h-full w-full items-center justify-center px-4 py-6 dark:bg-gray-900">
           <img
             src={sentryWordMarkDarkSvg}
             alt="Sentry"
@@ -229,7 +229,7 @@ export const partners: Partner[] = [
           <img
             src={sentryWordMarkLightSvg}
             alt="Sentry"
-            className="w-[275px] max-w-full hidden dark:block"
+            className="hidden w-[275px] max-w-full dark:block"
           />
         </div>
       ),
@@ -243,7 +243,7 @@ export const partners: Partner[] = [
             the best possible experience to your users. Together, we're
             committed to making sure that you can build with confidence.
           </div>
-          <span className="text-blue-500 uppercase font-black text-sm">
+          <span className="text-sm font-black text-blue-500 uppercase">
             Learn More
           </span>
         </>
@@ -298,7 +298,7 @@ export const partners: Partner[] = [
             <strong>stay up to date with the latest and greatest</strong> in the
             web dev world regardless.
           </div>
-          <span className="text-blue-500 uppercase font-black text-sm">
+          <span className="text-sm font-black text-blue-500 uppercase">
             Learn More
           </span>
         </>
@@ -320,7 +320,7 @@ export const partners: Partner[] = [
           <img
             src={nozzleImage}
             alt="SEO keyword rank tracker"
-            className="w-[230px] max-w-full my-2"
+            className="my-2 w-[230px] max-w-full"
             width="230"
             height="80"
           />
@@ -339,7 +339,7 @@ export const partners: Partner[] = [
             prove the value of the full gamut of TanStack tools on the front-end
             with unmatched UI/UX.
           </div>
-          <span className="text-blue-500 uppercase font-black text-sm">
+          <span className="text-sm font-black text-blue-500 uppercase">
             Learn More
           </span>
         </>

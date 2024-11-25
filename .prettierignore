@@ -3,3 +3,7 @@
 **/public
 pnpm-lock.yaml
 routeTree.gen.ts
+
+.vercel
+.output
+.vinxi

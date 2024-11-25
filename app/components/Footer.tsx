@@ -21,9 +21,7 @@ const footerLinks = [
 export function Footer() {
   return (
     <div
-      className={`flex flex-col items-start justify-center gap-4 p-8
-      max-w-(--breakpoint-lg) mx-auto text-sm
-      bg-white dark:bg-gray-800 shadow-xl shadow-black/10 rounded-t-lg`}
+      className={`mx-auto flex max-w-(--breakpoint-lg) flex-col items-start justify-center gap-4 rounded-t-lg bg-white p-8 text-sm shadow-xl shadow-black/10 dark:bg-gray-800`}
     >
       <div className={`grid gap-1 sm:grid-cols-2 md:grid-cols-3`}>
         {footerLinks.map((item) => (

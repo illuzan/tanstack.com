@@ -52,7 +52,7 @@ function DocsRoute() {
       repo={library.repo}
     >
       <div
-        className="fixed inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-10 pointer-events-none blur-md"
+        className="pointer-events-none fixed inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-10 blur-md"
         style={{
           backgroundImage: `url(${background})`,
           backgroundSize: 'cover',

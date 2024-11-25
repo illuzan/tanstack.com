@@ -6,7 +6,7 @@ import { getBranch, getLibrary } from '~/libraries'
 import { capitalize } from '~/utils/utils'
 
 export const Route = createFileRoute(
-  '/$libraryId/$version/docs/framework/$framework/$'
+  '/$libraryId/$version/docs/framework/$framework/$',
 )({
   loader: (ctx) => {
     const { _splat: docsPath, framework, version, libraryId } = ctx.params

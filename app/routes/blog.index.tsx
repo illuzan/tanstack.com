@@ -20,7 +20,7 @@ const fetchFrontMatters = createServerFn({ method: 'GET' }).handler(
         const file = await fetchRepoFile(
           'tanstack/tanstack.com',
           'main',
-          filePath
+          filePath,
         )
 
         if (!file) {
@@ -38,7 +38,7 @@ const fetchFrontMatters = createServerFn({ method: 'GET' }).handler(
             authors: frontMatter.data.authors as Array<string> | undefined,
           },
         ] as const
-      })
+      }),
     )
 
     return frontMatters.sort((a, b) => {
@@ -57,7 +57,7 @@ const fetchFrontMatters = createServerFn({ method: 'GET' }).handler(
     //     'Cache-Control': 'public, max-age=300, s-maxage=3600',
     //   },
     // })
-  }
+  },
 )
 
 export const Route = createFileRoute('/blog/')({
@@ -78,30 +78,25 @@ function BlogIndex() {
 
   return (
     <div>
-      <div className="p-4 lg:p-6 min-h-screen">
+      <div className="min-h-screen p-4 lg:p-6">
         <div>
           <DocTitle>Latest Posts</DocTitle>
           <div className="h-4" />
           <div className="h-px bg-gray-500 opacity-20" />
           <div className="h-4" />
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 2xl:grid-cols-3">
           {frontMatters.map(
             ([id, { title, published, excerpt, authors = [] }]) => {
               return (
                 <Link
                   key={id}
                   to={`${id}`}
-                  className={`flex flex-col gap-4 justify-between
-                  border-2 border-transparent rounded-lg p-4 md:p-8
-                  transition-all bg-white dark:bg-gray-800
-                  shadow-xl dark:shadow-lg dark:shadow-blue-500/30
-                  hover:border-blue-500
-              `}
+                  className={`flex flex-col justify-between gap-4 rounded-lg border-2 border-transparent bg-white p-4 shadow-xl transition-all hover:border-blue-500 md:p-8 dark:bg-gray-800 dark:shadow-lg dark:shadow-blue-500/30`}
                 >
                   <div>
                     <div className={`text-lg font-extrabold`}>{title}</div>
-                    <div className={`italic font-light mt-2`}>
+                    <div className={`mt-2 font-light italic`}>
                       <p>
                         by {formatAuthors(authors)}
                         {published ? (
@@ -116,19 +111,19 @@ function BlogIndex() {
                       </p>
                     </div>
                     <div
-                      className={`text-sm mt-2 text-black dark:text-white leading-7`}
+                      className={`mt-2 text-sm leading-7 text-black dark:text-white`}
                     >
                       <Markdown code={excerpt || ''} />
                     </div>
                   </div>
                   <div>
-                    <div className="text-blue-500 uppercase font-black text-sm">
+                    <div className="text-sm font-black text-blue-500 uppercase">
                       Read More
                     </div>
                   </div>
                 </Link>
               )
-            }
+            },
           )}
         </div>
         <div className="h-24" />

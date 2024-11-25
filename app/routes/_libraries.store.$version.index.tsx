@@ -84,11 +84,8 @@ export default function StoreVersionIndex() {
 
   return (
     <>
-      <div className="flex flex-col gap-20 md:gap-32 max-w-full">
-        <div
-          className="flex flex-wrap py-2 px-4 items-center justify-center text-sm max-w-(--breakpoint-xl) mx-auto
-          md:text-base md:self-end"
-        >
+      <div className="flex max-w-full flex-col gap-20 md:gap-32">
+        <div className="mx-auto flex max-w-(--breakpoint-xl) flex-wrap items-center justify-center px-4 py-2 text-sm md:self-end md:text-base">
           {menu?.map((item, i) => {
             const label = (
               <div className="p-2 opacity-90 hover:opacity-100">
@@ -109,37 +106,27 @@ export default function StoreVersionIndex() {
             )
           })}
         </div>
-        <div className="flex flex-col items-center gap-6 text-center px-4">
-          <div className="flex gap-2 lg:gap-4 items-center">
+        <div className="flex flex-col items-center gap-6 px-4 text-center">
+          <div className="flex items-center gap-2 lg:gap-4">
             <h1
-              className={`inline-block font-black text-4xl md:text-6xl lg:text-7xl`}
+              className={`inline-block text-4xl font-black md:text-6xl lg:text-7xl`}
               style={{
                 viewTransitionName: `library-name`,
               }}
             >
               <span className={gradientText}>TanStack Store</span>{' '}
-              <span
-                className="text-[.5em] align-super text-black animate-bounce
-              dark:text-white"
-              >
+              <span className="animate-bounce align-super text-[.5em] text-black dark:text-white">
                 {version === 'latest' ? storeProject.latestVersion : version}
               </span>
             </h1>
           </div>
-          <h2
-            className="font-bold text-2xl max-w-md
-            md:text-3xl
-            lg:text-5xl lg:max-w-2xl"
-          >
-            <span className="underline decoration-dashed decoration-gray-500 decoration-3 underline-offset-2">
+          <h2 className="max-w-md text-2xl font-bold md:text-3xl lg:max-w-2xl lg:text-5xl">
+            <span className="underline decoration-gray-500 decoration-dashed decoration-3 underline-offset-2">
               Framework agnostic
             </span>{' '}
             type-safe store w/ reactive framework adapters
           </h2>
-          <p
-            className="text opacity-90 max-w-[500px]
-            lg:text-xl lg:max-w-[800px]"
-          >
+          <p className="text max-w-[500px] opacity-90 lg:max-w-[800px] lg:text-xl">
             Level up your state management with TanStack Store – the
             framework-agnostic, type-safe store. Enjoy{' '}
             <strong>
@@ -151,7 +138,7 @@ export default function StoreVersionIndex() {
           </p>
           <Link
             to="./docs/"
-            className={`py-2 px-4 bg-stone-600 text-white rounded-sm uppercase font-extrabold`}
+            className={`rounded-sm bg-stone-600 px-4 py-2 font-extrabold text-white uppercase`}
           >
             Get Started
           </Link>
@@ -260,21 +247,16 @@ export default function StoreVersionIndex() {
           </div>
         </div> */}
 
-        <div className="px-4 w-[500px] max-w-full mx-auto">
-          <h3 className="text-center text-3xl leading-8 font-extrabold tracking-tight sm:text-4xl sm:leading-10 lg:leading-none mt-8">
+        <div className="mx-auto w-[500px] max-w-full px-4">
+          <h3 className="mt-8 text-center text-3xl leading-8 font-extrabold tracking-tight sm:text-4xl sm:leading-10 lg:leading-none">
             Partners
           </h3>
           <div className="h-8" />
-          <div
-            className="flex-1 flex flex-col items-center text-sm text-center
-                      bg-white shadow-xl shadow-gray-500/20 rounded-lg
-                        divide-y-2 divide-gray-500/10 overflow-hidden
-                        dark:bg-gray-800 dark:shadow-none"
-          >
-            <span className="flex items-center gap-2 p-12 text-4xl text-rose-500 font-black uppercase">
+          <div className="flex flex-1 flex-col items-center divide-y-2 divide-gray-500/10 overflow-hidden rounded-lg bg-white text-center text-sm shadow-xl shadow-gray-500/20 dark:bg-gray-800 dark:shadow-none">
+            <span className="flex items-center gap-2 p-12 text-4xl font-black text-rose-500 uppercase">
               Store <TbHeartHandshake /> You?
             </span>
-            <div className="flex flex-col p-4 gap-4">
+            <div className="flex flex-col gap-4 p-4">
               <div>
                 We're looking for a TanStack Store OSS Partner to go above and
                 beyond the call of sponsorship. Are you as invested in TanStack
@@ -282,7 +264,7 @@ export default function StoreVersionIndex() {
               </div>
               <a
                 href="mailto:partners@tanstack.com?subject=TanStack Store Partnership"
-                className="text-blue-500 uppercase font-black text-sm"
+                className="text-sm font-black text-blue-500 uppercase"
               >
                 Let's chat
               </a>
@@ -290,19 +272,19 @@ export default function StoreVersionIndex() {
           </div>
         </div>
 
-        <div className="relative text-lg overflow-hidden">
-          <h3 className="text-center text-3xl leading-8 font-extrabold tracking-tight sm:text-4xl sm:leading-10 lg:leading-none mt-8">
+        <div className="relative overflow-hidden text-lg">
+          <h3 className="mt-8 text-center text-3xl leading-8 font-extrabold tracking-tight sm:text-4xl sm:leading-10 lg:leading-none">
             Sponsors
           </h3>
           <div
-            className="my-4 flex flex-wrap mx-auto max-w-(--breakpoint-lg)"
+            className="mx-auto my-4 flex max-w-(--breakpoint-lg) flex-wrap"
             style={{
               aspectRatio: '1/1',
             }}
           >
             <Await
               promise={sponsorsPromise}
-              fallback={<CgSpinner className="text-2xl animate-spin" />}
+              fallback={<CgSpinner className="animate-spin text-2xl" />}
               children={(sponsors) => {
                 return <SponsorPack sponsors={sponsors} />
               }}
@@ -311,21 +293,18 @@ export default function StoreVersionIndex() {
           <div className="text-center">
             <a
               href="https://github.com/sponsors/tannerlinsley"
-              className="inline-block bg-green-500 px-4 py-2 text-xl mx-auto leading-tight font-extrabold tracking-tight text-white rounded-full"
+              className="mx-auto inline-block rounded-full bg-green-500 px-4 py-2 text-xl leading-tight font-extrabold tracking-tight text-white"
             >
               Become a Sponsor!
             </a>
           </div>
         </div>
 
-        <div className="mx-auto max-w-[400px] flex flex-col gap-2 items-center">
-          <div className="shadow-lg rounded-lg overflow-hidden bg-white dark:bg-gray-800 dark:text-white">
+        <div className="mx-auto flex max-w-[400px] flex-col items-center gap-2">
+          <div className="overflow-hidden rounded-lg bg-white shadow-lg dark:bg-gray-800 dark:text-white">
             <Carbon />
           </div>
-          <span
-            className="text-[.7rem] bg-gray-500/10 py-1 px-2 rounded text-gray-500
-                dark:bg-gray-500/20"
-          >
+          <span className="rounded bg-gray-500/10 px-2 py-1 text-[.7rem] text-gray-500 dark:bg-gray-500/20">
             This ad helps us be happy about our invested time and not burn out
             and rage-quit OSS. Yay money! 😉
           </span>
@@ -405,17 +384,17 @@ export default function StoreVersionIndex() {
           </div>
         )} */}
 
-        <div className="flex flex-col gap-4 items-center">
-          <div className="font-extrabold text-xl lg:text-2xl">
+        <div className="flex flex-col items-center gap-4">
+          <div className="text-xl font-extrabold lg:text-2xl">
             Wow, you've come a long way!
           </div>
-          <div className="italic font-sm opacity-70">
+          <div className="font-sm italic opacity-70">
             Only one thing left to do...
           </div>
           <div>
             <Link
               to="./docs/"
-              className={`inline-block py-2 px-4 bg-stone-700 rounded-sm text-white uppercase font-extrabold`}
+              className={`inline-block rounded-sm bg-stone-700 px-4 py-2 font-extrabold text-white uppercase`}
             >
               Get Started!
             </Link>

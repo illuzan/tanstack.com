@@ -21,11 +21,11 @@ async function fetchRemote(
   owner: string,
   repo: string,
   ref: string,
-  filepath: string
+  filepath: string,
 ) {
   const href = new URL(
     `${owner}/${repo}/${ref}/${filepath}`,
-    'https://raw.githubusercontent.com/'
+    'https://raw.githubusercontent.com/',
   ).href
 
   const response = await fetch(href, {
@@ -53,7 +53,7 @@ async function fetchFs(repo: string, filepath: string) {
     throw new Error(
       `Failed to read file ${filepath} from repo ${repo}: ${
         error instanceof Error ? error.message : String(error)
-      }`
+      }`,
     )
   }
 }
@@ -63,7 +63,7 @@ async function fetchFs(repo: string, filepath: string) {
  */
 function replaceContent(
   text: string,
-  frontmatter: graymatter.GrayMatterFile<string>
+  frontmatter: graymatter.GrayMatterFile<string>,
 ) {
   let result = text
   const replace = frontmatter.data.replace as Record<string, string> | undefined
@@ -87,7 +87,7 @@ function replaceContent(
  */
 function replaceSections(
   text: string,
-  frontmatter: graymatter.GrayMatterFile<string>
+  frontmatter: graymatter.GrayMatterFile<string>,
 ) {
   let result = text
   // RegExp defining token pair to dicover sections in the document
@@ -101,7 +101,7 @@ function replaceSections(
   for (const match of frontmatter.content.matchAll(sectionRegex)) {
     if (match[1] !== match[2]) {
       console.error(
-        `Origin section '${match[1]}' does not have matching closing token (found '${match[2]}'). Please make sure that each section has corresponsing closing token and that sections are not nested.`
+        `Origin section '${match[1]}' does not have matching closing token (found '${match[2]}'). Please make sure that each section has corresponsing closing token and that sections are not nested.`,
       )
     }
 
@@ -113,7 +113,7 @@ function replaceSections(
   for (const match of result.matchAll(sectionRegex)) {
     if (match[1] !== match[2]) {
       console.error(
-        `Target section '${match[1]}' does not have matching closing token (found '${match[2]}'). Please make sure that each section has corresponsing closing token and that sections are not nested.`
+        `Target section '${match[1]}' does not have matching closing token (found '${match[2]}'). Please make sure that each section has corresponsing closing token and that sections are not nested.`,
       )
     }
 
@@ -130,7 +130,7 @@ function replaceSections(
           value[0] +
           result.slice(
             sectionMatch.index! + sectionMatch[0].length,
-            result.length
+            result.length,
           )
       }
     })
@@ -154,7 +154,7 @@ function replaceSections(
 function replaceProjectImageBranch(
   text: string,
   repoPair: string,
-  ref: string
+  ref: string,
 ) {
   const handleReplaceImageSrc = (src: string): string => {
     const srcLowered = src.toLowerCase()
@@ -252,7 +252,7 @@ function replaceProjectImageBranch(
 export async function fetchRepoFile(
   repoPair: string,
   ref: string,
-  filepath: string
+  filepath: string,
 ) {
   const key = `${repoPair}:${ref}:${filepath}`
   let [owner, repo] = repoPair.split('/')

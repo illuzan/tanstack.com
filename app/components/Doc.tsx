@@ -16,7 +16,7 @@ export function Doc({
   filePath: string
 }) {
   return (
-    <div className="p-4 lg:p-6 overflow-auto w-full">
+    <div className="w-full overflow-auto p-4 lg:p-6">
       {title ? <DocTitle>{title}</DocTitle> : null}
       <div className="h-4" />
       <div className="h-px bg-gray-500 opacity-20" />
@@ -25,7 +25,7 @@ export function Doc({
         <Markdown code={content} />
       </div>
       <div className="h-12" />
-      <div className="w-full h-px bg-gray-500 opacity-30" />
+      <div className="h-px w-full bg-gray-500 opacity-30" />
       <div className="py-4 opacity-70">
         <a
           href={`https://github.com/${repo}/tree/${branch}/${filePath}`}

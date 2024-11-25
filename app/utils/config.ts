@@ -22,7 +22,7 @@ const configSchema = z.object({
           label: z.string(),
           to: z.string(),
           badge: z.string().optional(),
-        })
+        }),
       ),
       frameworks: z
         .array(
@@ -33,14 +33,14 @@ const configSchema = z.object({
                 label: z.string(),
                 to: z.string(),
                 badge: z.string().optional(),
-              })
+              }),
             ),
-          })
+          }),
         )
         .optional(),
       collapsible: z.boolean().optional(),
       defaultCollapsed: z.boolean().optional(),
-    })
+    }),
   ),
   users: z.array(z.string()).optional(),
 })
@@ -62,7 +62,7 @@ export const getTanstackDocsConfig = createServerFn({ method: 'GET' })
     try {
       const tanstackDocsConfigFromJson = JSON.parse(config)
       const validationResult = configSchema.safeParse(
-        tanstackDocsConfigFromJson
+        tanstackDocsConfigFromJson,
       )
 
       if (!validationResult.success) {

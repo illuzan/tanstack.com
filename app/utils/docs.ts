@@ -41,7 +41,7 @@ export const loadDocs = async ({
 
 export const fetchDocs = createServerFn({ method: 'GET' })
   .validator(
-    z.object({ repo: z.string(), branch: z.string(), filePath: z.string() })
+    z.object({ repo: z.string(), branch: z.string(), filePath: z.string() }),
   )
   .handler(async ({ data: { repo, branch, filePath } }) => {
     const file = await fetchRepoFile(repo, branch, filePath)

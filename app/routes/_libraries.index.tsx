@@ -91,96 +91,80 @@ function Index() {
         src={toyPalmChair}
         className="-bottom-[50px] -right-[100px] z-0 fixed opacity-20"
       /> */}
-      <div className="max-w-full z-10">
-        <div className="flex flex-col items-center gap-6 text-center px-4 pt-12 lg:pt-24">
-          <div className="flex gap-2 lg:gap-4 items-center">
+      <div className="z-10 max-w-full">
+        <div className="flex flex-col items-center gap-6 px-4 pt-12 text-center lg:pt-24">
+          <div className="flex items-center gap-2 lg:gap-4">
             <img
               src={logoColor}
               alt="TanStack Logo"
               className="w-[40px] md:w-[60px] lg:w-[100px]"
             />
             <h1
-              className={`inline-block
-            font-black text-5xl
-            md:text-6xl
-            lg:text-8xl`}
+              className={`inline-block text-5xl font-black md:text-6xl lg:text-8xl`}
             >
               <span
-                className={`
-            inline-block text-transparent bg-clip-text bg-linear-to-r ${gradient}
-            underline decoration-4 md:decoration-8 underline-offset-[.5rem] md:underline-offset-[1rem] decoration-gray-200 dark:decoration-gray-800
-            mb-2 uppercase [letter-spacing:-.05em]
-            `}
+                className={`inline-block bg-linear-to-r bg-clip-text text-transparent ${gradient} mb-2 [letter-spacing:-.05em] uppercase underline decoration-gray-200 decoration-4 underline-offset-[.5rem] md:decoration-8 md:underline-offset-[1rem] dark:decoration-gray-800`}
               >
                 TanStack
               </span>
             </h1>
           </div>
-          <h2
-            className="font-bold text-2xl max-w-md
-            md:text-4xl
-            lg:text-5xl lg:max-w-2xl text-balance"
-          >
+          <h2 className="max-w-md text-2xl font-bold text-balance md:text-4xl lg:max-w-2xl lg:text-5xl">
             High-quality open-source software for{' '}
-            <span className="underline decoration-dashed decoration-yellow-500 decoration-3 underline-offset-2">
+            <span className="underline decoration-yellow-500 decoration-dashed decoration-3 underline-offset-2">
               web developers.
             </span>
           </h2>
-          <p
-            className="text opacity-90 max-w-sm
-            lg:text-xl lg:max-w-2xl text-balance"
-          >
+          <p className="text max-w-sm text-balance opacity-90 lg:max-w-2xl lg:text-xl">
             Headless, type-safe, & powerful utilities for Web Applications,
             Routing, State Management, Data Visualization, Datagrids/Tables, and
             more.
           </p>
         </div>
         <div className="h-8" />
-        <div className="p-8 w-fit mx-auto grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-8 items-center justify-center place-items-center bg-white/50 dark:bg-gray-700/30 dark:shadow-none rounded-xl shadow-xl">
-          <div className="flex gap-4 items-center">
+        <div className="mx-auto grid w-fit grid-cols-1 place-items-center items-center justify-center gap-8 rounded-xl bg-white/50 p-8 shadow-xl sm:grid-cols-2 xl:grid-cols-4 dark:bg-gray-700/30 dark:shadow-none">
+          <div className="flex items-center gap-4">
             <FaDownload className="text-2xl" />
             <div className="">
               <div className="text-2xl font-bold opacity-80">352,749,203</div>
-              <div className="text-sm opacity-50 font-medium italic">
+              <div className="text-sm font-medium italic opacity-50">
                 NPM Downloads
               </div>
             </div>
           </div>
-          <div className="flex gap-4 items-center">
+          <div className="flex items-center gap-4">
             <FaStar className="text-2xl" />
             <div className="">
               <div className="text-2xl font-bold opacity-80">91,478</div>
-              <div className="text-sm opacity-50 font-medium italic">
+              <div className="text-sm font-medium italic opacity-50">
                 Stars on Github
               </div>
             </div>
           </div>
-          <div className="flex gap-4 items-center">
+          <div className="flex items-center gap-4">
             <FaUsers className="text-2xl" />
             <div className="">
               <div className="text-2xl font-bold opacity-80">1,959</div>
-              <div className="text-sm opacity-50 font-medium italic">
+              <div className="text-sm font-medium italic opacity-50">
                 Contributors on GitHub
               </div>
             </div>
           </div>
-          <div className="flex gap-4 items-center">
+          <div className="flex items-center gap-4">
             <FaCube className="text-2xl" />
             <div className="">
               <div className="text-2xl font-bold opacity-80">1,126,523</div>
-              <div className="text-sm opacity-50 font-medium italic">
+              <div className="text-sm font-medium italic opacity-50">
                 Dependents on GitHub
               </div>
             </div>
           </div>
         </div>
         <div className="h-24" />
-        <div className="px-4 lg:max-w-(--breakpoint-lg) md:mx-auto">
+        <div className="px-4 md:mx-auto lg:max-w-(--breakpoint-lg)">
           <h3 className={`text-4xl font-light`}>Open Source Libraries</h3>
           <div
-            className={`mt-4 grid grid-cols-1 gap-8
-            sm:grid-cols-2 sm:gap-4
-            lg:grid-cols-3`}
+            className={`mt-4 grid grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3`}
           >
             {libraries.map((library, i) => {
               return (
@@ -189,14 +173,14 @@ function Index() {
                   to={library.to ?? '#'}
                   params
                   className={twMerge(
-                    `border-4 border-transparent rounded-lg shadow-lg p-4 md:p-8 text-white transition-all bg-white dark:bg-gray-900 dark:border dark:border-gray-800`,
-                    library.cardStyles
+                    `rounded-lg border-4 border-transparent bg-white p-4 text-white shadow-lg transition-all md:p-8 dark:border dark:border-gray-800 dark:bg-gray-900`,
+                    library.cardStyles,
                   )}
                   style={{
                     zIndex: i,
                   }}
                 >
-                  <div className="flex gap-2 justify-between items-center">
+                  <div className="flex items-center justify-between gap-2">
                     <MatchRoute
                       pending
                       to={library.to}
@@ -204,7 +188,7 @@ function Index() {
                         return (
                           <div
                             className={twMerge(
-                              `text-2xl font-extrabold`
+                              `text-2xl font-extrabold`,
                               // isPending && `[view-transition-name:library-name]`
                             )}
                             style={{
@@ -219,18 +203,18 @@ function Index() {
                     {library.badge ? (
                       <div
                         className={twMerge(
-                          `uppercase text-white bg-yellow-500 rounded-full px-2 py-1 text-xs font-black animate-pulse`,
-                          library.bgStyle
+                          `animate-pulse rounded-full bg-yellow-500 px-2 py-1 text-xs font-black text-white uppercase`,
+                          library.bgStyle,
                         )}
                       >
                         {library.badge}
                       </div>
                     ) : null}
                   </div>
-                  <div className={`text-lg italic font-light mt-2`}>
+                  <div className={`mt-2 text-lg font-light italic`}>
                     {library.tagline}
                   </div>
-                  <div className={`text-sm mt-2 text-black dark:text-white`}>
+                  <div className={`mt-2 text-sm text-black dark:text-white`}>
                     {library.description}
                   </div>
                 </Link>
@@ -239,8 +223,8 @@ function Index() {
           </div>
         </div>
         <div className="h-12" />
-        <div className={`px-4 lg:max-w-(--breakpoint-lg) md:mx-auto`}>
-          <h3 className={`text-4xl font-light mb-4`}>Partners</h3>
+        <div className={`px-4 md:mx-auto lg:max-w-(--breakpoint-lg)`}>
+          <h3 className={`mb-4 text-4xl font-light`}>Partners</h3>
           <div className={`grid grid-cols-1 gap-6 sm:grid-cols-2`}>
             {partners.map((partner) => {
               return (
@@ -248,13 +232,13 @@ function Index() {
                   key={partner.name}
                   href={partner.href}
                   target="_blank"
-                  className="bg-white shadow-xl shadow-gray-500/20 rounded-lg dark:border border-gray-500/20 dark:bg-gray-800 dark:shadow-none group overflow-hidden grid"
+                  className="group grid overflow-hidden rounded-lg border-gray-500/20 bg-white shadow-xl shadow-gray-500/20 dark:border dark:bg-gray-800 dark:shadow-none"
                   rel="noreferrer"
                 >
-                  <div className="z-0 row-start-1 col-start-1 bg-white flex items-center justify-center group-hover:blur-xs transition-all duration-200">
+                  <div className="z-0 col-start-1 row-start-1 flex items-center justify-center bg-white transition-all duration-200 group-hover:blur-xs">
                     {partner.homepageImg}
                   </div>
-                  <div className="z-10 row-start-1 col-start-1 max-w-full p-4 text-sm flex flex-col gap-4 items-start opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-white/70 dark:bg-gray-800/70">
+                  <div className="z-10 col-start-1 row-start-1 flex max-w-full flex-col items-start gap-4 bg-white/70 p-4 text-sm opacity-0 transition-opacity duration-200 group-hover:opacity-100 dark:bg-gray-800/70">
                     {partner.content}
                   </div>
                 </a>
@@ -263,31 +247,24 @@ function Index() {
           </div>
         </div>
         <div className="h-20" />
-        <div className={`lg:max-w-(--breakpoint-lg) px-4 mx-auto`}>
+        <div className={`mx-auto px-4 lg:max-w-(--breakpoint-lg)`}>
           <h3 className={`text-4xl font-light`}>Courses</h3>
           <div className={`mt-4 grid grid-cols-1 gap-4`}>
             {courses.map((course) => (
               <a
                 key={course.name}
                 href={course.href}
-                className={`flex gap-2 justify-between border-2 border-transparent rounded-lg p-4 md:p-8
-              transition-all bg-white/90 dark:bg-gray-800/90
-              shadow-xl shadow-green-700/10 dark:shadow-green-500/30
-              hover:border-green-500
-              `}
+                className={`flex justify-between gap-2 rounded-lg border-2 border-transparent bg-white/90 p-4 shadow-xl shadow-green-700/10 transition-all hover:border-green-500 md:p-8 dark:bg-gray-800/90 dark:shadow-green-500/30`}
                 target="_blank"
                 rel="noreferrer"
               >
-                <div
-                  className={`col-span-2
-                    md:col-span-5`}
-                >
+                <div className={`col-span-2 md:col-span-5`}>
                   <div className={`text-2xl font-bold text-green-500`}>
                     {course.name}
                   </div>
-                  <div className={`text-sm mt-2`}>{course.description}</div>
+                  <div className={`mt-2 text-sm`}>{course.description}</div>
                   <div
-                    className={`inline-block mt-4 px-4 py-2 bg-green-500 text-white rounded-sm shadow uppercase font-black text-sm`}
+                    className={`mt-4 inline-block rounded-sm bg-green-500 px-4 py-2 text-sm font-black text-white uppercase shadow`}
                   >
                     Check it out →
                   </div>
@@ -297,7 +274,7 @@ function Index() {
           </div>
         </div>
         <div className="h-12" />
-        <div className={`lg:max-w-(--breakpoint-lg) px-4 mx-auto`}>
+        <div className={`mx-auto px-4 lg:max-w-(--breakpoint-lg)`}>
           <h3 className={`text-4xl font-light`}>OSS Sponsors</h3>
           <div className="h-4" />
           <div
@@ -307,7 +284,7 @@ function Index() {
           >
             <Await
               promise={sponsorsPromise}
-              fallback={<CgSpinner className="text-2xl animate-spin" />}
+              fallback={<CgSpinner className="animate-spin text-2xl" />}
               children={(sponsors) => {
                 return <SponsorPack sponsors={sponsors} />
               }}
@@ -318,13 +295,15 @@ function Index() {
             <div>
               <a
                 href="https://github.com/sponsors/tannerlinsley"
-                className={`inline-block p-4 bg-green-500 rounded-sm text-white uppercase font-black`}
+                className={`inline-block rounded-sm bg-green-500 p-4 font-black text-white uppercase`}
               >
                 Become a Sponsor!
               </a>
             </div>
             <div className={`h-4`} />
-            <p className={`italic mx-auto max-w-(--breakpoint-sm) text-gray-500`}>
+            <p
+              className={`mx-auto max-w-(--breakpoint-sm) text-gray-500 italic`}
+            >
               Sponsors get special perks like{' '}
               <strong>
                 private discord channels, priority issue requests, direct
@@ -335,33 +314,24 @@ function Index() {
           </div>
         </div>
         <div className="h-12" />
-        <div className={`lg:max-w-[400px] px-4 mx-auto`}>
+        <div className={`mx-auto px-4 lg:max-w-[400px]`}>
           <div className="flex flex-col gap-4">
-            <div className="shadow-lg rounded-lg overflow-hidden bg-white dark:bg-gray-800 dark:text-white max-w-[250px] mx-auto">
+            <div className="mx-auto max-w-[250px] overflow-hidden rounded-lg bg-white shadow-lg dark:bg-gray-800 dark:text-white">
               <Carbon />
             </div>
-            <span
-              className="text-[.7rem] bg-gray-500/10 py-1 px-2 rounded text-gray-500
-                dark:bg-gray-500/20 self-center"
-            >
+            <span className="self-center rounded bg-gray-500/10 px-2 py-1 text-[.7rem] text-gray-500 dark:bg-gray-500/20">
               This ad helps us be happy about our invested time and not burn out
               and rage-quit OSS. Yay money! 😉
             </span>
           </div>
         </div>
         <div className="h-12" />
-        <div className="px-4 mx-auto max-w-(--breakpoint-lg)">
+        <div className="mx-auto max-w-(--breakpoint-lg) px-4">
           <div
-            className={`
-          rounded-md p-4 grid gap-6
-          bg-discord text-white overflow-hidden relative
-          shadow-xl shadow-indigo-700/30
-          sm:p-8 sm:grid-cols-3`}
+            className={`bg-discord relative grid gap-6 overflow-hidden rounded-md p-4 text-white shadow-xl shadow-indigo-700/30 sm:grid-cols-3 sm:p-8`}
           >
             <div
-              className={`absolute transform opacity-10 z-0
-            right-0 top-0 -translate-y-1/3 translate-x-1/3
-            sm:opacity-20`}
+              className={`absolute top-0 right-0 z-0 -translate-y-1/3 translate-x-1/3 transform opacity-10 sm:opacity-20`}
             >
               <img
                 src={discordImage}
@@ -382,8 +352,7 @@ function Index() {
               <a
                 href="https://discord.com/invite/WrRKjPJ"
                 target="_blank"
-                className={`block w-full mt-4 px-4 py-2 bg-white text-discord
-                text-center rounded shadow-lg z-10 uppercase font-black`}
+                className={`text-discord z-10 mt-4 block w-full rounded bg-white px-4 py-2 text-center font-black uppercase shadow-lg`}
                 rel="noreferrer"
               >
                 Join TanStack Discord
@@ -392,8 +361,8 @@ function Index() {
           </div>
         </div>
         <div className="h-4" />
-        <div className="px-4 mx-auto max-w-(--breakpoint-lg) relative">
-          <div className="rounded-md p-8 bg-white shadow-xl shadow-gray-900/10 md:p-14 dark:bg-gray-800">
+        <div className="relative mx-auto max-w-(--breakpoint-lg) px-4">
+          <div className="rounded-md bg-white p-8 shadow-xl shadow-gray-900/10 md:p-14 dark:bg-gray-800">
             {!bytesSignupMutation.submittedAt ? (
               <form
                 onSubmit={(e) => {
@@ -418,14 +387,14 @@ function Index() {
                     </figure>
                   </div>
 
-                  <h3 className={`text-lg mt-1`}>
+                  <h3 className={`mt-1 text-lg`}>
                     The Best JavaScript Newsletter
                   </h3>
                 </div>
-                <div className={`grid grid-cols-3 mt-4 gap-2`}>
+                <div className={`mt-4 grid grid-cols-3 gap-2`}>
                   <input
                     disabled={bytesSignupMutation.status === 'pending'}
-                    className={`col-span-2 p-3 placeholder-gray-400 text-black bg-gray-200 rounded-sm text-sm outline-hidden focus:outline-hidden w-full dark:(text-white bg-gray-700)`}
+                    className={`dark:(text-white bg-gray-700) col-span-2 w-full rounded-sm bg-gray-200 p-3 text-sm text-black placeholder-gray-400 outline-hidden focus:outline-hidden`}
                     name="email_address"
                     placeholder="Your email address"
                     type="text"
@@ -433,7 +402,7 @@ function Index() {
                   />
                   <button
                     type="submit"
-                    className={`bg-[#ED203D] text-white rounded-sm uppercase font-black`}
+                    className={`rounded-sm bg-[#ED203D] font-black text-white uppercase`}
                   >
                     <span>
                       {bytesSignupMutation.status === 'pending'
@@ -444,12 +413,12 @@ function Index() {
                 </div>
                 {bytesSignupMutation.error ? (
                   <p
-                    className={`text-sm text-red-500 font-semibold italic mt-2`}
+                    className={`mt-2 text-sm font-semibold text-red-500 italic`}
                   >
                     Looks like something went wrong. Please try again.
                   </p>
                 ) : (
-                  <p className={`text-sm opacity-30 font-semibold italic mt-2`}>
+                  <p className={`mt-2 text-sm font-semibold italic opacity-30`}>
                     Join over 100,000 devs
                   </p>
                 )}

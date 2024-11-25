@@ -5,7 +5,7 @@ import { ImSpinner2 } from 'react-icons/im'
 const LazySearchButton = React.lazy(() =>
   import('@orama/react-components').then((mod) => ({
     default: mod.OramaSearchButton,
-  }))
+  })),
 )
 
 let defaultMounted = false
@@ -23,7 +23,7 @@ export function ClientOnlySearchButton(props: any) {
       {mounted ? (
         <LazySearchButton {...props} />
       ) : (
-        <div className="bg-gray-500/5 h-[41px] rounded-md flex items-center pl-4">
+        <div className="flex h-[41px] items-center rounded-md bg-gray-500/5 pl-4">
           <ImSpinner2 className="animate-spin" />
         </div>
       )}

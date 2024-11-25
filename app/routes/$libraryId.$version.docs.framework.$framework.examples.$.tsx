@@ -9,7 +9,7 @@ import { seo } from '~/utils/seo'
 import { capitalize, slugToTitle } from '~/utils/utils'
 
 export const Route = createFileRoute(
-  '/$libraryId/$version/docs/framework/$framework/examples/$'
+  '/$libraryId/$version/docs/framework/$framework/examples/$',
 )({
   head: ({ params }) => {
     const library = getLibrary(params.libraryId)
@@ -17,10 +17,10 @@ export const Route = createFileRoute(
     return {
       meta: seo({
         title: `${capitalize(params.framework)} ${library.name} ${slugToTitle(
-          params._splat || ''
+          params._splat || '',
         )} Example | ${library.name} Docs`,
         description: `An example showing how to implement ${slugToTitle(
-          params._splat || ''
+          params._splat || '',
         )} in ${capitalize(params.framework)} using ${library.name}.`,
       }),
     }
@@ -62,13 +62,13 @@ export default function Example() {
   const showVercel = library.showVercelUrl
 
   return (
-    <div className="flex-1 flex flex-col min-h-0 overflow-auto">
+    <div className="flex min-h-0 flex-1 flex-col overflow-auto">
       <div className="p-4 lg:p-6">
         <DocTitle>
           <span>
             {capitalize(framework)} Example: {slugToTitle(_splat)}
           </span>
-          <div className="flex items-center gap-4 flex-wrap font-normal text-xs">
+          <div className="flex flex-wrap items-center gap-4 text-xs font-normal">
             {showVercel ? (
               <a
                 href={`https://vercel.com/new/clone?repository-url=${githubUrl}`}
@@ -79,7 +79,7 @@ export default function Example() {
             <a
               href={githubUrl}
               target="_blank"
-              className="flex gap-1 items-center"
+              className="flex items-center gap-1"
               rel="noreferrer"
             >
               <FaExternalLinkAlt /> Github
@@ -88,7 +88,7 @@ export default function Example() {
               <a
                 href={stackBlitzUrl}
                 target="_blank"
-                className="flex gap-1 items-center"
+                className="flex items-center gap-1"
                 rel="noreferrer"
               >
                 <FaExternalLinkAlt /> StackBlitz
@@ -98,7 +98,7 @@ export default function Example() {
               <a
                 href={codesandboxUrl}
                 target="_blank"
-                className="flex gap-1 items-center"
+                className="flex items-center gap-1"
                 rel="noreferrer"
               >
                 <FaExternalLinkAlt /> CodeSandbox
@@ -107,15 +107,15 @@ export default function Example() {
           </div>
         </DocTitle>
       </div>
-      <div className="flex-1 lg:px-6 flex flex-col min-h-0">
+      <div className="flex min-h-0 flex-1 flex-col lg:px-6">
         <iframe
           src={stackBlitzUrl}
           title={`${library.name} | ${examplePath}`}
           sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-          className="flex-1 w-full overflow-hidden lg:rounded-lg shadow-xl shadow-gray-700/20 bg-white dark:bg-black"
+          className="w-full flex-1 overflow-hidden bg-white shadow-xl shadow-gray-700/20 lg:rounded-lg dark:bg-black"
         />
       </div>
-      <div className="lg:h-16 lg:mt-2" />
+      <div className="lg:mt-2 lg:h-16" />
     </div>
   )
 }

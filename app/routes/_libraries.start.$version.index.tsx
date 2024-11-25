@@ -103,11 +103,8 @@ export default function VersionIndex() {
   const gradientText = `inline-block text-transparent bg-clip-text bg-linear-to-r ${startProject.colorFrom} ${startProject.colorTo}`
 
   return (
-    <div className="flex flex-col gap-20 md:gap-32 max-w-full">
-      <div
-        className="flex flex-wrap py-2 px-4 items-center justify-center text-sm max-w-(--breakpoint-xl) mx-auto
-          md:text-base md:self-end"
-      >
+    <div className="flex max-w-full flex-col gap-20 md:gap-32">
+      <div className="mx-auto flex max-w-(--breakpoint-xl) flex-wrap items-center justify-center px-4 py-2 text-sm md:self-end md:text-base">
         {menu?.map((item, i) => {
           const label = (
             <div className="p-2 opacity-90 hover:opacity-100">{item.label}</div>
@@ -126,13 +123,10 @@ export default function VersionIndex() {
           )
         })}
       </div>
-      <div className="flex flex-col items-center gap-8 text-center px-4">
-        <div className="flex gap-2 lg:gap-4 items-center">
+      <div className="flex flex-col items-center gap-8 px-4 text-center">
+        <div className="flex items-center gap-2 lg:gap-4">
           <h1
-            className={`inline-block
-            font-black text-4xl
-            md:text-6xl
-            lg:text-7xl relative`}
+            className={`relative inline-block text-4xl font-black md:text-6xl lg:text-7xl`}
             style={{
               viewTransitionName: `library-name`,
             }}
@@ -141,31 +135,18 @@ export default function VersionIndex() {
           </h1>
         </div>
         {/* <div className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-[150%]"> */}
-        <div
-          className="text-sm
-            md:text-base font-black
-            lg:text-lg align-super text-white animate-bounce uppercase
-              dark:text-black bg-black dark:bg-white shadow-xl shadow-black/30 px-2 py-1 rounded-md
-              leading-none whitespace-nowrap"
-        >
+        <div className="animate-bounce rounded-md bg-black px-2 py-1 align-super text-sm leading-none font-black whitespace-nowrap text-white uppercase shadow-xl shadow-black/30 md:text-base lg:text-lg dark:bg-white dark:text-black">
           STATUS: BETA
           {/* {version === 'latest' ? latestVersion : version} */}
         </div>
         {/* </div> */}
-        <h2
-          className="font-bold text-2xl max-w-md
-            md:text-3xl
-            lg:text-5xl lg:max-w-2xl"
-        >
+        <h2 className="max-w-md text-2xl font-bold md:text-3xl lg:max-w-2xl lg:text-5xl">
           Full-stack React framework{' '}
-          <span className="underline decoration-dashed decoration-yellow-500 decoration-3 underline-offset-2">
+          <span className="underline decoration-yellow-500 decoration-dashed decoration-3 underline-offset-2">
             powered by TanStack Router
           </span>{' '}
         </h2>
-        <p
-          className="text opacity-90 max-w-[500px]
-            lg:text-xl lg:max-w-[600px]"
-        >
+        <p className="text max-w-[500px] opacity-90 lg:max-w-[600px] lg:text-xl">
           Full-document SSR, Streaming, Server Functions, bundling and more,
           powered by <strong>TanStack Router</strong>, <strong>Vinxi</strong>,
           and <strong>Vite</strong>. Ready to deploy to your favorite hosting
@@ -173,16 +154,16 @@ export default function VersionIndex() {
         </p>
         <Link
           to="../../router/latest/docs/framework/react/start/overview"
-          className={`py-2 px-4 bg-cyan-500 rounded-sm text-white uppercase font-extrabold`}
+          className={`rounded-sm bg-cyan-500 px-4 py-2 font-extrabold text-white uppercase`}
         >
           Get Started
         </Link>
       </div>
-      <div className="text-lg grid gap-12 p-8 max-w-[1200px] mx-auto md:grid-cols-2 xl:grid-cols-4">
-        <div className="flex-1 flex flex-col gap-8 items-center">
+      <div className="mx-auto grid max-w-[1200px] gap-12 p-8 text-lg md:grid-cols-2 xl:grid-cols-4">
+        <div className="flex flex-1 flex-col items-center gap-8">
           <div className="text-center">
             <PiTreeStructureBold
-              className="text-cyan-700 dark:text-cyan-500 text-6xl motion-safe:animate-pulse"
+              className="text-6xl text-cyan-700 motion-safe:animate-pulse dark:text-cyan-500"
               style={{
                 animationDuration: '5s',
                 animationTimingFunction: 'ease-in-out',
@@ -190,10 +171,10 @@ export default function VersionIndex() {
             />
           </div>
           <div className="flex flex-col gap-4 text-center">
-            <h3 className="uppercase text-xl font-black">
+            <h3 className="text-xl font-black uppercase">
               Enterprise-Grade Routing
             </h3>
-            <p className="text-sm text-gray-800 dark:text-gray-200 leading-6">
+            <p className="text-sm leading-6 text-gray-800 dark:text-gray-200">
               Built on TanStack Router, Start comes pre-packed with a{' '}
               <span className="font-semibold text-cyan-700 dark:text-cyan-500">
                 fully type-safe and powerfully-unmatched routing system
@@ -205,12 +186,12 @@ export default function VersionIndex() {
             </p>
           </div>
         </div>
-        <div className="flex-1 flex flex-col gap-8 items-center">
-          <div className="text-center grid grid-cols-1 grid-rows-1">
-            <TbServerBolt className="text-cyan-700 dark:text-cyan-500 text-6xl row-start-1 col-start-1" />
-            <div className="opacity-50 row-start-1 col-start-1">
+        <div className="flex flex-1 flex-col items-center gap-8">
+          <div className="grid grid-cols-1 grid-rows-1 text-center">
+            <TbServerBolt className="col-start-1 row-start-1 text-6xl text-cyan-700 dark:text-cyan-500" />
+            <div className="col-start-1 row-start-1 opacity-50">
               <TbServerBolt
-                className="text-cyan-700 dark:text-cyan-500 text-6xl animate-ping"
+                className="animate-ping text-6xl text-cyan-700 dark:text-cyan-500"
                 style={{
                   animationDuration: '2s',
                   animationTimingFunction: 'ease-out',
@@ -219,10 +200,10 @@ export default function VersionIndex() {
             </div>
           </div>
           <div className="flex flex-col gap-4 text-center">
-            <h3 className="uppercase text-xl font-black">
+            <h3 className="text-xl font-black uppercase">
               SSR, Streaming and Server RPCs
             </h3>
-            <p className="text-sm text-gray-800 dark:text-gray-200 leading-6">
+            <p className="text-sm leading-6 text-gray-800 dark:text-gray-200">
               Who said rich and interactive applications can't have it all?
               TanStack Start includes powerful capabilities for{' '}
               <span className="font-semibold text-cyan-700 dark:text-cyan-500">
@@ -233,10 +214,10 @@ export default function VersionIndex() {
             </p>
           </div>
         </div>
-        <div className="flex-1 flex flex-col gap-8 items-center">
+        <div className="flex flex-1 flex-col items-center gap-8">
           <div className="text-center">
             <FaYinYang
-              className="text-cyan-700 dark:text-cyan-500 text-6xl motion-safe:animate-spin"
+              className="text-6xl text-cyan-700 motion-safe:animate-spin dark:text-cyan-500"
               style={{
                 animationDuration: '10s',
                 animationTimingFunction: 'ease-in-out',
@@ -244,10 +225,10 @@ export default function VersionIndex() {
             />
           </div>
           <div className="flex flex-col gap-4 text-center">
-            <h3 className="uppercase text-xl font-black">
+            <h3 className="text-xl font-black uppercase">
               Client-Side First, 100% Server Capable
             </h3>
-            <p className="text-sm text-gray-800 dark:text-gray-200 leading-6">
+            <p className="text-sm leading-6 text-gray-800 dark:text-gray-200">
               While other frameworks continue to compromise on the client-side
               application experience we've cultivated as a front-end community
               over the years, TanStack Start stays true to the{' '}
@@ -262,10 +243,10 @@ export default function VersionIndex() {
             </p>
           </div>
         </div>
-        <div className="flex-1 flex flex-col gap-8 items-center">
+        <div className="flex flex-1 flex-col items-center gap-8">
           <div className="text-center">
             <PiRocketLaunchDuotone
-              className="text-cyan-700 dark:text-cyan-500 text-6xl motion-safe:animate-bounce"
+              className="text-6xl text-cyan-700 motion-safe:animate-bounce dark:text-cyan-500"
               style={{
                 animationDuration: '2.5s',
                 animationTimingFunction: 'ease-in-out',
@@ -273,10 +254,10 @@ export default function VersionIndex() {
             />
           </div>
           <div className="flex flex-col gap-4 text-center">
-            <h3 className="uppercase text-xl font-black">
+            <h3 className="text-xl font-black uppercase">
               Deploy Anywhere with Vinxi & Vite
             </h3>
-            <p className="text-sm text-gray-700 dark:text-gray-200 leading-6">
+            <p className="text-sm leading-6 text-gray-700 dark:text-gray-200">
               With Vinxi and Vite under the hood, TanStack Start is designed to
               be{' '}
               <span className="font-semibold text-cyan-700 dark:text-cyan-500">
@@ -290,10 +271,10 @@ export default function VersionIndex() {
         </div>
       </div>
       <div className="space-y-8 px-4">
-        <div className="font-black text-3xl mr-1 text-center">
+        <div className="mr-1 text-center text-3xl font-black">
           When can I use it?
         </div>
-        <div className="max-w-full p-8 w-[800px] mx-auto leading-loose space-y-4 bg-white dark:bg-gray-700 rounded-xl shadow-xl shadow-black/10">
+        <div className="mx-auto w-[800px] max-w-full space-y-4 rounded-xl bg-white p-8 leading-loose shadow-xl shadow-black/10 dark:bg-gray-700">
           <div>
             You can use <strong>TanStack Start BETA</strong> today! Although
             currently in active development we do not expect any more breaking
@@ -303,31 +284,31 @@ export default function VersionIndex() {
             version and keeping up with the latest releases.
           </div>
         </div>
-        <div className="grid items-center gap-2 justify-center grid-cols-2 w-[600px] max-w-full mx-auto">
+        <div className="mx-auto grid w-[600px] max-w-full grid-cols-2 items-center justify-center gap-2">
           <Link
             to="../../router/latest/docs/framework/react/examples/start-basic"
-            className={`flex items-center gap-2 py-2 px-4 bg-cyan-900 rounded-sm text-white uppercase font-extrabold`}
+            className={`flex items-center gap-2 rounded-sm bg-cyan-900 px-4 py-2 font-extrabold text-white uppercase`}
           >
             <VscPreview /> See an Example
           </Link>
           <Link
             to="../../router/latest/docs/framework/react/start/overview"
-            className={`flex items-center gap-2 py-2 px-4 bg-cyan-800 rounded-sm text-white uppercase font-extrabold`}
+            className={`flex items-center gap-2 rounded-sm bg-cyan-800 px-4 py-2 font-extrabold text-white uppercase`}
           >
             <FaBook /> Try the BETA
           </Link>
           <a
             href={`https://github.com/tanstack/tanstack.com`}
-            className={`flex items-center gap-2 py-2 px-4 bg-cyan-700 rounded-sm text-white uppercase font-extrabold`}
+            className={`flex items-center gap-2 rounded-sm bg-cyan-700 px-4 py-2 font-extrabold text-white uppercase`}
           >
             <FaGithub /> TanStack.com Source
           </a>
           <a
             href={`https://twitter.com/intent/post?text=${encodeURIComponent(
-              `TanStack Start is in BETA! It's a new full-stack React framework from @Tan_Stack and you can check it out at https://tanstack.com/start/`
+              `TanStack Start is in BETA! It's a new full-stack React framework from @Tan_Stack and you can check it out at https://tanstack.com/start/`,
             )}`}
             target="_blank"
-            className={`flex items-center gap-2 py-2 px-4 bg-cyan-500 rounded-sm text-white uppercase font-extrabold`}
+            className={`flex items-center gap-2 rounded-sm bg-cyan-500 px-4 py-2 font-extrabold text-white uppercase`}
             rel="noreferrer"
           >
             <FaTwitter /> Tweet about it!
@@ -488,8 +469,8 @@ export default function VersionIndex() {
         </marquee>
       </div> */}
 
-      <div className="px-4 lg:max-w-(--breakpoint-lg) md:mx-auto mx-auto">
-        <h3 className="text-center text-3xl leading-8 font-extrabold tracking-tight sm:text-4xl sm:leading-10 lg:leading-none mt-8">
+      <div className="mx-auto px-4 md:mx-auto lg:max-w-(--breakpoint-lg)">
+        <h3 className="mt-8 text-center text-3xl leading-8 font-extrabold tracking-tight sm:text-4xl sm:leading-10 lg:leading-none">
           Partners
         </h3>
         <div className="h-8" />
@@ -502,13 +483,13 @@ export default function VersionIndex() {
                   key={partner.name}
                   href={partner.href}
                   target="_blank"
-                  className="bg-white shadow-xl shadow-gray-500/20 rounded-lg dark:border border-gray-500/20 dark:bg-gray-800 dark:shadow-none group overflow-hidden grid"
+                  className="group grid overflow-hidden rounded-lg border-gray-500/20 bg-white shadow-xl shadow-gray-500/20 dark:border dark:bg-gray-800 dark:shadow-none"
                   rel="noreferrer"
                 >
-                  <div className="z-0 row-start-1 col-start-1 bg-white flex items-center justify-center group-hover:blur-xs transition-all duration-200">
+                  <div className="z-0 col-start-1 row-start-1 flex items-center justify-center bg-white transition-all duration-200 group-hover:blur-xs">
                     {partner.homepageImg}
                   </div>
-                  <div className="z-10 row-start-1 col-start-1 max-w-full p-4 text-sm flex flex-col gap-4 items-start opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-white/70 dark:bg-gray-800/70">
+                  <div className="z-10 col-start-1 row-start-1 flex max-w-full flex-col items-start gap-4 bg-white/70 p-4 text-sm opacity-0 transition-opacity duration-200 group-hover:opacity-100 dark:bg-gray-800/70">
                     {partner.content}
                   </div>
                 </a>
@@ -517,19 +498,19 @@ export default function VersionIndex() {
         </div>
       </div>
 
-      <div className="relative text-lg overflow-hidden">
-        <h3 className="text-center text-3xl leading-8 font-extrabold tracking-tight sm:text-4xl sm:leading-10 lg:leading-none mt-8">
+      <div className="relative overflow-hidden text-lg">
+        <h3 className="mt-8 text-center text-3xl leading-8 font-extrabold tracking-tight sm:text-4xl sm:leading-10 lg:leading-none">
           Sponsors
         </h3>
         <div
-          className="my-4 flex flex-wrap mx-auto max-w-(--breakpoint-lg)"
+          className="mx-auto my-4 flex max-w-(--breakpoint-lg) flex-wrap"
           style={{
             aspectRatio: '1/1',
           }}
         >
           <Await
             promise={sponsorsPromise}
-            fallback={<CgSpinner className="text-2xl animate-spin" />}
+            fallback={<CgSpinner className="animate-spin text-2xl" />}
             children={(sponsors) => {
               return <SponsorPack sponsors={sponsors} />
             }}
@@ -538,21 +519,18 @@ export default function VersionIndex() {
         <div className="text-center">
           <a
             href="https://github.com/sponsors/tannerlinsley"
-            className="inline-block bg-green-500 px-4 py-2 text-xl mx-auto leading-tight font-extrabold tracking-tight text-white rounded-full"
+            className="mx-auto inline-block rounded-full bg-green-500 px-4 py-2 text-xl leading-tight font-extrabold tracking-tight text-white"
           >
             Become a Sponsor!
           </a>
         </div>
       </div>
 
-      <div className="mx-auto max-w-[400px] flex flex-col gap-2 items-center">
-        <div className="shadow-lg rounded-lg overflow-hidden bg-white dark:bg-gray-800 dark:text-white max-w-[250px] mx-auto">
+      <div className="mx-auto flex max-w-[400px] flex-col items-center gap-2">
+        <div className="mx-auto max-w-[250px] overflow-hidden rounded-lg bg-white shadow-lg dark:bg-gray-800 dark:text-white">
           <Carbon />
         </div>
-        <span
-          className="text-[.7rem] bg-gray-500/10 py-1 px-2 rounded text-gray-500
-                dark:bg-gray-500/20"
-        >
+        <span className="rounded bg-gray-500/10 px-2 py-1 text-[.7rem] text-gray-500 dark:bg-gray-500/20">
           This ad helps us be happy about our invested time and not burn out and
           rage-quit OSS. Yay money! 😉
         </span>
@@ -632,17 +610,17 @@ export default function VersionIndex() {
         </div>
       )} */}
 
-      <div className="flex flex-col gap-4 items-center">
-        <div className="font-extrabold text-xl lg:text-2xl">
+      <div className="flex flex-col items-center gap-4">
+        <div className="text-xl font-extrabold lg:text-2xl">
           Wow, you've come a long way!
         </div>
-        <div className="italic font-sm opacity-70">
+        <div className="font-sm italic opacity-70">
           Only one thing left to do...
         </div>
         <div>
           <Link
             to="../../router/latest/docs/framework/react/start/overview"
-            className={`inline-block py-2 px-4 bg-cyan-500 rounded-sm text-white uppercase font-extrabold`}
+            className={`inline-block rounded-sm bg-cyan-500 px-4 py-2 font-extrabold text-white uppercase`}
           >
             Get Started!
           </Link>

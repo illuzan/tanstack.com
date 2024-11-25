@@ -86,7 +86,7 @@ export const Route = createRootRouteWithContext()({
       throw redirect({
         href: ctx.location.href.replace(
           /\/docs\/(react|vue|angular|svelte|solid)\//gm,
-          '/docs/framework/$1/'
+          '/docs/framework/$1/',
         ),
       })
     }
@@ -158,22 +158,19 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         ) : null}
         {showLoading ? (
           <div
-            className={`fixed top-0 left-0 h-[300px] w-full
-        transition-all duration-300 pointer-events-none
-        z-30 dark:h-[200px] dark:!bg-white/10 dark:rounded-[100%] ${
-          isLoading
-            ? 'delay-0 opacity-1 -translate-y-1/2'
-            : 'delay-300 opacity-0 -translate-y-full'
-        }`}
+            className={`pointer-events-none fixed top-0 left-0 z-30 h-[300px] w-full transition-all duration-300 dark:h-[200px] dark:rounded-[100%] dark:!bg-white/10 ${
+              isLoading
+                ? '-translate-y-1/2 opacity-1 delay-0'
+                : '-translate-y-full opacity-0 delay-300'
+            }`}
             style={{
               background: `radial-gradient(closest-side, rgba(0,10,40,0.2) 0%, rgba(0,0,0,0) 100%)`,
             }}
           >
             <div
-              className={`absolute top-1/2 left-1/2 -translate-x-1/2 translate-y-[30px] p-2 bg-white/80 dark:bg-gray-800
-        rounded-lg shadow-lg`}
+              className={`absolute top-1/2 left-1/2 -translate-x-1/2 translate-y-[30px] rounded-lg bg-white/80 p-2 shadow-lg dark:bg-gray-800`}
             >
-              <CgSpinner className="text-3xl animate-spin" />
+              <CgSpinner className="animate-spin text-3xl" />
             </div>
           </div>
         ) : null}
