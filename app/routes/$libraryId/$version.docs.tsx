@@ -3,7 +3,6 @@ import { DocsLayout } from '~/components/DocsLayout'
 import { getBranch, getLibrary } from '~/libraries'
 import { getTanstackDocsConfig } from '~/utils/config'
 import { seo } from '~/utils/seo'
-import background from '~/images/background.jpg'
 
 export const Route = createFileRoute('/$libraryId/$version/docs')({
   loader: async (ctx) => {
@@ -51,15 +50,6 @@ function DocsRoute() {
       versions={library.availableVersions}
       repo={library.repo}
     >
-      <div
-        className="pointer-events-none fixed inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-10 blur-md"
-        style={{
-          backgroundImage: `url(${background})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'bottom',
-          backgroundRepeat: 'no-repeat',
-        }}
-      />
       <Outlet />
     </DocsLayout>
   )

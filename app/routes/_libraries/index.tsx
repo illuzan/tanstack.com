@@ -19,7 +19,7 @@ import bytesImage from '~/images/bytes.svg'
 // import toyPalmChair from '~/images/toy-palm-chair.png'
 // import waves from '~/images/waves.png'
 // import background from '~/images/background.jpg'
-import { partners } from '../utils/partners'
+import { partners } from '../../utils/partners'
 import { FaBox, FaCube, FaDownload, FaStar, FaUsers } from 'react-icons/fa'
 
 export const textColors = [
@@ -103,7 +103,7 @@ function Index() {
               className={`inline-block text-5xl font-black md:text-6xl lg:text-8xl`}
             >
               <span
-                className={`inline-block bg-linear-to-r bg-clip-text text-transparent ${gradient} mb-2 [letter-spacing:-.05em] uppercase underline decoration-gray-200 decoration-4 underline-offset-[.5rem] md:decoration-8 md:underline-offset-[1rem] dark:decoration-gray-800`}
+                className={`inline-block bg-gradient-to-r bg-clip-text text-transparent ${gradient} mb-2 [letter-spacing:-.05em] uppercase underline decoration-gray-200 decoration-4 underline-offset-[.5rem] md:decoration-8 md:underline-offset-[1rem] dark:decoration-gray-800`}
               >
                 TanStack
               </span>
@@ -122,7 +122,7 @@ function Index() {
           </p>
         </div>
         <div className="h-8" />
-        <div className="mx-auto grid w-fit grid-cols-1 place-items-center items-center justify-center gap-8 rounded-xl bg-white/50 p-8 shadow-xl sm:grid-cols-2 xl:grid-cols-4 dark:bg-gray-700/30 dark:shadow-none">
+        <div className="mx-auto grid w-fit grid-cols-1 place-items-center items-center justify-center gap-8 rounded-xl bg-white/30 p-8 shadow-xl backdrop-blur-lg sm:grid-cols-2 xl:grid-cols-4 dark:bg-gray-600/30">
           <div className="flex items-center gap-4">
             <FaDownload className="text-2xl" />
             <div className="">
@@ -161,7 +161,7 @@ function Index() {
           </div>
         </div>
         <div className="h-24" />
-        <div className="px-4 md:mx-auto lg:max-w-(--breakpoint-lg)">
+        <div className="px-4 md:mx-auto lg:max-w-screen-lg">
           <h3 className={`text-4xl font-light`}>Open Source Libraries</h3>
           <div
             className={`mt-4 grid grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3`}
@@ -223,7 +223,7 @@ function Index() {
           </div>
         </div>
         <div className="h-12" />
-        <div className={`px-4 md:mx-auto lg:max-w-(--breakpoint-lg)`}>
+        <div className={`px-4 md:mx-auto lg:max-w-screen-lg`}>
           <h3 className={`mb-4 text-4xl font-light`}>Partners</h3>
           <div className={`grid grid-cols-1 gap-6 sm:grid-cols-2`}>
             {partners.map((partner) => {
@@ -235,7 +235,7 @@ function Index() {
                   className="group grid overflow-hidden rounded-lg border-gray-500/20 bg-white shadow-xl shadow-gray-500/20 dark:border dark:bg-gray-800 dark:shadow-none"
                   rel="noreferrer"
                 >
-                  <div className="z-0 col-start-1 row-start-1 flex items-center justify-center bg-white transition-all duration-200 group-hover:blur-xs">
+                  <div className="z-0 col-start-1 row-start-1 flex items-center justify-center bg-white transition-all duration-200 group-hover:blur-sm">
                     {partner.homepageImg}
                   </div>
                   <div className="z-10 col-start-1 row-start-1 flex max-w-full flex-col items-start gap-4 bg-white/70 p-4 text-sm opacity-0 transition-opacity duration-200 group-hover:opacity-100 dark:bg-gray-800/70">
@@ -247,7 +247,7 @@ function Index() {
           </div>
         </div>
         <div className="h-20" />
-        <div className={`mx-auto px-4 lg:max-w-(--breakpoint-lg)`}>
+        <div className={`mx-auto px-4 lg:max-w-screen-lg`}>
           <h3 className={`text-4xl font-light`}>Courses</h3>
           <div className={`mt-4 grid grid-cols-1 gap-4`}>
             {courses.map((course) => (
@@ -264,7 +264,7 @@ function Index() {
                   </div>
                   <div className={`mt-2 text-sm`}>{course.description}</div>
                   <div
-                    className={`mt-4 inline-block rounded-sm bg-green-500 px-4 py-2 text-sm font-black text-white uppercase shadow`}
+                    className={`mt-4 inline-block rounded bg-green-500 px-4 py-2 text-sm font-black text-white uppercase shadow`}
                   >
                     Check it out →
                   </div>
@@ -274,7 +274,7 @@ function Index() {
           </div>
         </div>
         <div className="h-12" />
-        <div className={`mx-auto px-4 lg:max-w-(--breakpoint-lg)`}>
+        <div className={`mx-auto px-4 lg:max-w-screen-lg`}>
           <h3 className={`text-4xl font-light`}>OSS Sponsors</h3>
           <div className="h-4" />
           <div
@@ -295,15 +295,13 @@ function Index() {
             <div>
               <a
                 href="https://github.com/sponsors/tannerlinsley"
-                className={`inline-block rounded-sm bg-green-500 p-4 font-black text-white uppercase`}
+                className={`inline-block rounded bg-green-500 p-4 font-black text-white uppercase`}
               >
                 Become a Sponsor!
               </a>
             </div>
             <div className={`h-4`} />
-            <p
-              className={`mx-auto max-w-(--breakpoint-sm) text-gray-500 italic`}
-            >
+            <p className={`mx-auto max-w-screen-sm text-gray-500 italic`}>
               Sponsors get special perks like{' '}
               <strong>
                 private discord channels, priority issue requests, direct
@@ -319,14 +317,14 @@ function Index() {
             <div className="mx-auto max-w-[250px] overflow-hidden rounded-lg bg-white shadow-lg dark:bg-gray-800 dark:text-white">
               <Carbon />
             </div>
-            <span className="self-center rounded bg-gray-500/10 px-2 py-1 text-[.7rem] text-gray-500 dark:bg-gray-500/20">
+            <span className="bg-opacity-10 dark:bg-opacity-20 self-center rounded bg-gray-500 px-2 py-1 text-[.7rem] text-gray-500">
               This ad helps us be happy about our invested time and not burn out
               and rage-quit OSS. Yay money! 😉
             </span>
           </div>
         </div>
         <div className="h-12" />
-        <div className="mx-auto max-w-(--breakpoint-lg) px-4">
+        <div className="mx-auto max-w-screen-lg px-4">
           <div
             className={`bg-discord relative grid gap-6 overflow-hidden rounded-md p-4 text-white shadow-xl shadow-indigo-700/30 sm:grid-cols-3 sm:p-8`}
           >
@@ -361,7 +359,7 @@ function Index() {
           </div>
         </div>
         <div className="h-4" />
-        <div className="relative mx-auto max-w-(--breakpoint-lg) px-4">
+        <div className="relative mx-auto max-w-screen-lg px-4">
           <div className="rounded-md bg-white p-8 shadow-xl shadow-gray-900/10 md:p-14 dark:bg-gray-800">
             {!bytesSignupMutation.submittedAt ? (
               <form
@@ -394,7 +392,7 @@ function Index() {
                 <div className={`mt-4 grid grid-cols-3 gap-2`}>
                   <input
                     disabled={bytesSignupMutation.status === 'pending'}
-                    className={`dark:(text-white bg-gray-700) col-span-2 w-full rounded-sm bg-gray-200 p-3 text-sm text-black placeholder-gray-400 outline-hidden focus:outline-hidden`}
+                    className={`dark:(text-white bg-gray-700) col-span-2 w-full rounded bg-gray-200 p-3 text-sm text-black placeholder-gray-400 outline-none focus:outline-none`}
                     name="email_address"
                     placeholder="Your email address"
                     type="text"
@@ -402,7 +400,7 @@ function Index() {
                   />
                   <button
                     type="submit"
-                    className={`rounded-sm bg-[#ED203D] font-black text-white uppercase`}
+                    className={`rounded bg-[#ED203D] font-black text-white uppercase`}
                   >
                     <span>
                       {bytesSignupMutation.status === 'pending'

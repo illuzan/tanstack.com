@@ -24,7 +24,8 @@ import { getLibrary, libraries } from '~/libraries'
 import { Scarf } from '~/components/Scarf'
 import { searchBoxParams, searchButtonParams } from '~/components/Orama'
 import { ClientOnlySearchButton } from '~/components/ClientOnlySearchButton'
-import background from '~/images/background.jpg'
+import { ThemeToggle } from '~/components/ThemeToggle'
+import { TbBrandBluesky, TbBrandTwitter } from 'react-icons/tb'
 
 export const Route = createFileRoute('/_libraries')({
   loader: async (ctx) => {
@@ -42,7 +43,7 @@ function LibrariesLayout() {
   const library = libraryId ? getLibrary(libraryId) : undefined
   const detailsRef = React.useRef<HTMLElement>(null!)
 
-  const linkClasses = `flex items-center justify-between group px-2 py-1 rounded-lg hover:bg-gray-500/10 font-black`
+  const linkClasses = `flex items-center justify-between group px-2 py-1 rounded-lg hover:bg-gray-500 hover:bg-opacity-10 font-black`
 
   const [mounted, setMounted] = React.useState(false)
 
@@ -176,7 +177,7 @@ function LibrariesLayout() {
             className={twMerge(linkClasses, 'font-normal')}
             activeProps={{
               className: twMerge(
-                'font-bold! bg-gray-500/10 dark:bg-gray-500/30',
+                '!font-bold bg-gray-500/10 dark:bg-gray-500/30',
               ),
             }}
             target={item.to.startsWith('http') ? '_blank' : undefined}
@@ -208,7 +209,13 @@ function LibrariesLayout() {
           href="https://x.com/tan_stack"
           className="opacity-70 hover:opacity-100"
         >
-          <FaTwitter className="text-xl" />
+          <TbBrandTwitter className="text-xl" />
+        </a>
+        <a
+          href="https://bsky.app/profile/tanstack.com"
+          className="opacity-70 hover:opacity-100"
+        >
+          <TbBrandBluesky className="text-xl" />
         </a>
         <a
           href="https://instagram.com/tan_stack"
@@ -216,6 +223,9 @@ function LibrariesLayout() {
         >
           <FaInstagram className="text-xl" />
         </a>
+      </div>
+      <div className="ml-auto">
+        <ThemeToggle />
       </div>
     </div>
   )
@@ -225,16 +235,16 @@ function LibrariesLayout() {
       <details
         ref={detailsRef as any}
         id="docs-details"
-        className="border-b border-gray-500/20"
+        className="border-opacity-20 border-b border-gray-500"
       >
         <summary className="flex items-center justify-between gap-2 p-4">
-          <div className="flex items-center gap-2 text-xl md:text-2xl">
+          <div className="flex flex-1 items-center gap-2 text-xl md:text-2xl">
             <CgMenuLeft className="icon-open mr-2 cursor-pointer" />
             <CgClose className="icon-close mr-2 cursor-pointer" />
             {logo}
           </div>
         </summary>
-        <div className="flex h-[0vh] flex-col gap-4 overflow-y-auto border-t border-gray-500/20 bg-gray-100 text-lg whitespace-nowrap dark:bg-gray-900">
+        <div className="border-opacity-20 flex h-[0vh] flex-col gap-4 overflow-y-auto border-t border-gray-500 bg-gray-100 text-lg whitespace-nowrap dark:bg-gray-900">
           <div className="p-2 pb-0">
             <ClientOnlySearchButton {...searchButtonParams} />
           </div>
@@ -257,7 +267,7 @@ function LibrariesLayout() {
             Search
           </ClientOnlySearchButton>
         </div>
-        <div className="flex flex-1 flex-col gap-4 overflow-y-auto pb-[300px] text-base whitespace-nowrap">
+        <div className="flex flex-1 flex-col gap-4 overflow-y-auto pb-[50px] text-base whitespace-nowrap">
           <div className="space-y-1 border-b border-gray-500/10 p-2 text-sm dark:border-gray-500/20">
             {items}
           </div>
@@ -273,16 +283,6 @@ function LibrariesLayout() {
       {smallMenu}
       {largeMenu}
       <div className="relative flex min-h-0 flex-1 justify-center overflow-x-hidden">
-        <div
-          className="pointer-events-none fixed inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-10 blur-xs"
-          style={{
-            backgroundImage: `url(${background})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'bottom',
-            backgroundRepeat: 'no-repeat',
-          }}
-        />
-
         {library?.scarfId ? <Scarf id={library.scarfId} /> : null}
         <Outlet />
       </div>

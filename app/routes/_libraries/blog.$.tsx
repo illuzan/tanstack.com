@@ -37,7 +37,7 @@ const fetchBlogPost = createServerFn({ method: 'GET' })
     }
   })
 
-export const Route = createFileRoute('/blog/$')({
+export const Route = createFileRoute('/_libraries/blog/$')({
   loader: ({ params }) => fetchBlogPost({ data: params._splat }),
   head: ({ loaderData }) => {
     return {

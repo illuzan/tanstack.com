@@ -1,11 +1,11 @@
 import * as React from 'react'
 import {
   Outlet,
+  ScriptOnce,
   ScrollRestoration,
   createRootRouteWithContext,
   redirect,
   useMatches,
-  useRouter,
   useRouterState,
 } from '@tanstack/react-router'
 import appCss from '~/styles/app.css?url'
@@ -17,6 +17,9 @@ import { TanStackRouterDevtools } from '@tanstack/router-devtools'
 import { NotFound } from '~/components/NotFound'
 import { CgSpinner } from 'react-icons/cg'
 import { DefaultCatchBoundary } from '~/components/DefaultCatchBoundary'
+import background from '~/images/background.jpg'
+import { twMerge } from 'tailwind-merge'
+import { getThemeCookie, useThemeStore } from '~/components/ThemeToggle'
 
 export const Route = createRootRouteWithContext()({
   head: () => ({
@@ -91,6 +94,12 @@ export const Route = createRootRouteWithContext()({
       })
     }
   },
+  staleTime: Infinity,
+  loader: async () => {
+    return {
+      themeCookie: await getThemeCookie(),
+    }
+  },
   errorComponent: (props) => {
     return (
       <RootDocument>
@@ -117,6 +126,13 @@ function RootComponent() {
 }
 
 function RootDocument({ children }: { children: React.ReactNode }) {
+  const { themeCookie } = Route.useLoaderData()
+
+  React.useEffect(() => {
+    useThemeStore.setState({ mode: themeCookie })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   const matches = useMatches()
 
   const isLoading = useRouterState({
@@ -141,17 +157,47 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 
   const showDevtools = showLoading && isRouterPage
 
+  const pathLength = useRouterState({
+    select: (s) =>
+      Math.max(
+        0,
+        s.location.pathname.replace('/docs/framework', '').split('/').length -
+          2,
+      ),
+  })
+
+  const themeClass = themeCookie === 'dark' ? 'dark' : ''
+
   return (
-    <html lang="en">
+    <html lang="en" className={themeClass}>
       <head>
+        {/* If the theme is set to auto, inject a tiny script to set the proper class on html based on the user preference */}
+        {themeCookie === 'auto' ? (
+          <ScriptOnce
+            children={`window.matchMedia('(prefers-color-scheme: dark)').matches ? document.documentElement.classList.add('dark') : null`}
+          />
+        ) : null}
         <Meta />
         {matches.find((d) => d.staticData?.baseParent) ? (
           <base target="_parent" />
         ) : null}
       </head>
       <body>
-        {/* <SpeedInsights /> */}
-        {/* <Analytics /> */}
+        <div className="pointer-events-none fixed inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-10 blur-sm" />
+        <div
+          className={twMerge(
+            'pointer-events-none fixed inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-10 transition-all duration-[2.5s] ease-in-out dark:opacity-20',
+            `[&+*]:relative`,
+          )}
+          style={{
+            backgroundImage: `url(${background})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'bottom',
+            backgroundRepeat: 'no-repeat',
+            filter: `blur(${pathLength * 2}px)`,
+            transform: `scale(${1 + pathLength * 0.05})`,
+          }}
+        />
         <React.Suspense fallback={null}>{children}</React.Suspense>
         {showDevtools ? (
           <TanStackRouterDevtools position="bottom-right" />

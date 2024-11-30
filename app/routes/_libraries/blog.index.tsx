@@ -60,7 +60,7 @@ const fetchFrontMatters = createServerFn({ method: 'GET' }).handler(
   },
 )
 
-export const Route = createFileRoute('/blog/')({
+export const Route = createFileRoute('/_libraries/blog/')({
   loader: () => fetchFrontMatters(),
   notFoundComponent: () => <PostNotFound />,
   component: BlogIndex,
@@ -80,10 +80,8 @@ function BlogIndex() {
     <div>
       <div className="min-h-screen p-4 lg:p-6">
         <div>
-          <DocTitle>Latest Posts</DocTitle>
-          <div className="h-4" />
-          <div className="h-px bg-gray-500 opacity-20" />
-          <div className="h-4" />
+          <DocTitle>Blog</DocTitle>
+          <div className="h-6" />
         </div>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 2xl:grid-cols-3">
           {frontMatters.map(
@@ -92,11 +90,11 @@ function BlogIndex() {
                 <Link
                   key={id}
                   to={`${id}`}
-                  className={`flex flex-col justify-between gap-4 rounded-lg border-2 border-transparent bg-white p-4 shadow-xl transition-all hover:border-blue-500 md:p-8 dark:bg-gray-800 dark:shadow-lg dark:shadow-blue-500/30`}
+                  className={`flex flex-col justify-between gap-4 rounded-lg border-2 border-transparent bg-white/100 p-4 shadow-xl transition-all hover:border-blue-500 md:p-8 dark:bg-gray-800 dark:shadow-lg dark:shadow-blue-500/30`}
                 >
                   <div>
                     <div className={`text-lg font-extrabold`}>{title}</div>
-                    <div className={`mt-2 font-light italic`}>
+                    <div className={`mt-1 text-xs font-light italic`}>
                       <p>
                         by {formatAuthors(authors)}
                         {published ? (
@@ -111,9 +109,9 @@ function BlogIndex() {
                       </p>
                     </div>
                     <div
-                      className={`mt-2 text-sm leading-7 text-black dark:text-white`}
+                      className={`mt-4 text-sm leading-7 text-black dark:text-white`}
                     >
-                      <Markdown code={excerpt || ''} />
+                      <Markdown rawContent={excerpt || ''} />
                     </div>
                   </div>
                   <div>
