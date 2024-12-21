@@ -170,8 +170,8 @@ export default function VersionIndex() {
               }}
             />
           </div>
-          <div className="flex flex-col gap-4 text-center">
-            <h3 className="text-xl font-black uppercase">
+          <div className="flex flex-col gap-4">
+            <h3 className="uppercase text-xl font-black">
               Enterprise-Grade Routing
             </h3>
             <p className="text-sm leading-6 text-gray-800 dark:text-gray-200">
@@ -199,8 +199,8 @@ export default function VersionIndex() {
               />
             </div>
           </div>
-          <div className="flex flex-col gap-4 text-center">
-            <h3 className="text-xl font-black uppercase">
+          <div className="flex flex-col gap-4">
+            <h3 className="uppercase text-xl font-black">
               SSR, Streaming and Server RPCs
             </h3>
             <p className="text-sm leading-6 text-gray-800 dark:text-gray-200">
@@ -224,8 +224,8 @@ export default function VersionIndex() {
               }}
             />
           </div>
-          <div className="flex flex-col gap-4 text-center">
-            <h3 className="text-xl font-black uppercase">
+          <div className="flex flex-col gap-4">
+            <h3 className="uppercase text-xl font-black">
               Client-Side First, 100% Server Capable
             </h3>
             <p className="text-sm leading-6 text-gray-800 dark:text-gray-200">
@@ -253,8 +253,8 @@ export default function VersionIndex() {
               }}
             />
           </div>
-          <div className="flex flex-col gap-4 text-center">
-            <h3 className="text-xl font-black uppercase">
+          <div className="flex flex-col gap-4">
+            <h3 className="uppercase text-xl font-black">
               Deploy Anywhere with Vinxi & Vite
             </h3>
             <p className="text-sm leading-6 text-gray-700 dark:text-gray-200">

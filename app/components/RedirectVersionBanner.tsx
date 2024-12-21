@@ -1,12 +1,15 @@
 import { useLocalStorage } from '~/utils/useLocalStorage'
 import { useClientOnlyRender } from '~/utils/useClientOnlyRender'
-import { Link } from '@tanstack/react-router'
+import { Link, useMatches } from '@tanstack/react-router'
 
 export function RedirectVersionBanner(props: {
   version: string
   latestVersion: string
 }) {
   const { version, latestVersion } = props
+
+  const matches = useMatches()
+  const activeMatch = matches[matches.length - 1]
 
   // After user clicks hide, do not show modal for a month, and then remind users that there is a new version!
   const [showModal, setShowModal] = useLocalStorage(
@@ -25,6 +28,7 @@ export function RedirectVersionBanner(props: {
         <p className="block">
           You are currently reading <strong>{version}</strong> docs. Redirect to{' '}
           <Link
+            to={activeMatch.fullPath}
             params={{
               version: 'latest',
             }}
@@ -36,6 +40,7 @@ export function RedirectVersionBanner(props: {
         </p>
         <div className="flex flex-col items-center gap-2 lg:flex-row">
           <Link
+            to={activeMatch.fullPath}
             params={{
               version: 'latest',
             }}

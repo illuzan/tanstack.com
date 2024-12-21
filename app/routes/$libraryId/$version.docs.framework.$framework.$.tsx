@@ -4,10 +4,12 @@ import { Doc } from '~/components/Doc'
 import { loadDocs } from '~/utils/docs'
 import { getBranch, getLibrary } from '~/libraries'
 import { capitalize } from '~/utils/utils'
+import { DocContainer } from '~/components/DocContainer'
 
 export const Route = createFileRoute(
   '/$libraryId/$version/docs/framework/$framework/$',
 )({
+  staleTime: 1000 * 60 * 5,
   loader: (ctx) => {
     const { _splat: docsPath, framework, version, libraryId } = ctx.params
 
@@ -44,15 +46,17 @@ function Docs() {
   const branch = getBranch(library, version)
 
   return (
-    <Doc
-      title={title}
-      content={content}
-      repo={library.repo}
-      branch={branch}
-      filePath={filePath}
-      colorFrom={library.colorFrom}
-      colorTo={library.colorTo}
-      shouldRenderToc
-    />
+    <DocContainer>
+      <Doc
+        title={title}
+        content={content}
+        repo={library.repo}
+        branch={branch}
+        filePath={filePath}
+        colorFrom={library.colorFrom}
+        colorTo={library.colorTo}
+        shouldRenderToc
+      />
+    </DocContainer>
   )
 }

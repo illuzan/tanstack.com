@@ -6,4 +6,5 @@ routeTree.gen.ts
 
 .vercel
 .output
-.vinxi
+convex/_generated
+convex/README.md

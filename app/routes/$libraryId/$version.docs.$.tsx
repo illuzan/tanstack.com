@@ -3,8 +3,10 @@ import { seo } from '~/utils/seo'
 import { Doc } from '~/components/Doc'
 import { loadDocs } from '~/utils/docs'
 import { getBranch, getLibrary } from '~/libraries'
+import { DocContainer } from '~/components/DocContainer'
 
 export const Route = createFileRoute('/$libraryId/$version/docs/$')({
+  staleTime: 1000 * 60 * 5,
   loader: (ctx) => {
     const { _splat: docsPath, version, libraryId } = ctx.params
     const library = getLibrary(libraryId)
@@ -29,6 +31,12 @@ export const Route = createFileRoute('/$libraryId/$version/docs/$')({
     }
   },
   component: Docs,
+  headers: (ctx) => {
+    return {
+      'cache-control': 'public, max-age=0, must-revalidate',
+      'cdn-cache-control': 'max-age=300, stale-while-revalidate=300, durable',
+    }
+  },
 })
 
 function Docs() {
@@ -38,15 +46,17 @@ function Docs() {
   const branch = getBranch(library, version)
 
   return (
-    <Doc
-      title={title}
-      content={content}
-      repo={library.repo}
-      branch={branch}
-      filePath={filePath}
-      colorFrom={library.colorFrom}
-      colorTo={library.colorTo}
-      shouldRenderToc
-    />
+    <DocContainer>
+      <Doc
+        title={title}
+        content={content}
+        repo={library.repo}
+        branch={branch}
+        filePath={filePath}
+        colorFrom={library.colorFrom}
+        colorTo={library.colorTo}
+        shouldRenderToc
+      />
+    </DocContainer>
   )
 }

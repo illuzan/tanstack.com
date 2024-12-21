@@ -29,6 +29,7 @@ import { DocsCalloutBytes } from '~/components/DocsCalloutBytes'
 import { ClientOnlySearchButton } from './ClientOnlySearchButton'
 import { twMerge } from 'tailwind-merge'
 import { partners } from '~/utils/partners'
+import { useThemeStore } from './ThemeToggle'
 
 // Let's use zustand to wrap the local storage logic. This way
 // we'll get subscriptions for free and we can use it in other
@@ -321,6 +322,10 @@ export function DocsLayout({
   const versionConfig = useVersionConfig({ versions })
   const menuConfig = useMenuConfig({ config, frameworks, repo })
 
+  const { mode: themeMode } = useThemeStore()
+
+  const oramaThemeMode = themeMode === 'auto' ? 'system' : themeMode
+
   const matches = useMatches()
   const lastMatch = last(matches)
 
@@ -486,7 +491,10 @@ export function DocsLayout({
               onSelect={versionConfig.onSelect}
             />
           </div>
-          <ClientOnlySearchButton {...searchButtonParams}>
+          <ClientOnlySearchButton
+            {...searchButtonParams}
+            colorScheme={oramaThemeMode}
+          >
             Search
           </ClientOnlySearchButton>
           {menuItems}
@@ -547,6 +555,7 @@ export function DocsLayout({
               } as any,
             }}
             facetProperty={undefined}
+            colorScheme={oramaThemeMode}
           />
         )}
       </div>
@@ -679,8 +688,8 @@ export function DocsLayout({
         </div>
       </div>
       {showBytes ? (
-        <div className="fixed top-1/2 right-2 z-30 w-[300px] max-w-[350px] -translate-y-1/2 shadow-lg md:hidden print:hidden">
-          <div className="rounded-lg border border-black/10 bg-white p-4 md:p-6 dark:border-white/10 dark:bg-gray-900/30">
+        <div className="w-[300px] max-w-[350px] fixed md:hidden top-1/2 right-2 z-30 -translate-y-1/2 shadow-lg print:hidden">
+          <div className="bg-white dark:bg-gray-800 border border-black/10 dark:border-white/10 p-4 md:p-6 rounded-lg">
             {libraryId === 'query' ? (
               <DocsCalloutQueryGG />
             ) : (

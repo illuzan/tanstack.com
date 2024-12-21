@@ -8,6 +8,7 @@ import { Footer } from '~/components/Footer'
 import { extractFrontMatter, fetchRepoFile } from '~/utils/documents.server'
 import { PostNotFound } from './blog'
 import { createServerFn } from '@tanstack/start'
+import { setHeaders } from 'vinxi/http'
 
 const fetchFrontMatters = createServerFn({ method: 'GET' }).handler(
   async () => {
@@ -28,6 +29,12 @@ const fetchFrontMatters = createServerFn({ method: 'GET' }).handler(
         }
 
         const frontMatter = extractFrontMatter(file)
+
+        setHeaders({
+          'cache-control': 'public, max-age=0, must-revalidate',
+          'cdn-cache-control':
+            'max-age=300, stale-while-revalidate=300, durable',
+        })
 
         return [
           info.id,
@@ -61,6 +68,7 @@ const fetchFrontMatters = createServerFn({ method: 'GET' }).handler(
 )
 
 export const Route = createFileRoute('/_libraries/blog/')({
+  staleTime: Infinity,
   loader: () => fetchFrontMatters(),
   notFoundComponent: () => <PostNotFound />,
   component: BlogIndex,

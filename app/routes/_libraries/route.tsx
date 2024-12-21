@@ -3,7 +3,6 @@ import {
   Link,
   Outlet,
   createFileRoute,
-  defer,
   useParams,
 } from '@tanstack/react-router'
 import { CgClose, CgMenuLeft, CgMusicSpeaker } from 'react-icons/cg'
@@ -12,22 +11,17 @@ import { twMerge } from 'tailwind-merge'
 import { OramaSearchBox } from '@orama/react-components'
 import { sortBy } from '~/utils/utils'
 import logoColor100w from '~/images/logo-color-100w.png'
-import {
-  FaDiscord,
-  FaGithub,
-  FaInstagram,
-  FaTshirt,
-  FaTwitter,
-} from 'react-icons/fa'
+import { FaDiscord, FaGithub, FaInstagram, FaTshirt } from 'react-icons/fa'
 import { getSponsorsForSponsorPack } from '~/server/sponsors'
 import { getLibrary, libraries } from '~/libraries'
 import { Scarf } from '~/components/Scarf'
 import { searchBoxParams, searchButtonParams } from '~/components/Orama'
 import { ClientOnlySearchButton } from '~/components/ClientOnlySearchButton'
-import { ThemeToggle } from '~/components/ThemeToggle'
+import { ThemeToggle, useThemeStore } from '~/components/ThemeToggle'
 import { TbBrandBluesky, TbBrandTwitter } from 'react-icons/tb'
 
 export const Route = createFileRoute('/_libraries')({
+  staleTime: Infinity,
   loader: async (ctx) => {
     return {
       sponsorsPromise: getSponsorsForSponsorPack(),
@@ -46,6 +40,10 @@ function LibrariesLayout() {
   const linkClasses = `flex items-center justify-between group px-2 py-1 rounded-lg hover:bg-gray-500 hover:bg-opacity-10 font-black`
 
   const [mounted, setMounted] = React.useState(false)
+
+  const { mode: themeMode } = useThemeStore()
+
+  const oramaThemeMode = themeMode === 'auto' ? 'system' : themeMode
 
   React.useEffect(() => {
     setMounted(true)
@@ -246,7 +244,10 @@ function LibrariesLayout() {
         </summary>
         <div className="border-opacity-20 flex h-[0vh] flex-col gap-4 overflow-y-auto border-t border-gray-500 bg-gray-100 text-lg whitespace-nowrap dark:bg-gray-900">
           <div className="p-2 pb-0">
-            <ClientOnlySearchButton {...searchButtonParams} />
+            <ClientOnlySearchButton
+              {...searchButtonParams}
+              colorScheme={oramaThemeMode}
+            />
           </div>
           <div className="space-y-px border-b border-gray-500/10 p-2 text-sm dark:border-gray-500/20">
             {items}
@@ -263,7 +264,10 @@ function LibrariesLayout() {
           {logo}
         </div>
         <div className="p-2">
-          <ClientOnlySearchButton {...searchButtonParams}>
+          <ClientOnlySearchButton
+            {...searchButtonParams}
+            colorScheme={oramaThemeMode}
+          >
             Search
           </ClientOnlySearchButton>
         </div>
@@ -288,7 +292,7 @@ function LibrariesLayout() {
       </div>
       {mounted ? (
         <div className="fixed z-50">
-          <OramaSearchBox {...searchBoxParams} />
+          <OramaSearchBox {...searchBoxParams} colorScheme={oramaThemeMode} />
         </div>
       ) : null}
     </div>
