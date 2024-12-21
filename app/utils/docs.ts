@@ -74,7 +74,7 @@ export const fetchDocs = createServerFn({ method: 'GET' })
     setHeader('Cache-Control', 'public, max-age=0, must-revalidate')
     setHeader(
       'CDN-Cache-Control',
-      'max-age=300, stale-while-revalidate=300, durable'
+      'max-age=300, stale-while-revalidate=300, durable',
     )
 
     return {

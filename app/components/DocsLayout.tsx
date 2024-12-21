@@ -375,7 +375,7 @@ export function DocsLayout({
           {group?.label}
         </LabelComp>
         <div className="h-2" />
-        <ul className="ml-2 list-none text-[.85em]">
+        <ul className="ml-2 list-none text-[.85em] leading-6">
           {group?.children?.map((child, i) => {
             const linkClasses = `cursor-pointer flex gap-2 items-center justify-between group px-2 py-[.1rem] rounded-lg hover:bg-gray-500/10`
 
@@ -574,7 +574,7 @@ export function DocsLayout({
               <Link
                 to={prevItem.to}
                 params
-                className="z-20 flex items-center justify-center overflow-hidden rounded-lg bg-white/70 px-2 py-1 text-black shadow-lg shadow-black/20 backdrop-blur-sm dark:bg-gray-500/40 dark:text-white"
+                className="z-20 flex items-center justify-center overflow-hidden rounded-lg bg-white/70 px-2 py-1 text-black shadow-lg shadow-black/20 backdrop-blur-xs dark:bg-gray-500/40 dark:text-white"
               >
                 <div className="flex items-center gap-2 font-bold">
                   <FaArrowLeft />
@@ -588,7 +588,7 @@ export function DocsLayout({
               <Link
                 to={nextItem.to}
                 params
-                className="z-20 flex items-center justify-center overflow-hidden rounded-lg bg-white/70 px-2 py-1 text-black shadow-lg shadow-black/20 backdrop-blur-sm dark:bg-gray-500/40 dark:text-white"
+                className="z-20 flex items-center justify-center overflow-hidden rounded-lg bg-white/70 px-2 py-1 text-black shadow-lg shadow-black/20 backdrop-blur-xs dark:bg-gray-500/40 dark:text-white"
               >
                 <div className="flex items-center gap-2 font-bold">
                   <span
@@ -680,7 +680,7 @@ export function DocsLayout({
 
           <div className="flex flex-col space-y-2 rounded-l-lg border-t border-b border-l border-gray-500/20 bg-white p-4 shadow-xl dark:bg-gray-900/20">
             <Carbon />
-            <div className="self-center rounded bg-gray-500/10 px-2 py-1 text-[.7rem] text-gray-500 italic opacity-50 transition-opacity hover:opacity-100 dark:bg-gray-500/20">
+            <div className="self-center rounded-sm bg-gray-500/10 px-2 py-1 text-[.7rem] text-gray-500 italic opacity-50 transition-opacity hover:opacity-100 dark:bg-gray-500/20">
               This ad helps to keep us from burning out and rage-quitting OSS
               just *that* much more, so chill. 😉
             </div>
@@ -688,8 +688,8 @@ export function DocsLayout({
         </div>
       </div>
       {showBytes ? (
-        <div className="w-[300px] max-w-[350px] fixed md:hidden top-1/2 right-2 z-30 -translate-y-1/2 shadow-lg print:hidden">
-          <div className="bg-white dark:bg-gray-800 border border-black/10 dark:border-white/10 p-4 md:p-6 rounded-lg">
+        <div className="fixed top-1/2 right-2 z-30 w-[300px] max-w-[350px] -translate-y-1/2 shadow-lg md:hidden print:hidden">
+          <div className="rounded-lg border border-black/10 bg-white p-4 md:p-6 dark:border-white/10 dark:bg-gray-800">
             {libraryId === 'query' ? (
               <DocsCalloutQueryGG />
             ) : (

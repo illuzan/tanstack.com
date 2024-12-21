@@ -293,7 +293,7 @@ export default function VersionIndex() {
           <div className="overflow-hidden rounded-lg bg-white shadow-lg dark:bg-gray-800 dark:text-white">
             <Carbon />
           </div>
-          <span className="rounded bg-gray-500/10 px-2 py-1 text-[.7rem] text-gray-500 dark:bg-gray-500/20">
+          <span className="rounded-sm bg-gray-500/10 px-2 py-1 text-[.7rem] text-gray-500 dark:bg-gray-500/20">
             This ad helps us be happy about our invested time and not burn out
             and rage-quit OSS. Yay money! 😉
           </span>

@@ -120,7 +120,7 @@ export function ThemeToggle() {
         />
         <span
           className={twMerge(
-            `absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[.6rem] font-black uppercase transition-opacity select-none`,
+            `absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[.6rem] leading-8 font-black uppercase transition-opacity select-none`,
             mode === 'auto' ? 'opacity-30 hover:opacity-50' : 'opacity-0',
           )}
         >

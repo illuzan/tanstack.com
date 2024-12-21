@@ -37,7 +37,7 @@ function LibrariesLayout() {
   const library = libraryId ? getLibrary(libraryId) : undefined
   const detailsRef = React.useRef<HTMLElement>(null!)
 
-  const linkClasses = `flex items-center justify-between group px-2 py-1 rounded-lg hover:bg-gray-500 hover:bg-opacity-10 font-black`
+  const linkClasses = `flex items-center justify-between group px-2 py-1 rounded-lg hover:bg-gray-500/10 font-black`
 
   const [mounted, setMounted] = React.useState(false)
 
@@ -111,7 +111,7 @@ function LibrariesLayout() {
                         {library.badge ? (
                           <span
                             className={twMerge(
-                              `animate-pulse rounded-full bg-gray-500/10 px-2 py-px text-[.7rem] font-black text-white uppercase transition-opacity group-hover:opacity-100 dark:bg-gray-500/20`,
+                              `animate-pulse rounded-full bg-gray-500/10 px-2 py-px text-[.7rem] leading-5 font-black text-white uppercase transition-opacity group-hover:opacity-100 dark:bg-gray-500/20`,
                               // library.badge === 'new'
                               //   ? 'text-green-500'
                               //   : library.badge === 'soon'
@@ -175,7 +175,7 @@ function LibrariesLayout() {
             className={twMerge(linkClasses, 'font-normal')}
             activeProps={{
               className: twMerge(
-                '!font-bold bg-gray-500/10 dark:bg-gray-500/30',
+                'font-bold! bg-gray-500/10 dark:bg-gray-500/30',
               ),
             }}
             target={item.to.startsWith('http') ? '_blank' : undefined}
@@ -233,7 +233,7 @@ function LibrariesLayout() {
       <details
         ref={detailsRef as any}
         id="docs-details"
-        className="border-opacity-20 border-b border-gray-500"
+        className="border-b border-gray-500/20"
       >
         <summary className="flex items-center justify-between gap-2 p-4">
           <div className="flex flex-1 items-center gap-2 text-xl md:text-2xl">
@@ -242,7 +242,7 @@ function LibrariesLayout() {
             {logo}
           </div>
         </summary>
-        <div className="border-opacity-20 flex h-[0vh] flex-col gap-4 overflow-y-auto border-t border-gray-500 bg-gray-100 text-lg whitespace-nowrap dark:bg-gray-900">
+        <div className="flex h-[0vh] flex-col gap-4 overflow-y-auto border-t border-gray-500/20 bg-gray-100 text-lg whitespace-nowrap dark:bg-gray-900">
           <div className="p-2 pb-0">
             <ClientOnlySearchButton
               {...searchButtonParams}
@@ -279,7 +279,7 @@ function LibrariesLayout() {
       </div>
     </>
   )
-
+  console.log('library', library)
   return (
     <div
       className={`flex min-h-screen w-full min-w-0 flex-col transition-all duration-300 lg:flex-row`}

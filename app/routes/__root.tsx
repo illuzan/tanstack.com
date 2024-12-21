@@ -186,7 +186,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         ) : null}
       </head>
       <body>
-        <div className="pointer-events-none fixed inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-10 blur-sm" />
+        <div className="pointer-events-none fixed inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-10 blur-xs" />
         <div
           className={twMerge(
             'pointer-events-none fixed inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-10 transition-all duration-[2.5s] ease-in-out dark:opacity-20',
@@ -197,7 +197,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
             backgroundSize: 'cover',
             backgroundPosition: 'bottom',
             backgroundRepeat: 'no-repeat',
-            filter: `blur(${pathLength * 2}px)`,
+            filter: `blur-xs(${pathLength * 2}px)`,
             transform: `scale(${1 + pathLength * 0.05})`,
           }}
         />
@@ -209,7 +209,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
           <div
             className={`pointer-events-none fixed top-0 left-0 z-30 h-[300px] w-full transition-all duration-300 dark:h-[200px] dark:rounded-[100%] dark:!bg-white/10 ${
               isLoading
-                ? '-translate-y-1/2 opacity-1 delay-0'
+                ? '-translate-y-1/2 opacity-100 delay-0'
                 : '-translate-y-full opacity-0 delay-300'
             }`}
             style={{

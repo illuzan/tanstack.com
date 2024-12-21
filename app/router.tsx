@@ -45,7 +45,7 @@ export function createRouter() {
         </ConvexProvider>
       ),
     }),
-    queryClient
+    queryClient,
   )
 
   router.subscribe('onResolved', () => {

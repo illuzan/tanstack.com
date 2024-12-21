@@ -83,7 +83,7 @@ const StableCounter = ({ value }: { value?: number }) => {
   const dummyString = Number(
     Array(value?.toString().length ?? 1)
       .fill('8')
-      .join('')
+      .join(''),
   ).toLocaleString()
 
   return (
@@ -120,30 +120,30 @@ const OssStats = () => {
   const { data: github } = useSuspenseQuery(
     convexQuery(api.stats.getGithubOwner, {
       owner: 'tanstack',
-    })
+    }),
   )
   console.log('github', github)
   const { data: npm } = useSuspenseQuery(
     convexQuery(api.stats.getNpmOrg, {
       name: 'tanstack',
-    })
+    }),
   )
 
   return (
     <div>
-      <div className="p-8 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-8 items-center justify-center xl:place-items-center bg-white/50 dark:bg-gray-700/30 dark:shadow-none rounded-xl shadow-xl">
+      <div className="grid grid-cols-1 items-center justify-center gap-8 rounded-xl bg-white/50 p-8 shadow-xl sm:grid-cols-2 xl:grid-cols-4 xl:place-items-center dark:bg-gray-700/30 dark:shadow-none">
         <a
           href="https://www.npmjs.com/org/tanstack"
           target="_blank"
           rel="noreferrer"
-          className="group flex gap-4 items-center"
+          className="group flex items-center gap-4"
         >
-          <FaDownload className="text-2xl group-hover:text-emerald-500 transition-colors duration-200" />
+          <FaDownload className="text-2xl transition-colors duration-200 group-hover:text-emerald-500" />
           <div>
-            <div className="text-2xl font-bold opacity-80 relative group-hover:text-emerald-500 transition-colors duration-200">
+            <div className="relative text-2xl font-bold opacity-80 transition-colors duration-200 group-hover:text-emerald-500">
               <NpmDownloadCounter npmData={npm} />
             </div>
-            <div className="text-sm opacity-50 font-medium italic group-hover:text-emerald-500 transition-colors duration-200">
+            <div className="text-sm font-medium italic opacity-50 transition-colors duration-200 group-hover:text-emerald-500">
               NPM Downloads
             </div>
           </div>
@@ -152,59 +152,59 @@ const OssStats = () => {
           href="https://github.com/orgs/TanStack/repositories?q=sort:stars"
           target="_blank"
           rel="noreferrer"
-          className="group flex gap-4 items-center"
+          className="group flex items-center gap-4"
         >
-          <FaStar className="group-hover:text-yellow-500 text-2xl transition-colors duration-200" />
+          <FaStar className="text-2xl transition-colors duration-200 group-hover:text-yellow-500" />
           <div>
-            <div className="text-2xl font-bold opacity-80 leading-none group-hover:text-yellow-500 transition-colors duration-200">
+            <div className="text-2xl leading-none font-bold opacity-80 transition-colors duration-200 group-hover:text-yellow-500">
               <NumberFlow value={github?.starCount} />
             </div>
-            <div className="text-sm opacity-50 font-medium italic -mt-1 group-hover:text-yellow-500 transition-colors duration-200">
+            <div className="-mt-1 text-sm font-medium italic opacity-50 transition-colors duration-200 group-hover:text-yellow-500">
               Stars on Github
             </div>
           </div>
         </a>
-        <div className="flex gap-4 items-center">
+        <div className="flex items-center gap-4">
           <FaUsers className="text-2xl" />
           <div className="">
             <div className="text-2xl font-bold opacity-80">
               <NumberFlow value={github?.contributorCount} />
             </div>
-            <div className="text-sm opacity-50 font-medium italic -mt-1">
+            <div className="-mt-1 text-sm font-medium italic opacity-50">
               Contributors on GitHub
             </div>
           </div>
         </div>
-        <div className="flex gap-4 items-center">
+        <div className="flex items-center gap-4">
           <FaCube className="text-2xl" />
           <div className="">
-            <div className="text-2xl font-bold opacity-80 relative">
+            <div className="relative text-2xl font-bold opacity-80">
               <NumberFlow value={github?.dependentCount} />
             </div>
-            <div className="text-sm opacity-50 font-medium italic -mt-1">
+            <div className="-mt-1 text-sm font-medium italic opacity-50">
               Dependents on GitHub
             </div>
           </div>
         </div>
       </div>
-      <div className="px-4 py-2 flex justify-end">
+      <div className="flex justify-end px-4 py-2">
         <a
           href="https://www.convex.dev/?utm_source=tanstack"
           className="group flex items-center gap-2"
         >
           <div className="h-2 w-2 animate-pulse rounded-full bg-green-500"></div>
           <div className="flex items-center gap-1">
-            <span className="text-[.75rem] opacity-30 relative -top-px">
+            <span className="relative -top-px text-[.75rem] opacity-30">
               Powered by
             </span>
             <img
-              className="dark:hidden opacity-30 group-hover:opacity-50"
+              className="opacity-30 group-hover:opacity-50 dark:hidden"
               src={convexImageDark}
               alt="Convex Logo"
               width={80}
             />
             <img
-              className="hidden dark:block opacity-30 group-hover:opacity-50"
+              className="hidden opacity-30 group-hover:opacity-50 dark:block"
               src={convexImageWhite}
               alt="Convex Logo"
               width={80}
@@ -247,7 +247,7 @@ function Index() {
               className={`inline-block text-5xl font-black md:text-6xl lg:text-8xl`}
             >
               <span
-                className={`inline-block bg-gradient-to-r bg-clip-text text-transparent ${gradient} mb-2 [letter-spacing:-.05em] uppercase underline decoration-gray-200 decoration-4 underline-offset-[.5rem] md:decoration-8 md:underline-offset-[1rem] dark:decoration-gray-800`}
+                className={`inline-block bg-linear-to-r bg-clip-text text-transparent ${gradient} mb-2 [letter-spacing:-.05em] uppercase underline decoration-gray-200 decoration-4 underline-offset-[.5rem] md:decoration-8 md:underline-offset-[1rem] dark:decoration-gray-800`}
               >
                 TanStack
               </span>
@@ -266,11 +266,11 @@ function Index() {
           </p>
         </div>
         <div className="h-8" />
-        <div className="w-fit mx-auto">
+        <div className="mx-auto w-fit">
           <OssStats />
         </div>
         <div className="h-24" />
-        <div className="px-4 md:mx-auto lg:max-w-screen-lg">
+        <div className="px-4 md:mx-auto lg:max-w-(--breakpoint-lg)">
           <h3 className={`text-4xl font-light`}>Open Source Libraries</h3>
           <div
             className={`mt-4 grid grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3`}
@@ -332,7 +332,7 @@ function Index() {
           </div>
         </div>
         <div className="h-12" />
-        <div className={`px-4 md:mx-auto lg:max-w-screen-lg`}>
+        <div className={`px-4 md:mx-auto lg:max-w-(--breakpoint-lg)`}>
           <h3 className={`mb-4 text-4xl font-light`}>Partners</h3>
           <div className={`grid grid-cols-1 gap-6 sm:grid-cols-2`}>
             {partners.map((partner) => {
@@ -344,7 +344,7 @@ function Index() {
                   className="group grid overflow-hidden rounded-lg border-gray-500/20 bg-white shadow-xl shadow-gray-500/20 dark:border dark:bg-gray-800 dark:shadow-none"
                   rel="noreferrer"
                 >
-                  <div className="z-0 col-start-1 row-start-1 flex items-center justify-center bg-white transition-all duration-200 group-hover:blur-sm">
+                  <div className="z-0 col-start-1 row-start-1 flex items-center justify-center bg-white transition-all duration-200 group-hover:blur-xs">
                     {partner.homepageImg}
                   </div>
                   <div className="z-10 col-start-1 row-start-1 flex max-w-full flex-col items-start gap-4 bg-white/70 p-4 text-sm opacity-0 transition-opacity duration-200 group-hover:opacity-100 dark:bg-gray-800/70">
@@ -356,7 +356,7 @@ function Index() {
           </div>
         </div>
         <div className="h-20" />
-        <div className={`mx-auto px-4 lg:max-w-screen-lg`}>
+        <div className={`mx-auto px-4 lg:max-w-(--breakpoint-lg)`}>
           <h3 className={`text-4xl font-light`}>Courses</h3>
           <div className={`mt-4 grid grid-cols-1 gap-4`}>
             {courses.map((course) => (
@@ -373,7 +373,7 @@ function Index() {
                   </div>
                   <div className={`mt-2 text-sm`}>{course.description}</div>
                   <div
-                    className={`mt-4 inline-block rounded bg-green-500 px-4 py-2 text-sm font-black text-white uppercase shadow`}
+                    className={`mt-4 inline-block rounded-sm bg-green-500 px-4 py-2 text-sm font-black text-white uppercase shadow`}
                   >
                     Check it out →
                   </div>
@@ -383,7 +383,7 @@ function Index() {
           </div>
         </div>
         <div className="h-12" />
-        <div className={`mx-auto px-4 lg:max-w-screen-lg`}>
+        <div className={`mx-auto px-4 lg:max-w-(--breakpoint-lg)`}>
           <h3 className={`text-4xl font-light`}>OSS Sponsors</h3>
           <div className="h-4" />
           <div
@@ -404,13 +404,15 @@ function Index() {
             <div>
               <a
                 href="https://github.com/sponsors/tannerlinsley"
-                className={`inline-block rounded bg-green-500 p-4 font-black text-white uppercase`}
+                className={`inline-block rounded-sm bg-green-500 p-4 font-black text-white uppercase`}
               >
                 Become a Sponsor!
               </a>
             </div>
             <div className={`h-4`} />
-            <p className={`mx-auto max-w-screen-sm text-gray-500 italic`}>
+            <p
+              className={`mx-auto max-w-(--breakpoint-sm) text-gray-500 italic`}
+            >
               Sponsors get special perks like{' '}
               <strong>
                 private discord channels, priority issue requests, direct
@@ -426,14 +428,14 @@ function Index() {
             <div className="mx-auto max-w-[250px] overflow-hidden rounded-lg bg-white shadow-lg dark:bg-gray-800 dark:text-white">
               <Carbon />
             </div>
-            <span className="bg-opacity-10 dark:bg-opacity-20 self-center rounded bg-gray-500 px-2 py-1 text-[.7rem] text-gray-500">
+            <span className="self-center rounded-sm bg-gray-500/10 px-2 py-1 text-[.7rem] text-gray-500 dark:bg-gray-500/20">
               This ad helps us be happy about our invested time and not burn out
               and rage-quit OSS. Yay money! 😉
             </span>
           </div>
         </div>
         <div className="h-12" />
-        <div className="mx-auto max-w-screen-lg px-4">
+        <div className="mx-auto max-w-(--breakpoint-lg) px-4">
           <div
             className={`bg-discord relative grid gap-6 overflow-hidden rounded-md p-4 text-white shadow-xl shadow-indigo-700/30 sm:grid-cols-3 sm:p-8`}
           >
@@ -459,7 +461,7 @@ function Index() {
               <a
                 href="https://discord.com/invite/WrRKjPJ"
                 target="_blank"
-                className={`text-discord z-10 mt-4 block w-full rounded bg-white px-4 py-2 text-center font-black uppercase shadow-lg`}
+                className={`text-discord z-10 mt-4 block w-full rounded-sm bg-white px-4 py-2 text-center font-black uppercase shadow-lg`}
                 rel="noreferrer"
               >
                 Join TanStack Discord
@@ -468,7 +470,7 @@ function Index() {
           </div>
         </div>
         <div className="h-4" />
-        <div className="relative mx-auto max-w-screen-lg px-4">
+        <div className="relative mx-auto max-w-(--breakpoint-lg) px-4">
           <div className="rounded-md bg-white p-8 shadow-xl shadow-gray-900/10 md:p-14 dark:bg-gray-800">
             {!bytesSignupMutation.submittedAt ? (
               <form
@@ -501,7 +503,7 @@ function Index() {
                 <div className={`mt-4 grid grid-cols-3 gap-2`}>
                   <input
                     disabled={bytesSignupMutation.status === 'pending'}
-                    className={`dark:(text-white bg-gray-700) col-span-2 w-full rounded bg-gray-200 p-3 text-sm text-black placeholder-gray-400 outline-none focus:outline-none`}
+                    className={`dark:(text-white bg-gray-700) col-span-2 w-full rounded-sm bg-gray-200 p-3 text-sm text-black placeholder-gray-400 outline-hidden focus:outline-hidden`}
                     name="email_address"
                     placeholder="Your email address"
                     type="text"
@@ -509,7 +511,7 @@ function Index() {
                   />
                   <button
                     type="submit"
-                    className={`rounded bg-[#ED203D] font-black text-white uppercase`}
+                    className={`rounded-sm bg-[#ED203D] font-black text-white uppercase`}
                   >
                     <span>
                       {bytesSignupMutation.status === 'pending'

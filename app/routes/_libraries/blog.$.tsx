@@ -85,7 +85,7 @@ ${content}`
         <Link
           from="/blog/$"
           to="/blog"
-          className="font-bold flex items-center gap-2 p-1"
+          className="flex items-center gap-2 p-1 font-bold"
         >
           <FaArrowLeft />
           Back

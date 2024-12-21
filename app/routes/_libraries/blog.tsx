@@ -20,7 +20,7 @@ export function PostNotFound() {
       <div className="text-lg">Post not found.</div>
       <Link
         to="/blog"
-        className={`rounded bg-gray-600 px-4 py-2 font-extrabold text-white uppercase dark:bg-gray-700`}
+        className={`rounded-sm bg-gray-600 px-4 py-2 font-extrabold text-white uppercase dark:bg-gray-700`}
       >
         Blog Home
       </Link>

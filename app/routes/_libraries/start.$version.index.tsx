@@ -171,7 +171,7 @@ export default function VersionIndex() {
             />
           </div>
           <div className="flex flex-col gap-4">
-            <h3 className="uppercase text-xl font-black">
+            <h3 className="text-xl font-black uppercase">
               Enterprise-Grade Routing
             </h3>
             <p className="text-sm leading-6 text-gray-800 dark:text-gray-200">
@@ -200,7 +200,7 @@ export default function VersionIndex() {
             </div>
           </div>
           <div className="flex flex-col gap-4">
-            <h3 className="uppercase text-xl font-black">
+            <h3 className="text-xl font-black uppercase">
               SSR, Streaming and Server RPCs
             </h3>
             <p className="text-sm leading-6 text-gray-800 dark:text-gray-200">
@@ -225,7 +225,7 @@ export default function VersionIndex() {
             />
           </div>
           <div className="flex flex-col gap-4">
-            <h3 className="uppercase text-xl font-black">
+            <h3 className="text-xl font-black uppercase">
               Client-Side First, 100% Server Capable
             </h3>
             <p className="text-sm leading-6 text-gray-800 dark:text-gray-200">
@@ -254,7 +254,7 @@ export default function VersionIndex() {
             />
           </div>
           <div className="flex flex-col gap-4">
-            <h3 className="uppercase text-xl font-black">
+            <h3 className="text-xl font-black uppercase">
               Deploy Anywhere with Vinxi & Vite
             </h3>
             <p className="text-sm leading-6 text-gray-700 dark:text-gray-200">
@@ -530,7 +530,7 @@ export default function VersionIndex() {
         <div className="mx-auto max-w-[250px] overflow-hidden rounded-lg bg-white shadow-lg dark:bg-gray-800 dark:text-white">
           <Carbon />
         </div>
-        <span className="rounded bg-gray-500/10 px-2 py-1 text-[.7rem] text-gray-500 dark:bg-gray-500/20">
+        <span className="rounded-sm bg-gray-500/10 px-2 py-1 text-[.7rem] text-gray-500 dark:bg-gray-500/20">
           This ad helps us be happy about our invested time and not burn out and
           rage-quit OSS. Yay money! 😉
         </span>

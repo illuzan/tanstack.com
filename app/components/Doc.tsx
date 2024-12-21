@@ -46,14 +46,14 @@ export function Doc({
   return (
     <div
       className={twMerge(
-        'w-full flex bg-white/70 dark:bg-black/50 mx-auto rounded-xl max-w-[936px]',
-        isTocVisible && 'max-w-full'
+        'mx-auto flex w-full max-w-[936px] rounded-xl bg-white/70 dark:bg-black/50',
+        isTocVisible && 'max-w-full',
       )}
     >
       <div
         className={twMerge(
-          'flex overflow-auto flex-col w-full p-4 lg:p-6',
-          isTocVisible && 'border-r border-gray-500/20 !pr-0'
+          'flex w-full flex-col overflow-auto p-4 lg:p-6',
+          isTocVisible && 'border-r border-gray-500/20 pr-0!',
         )}
       >
         {title ? <DocTitle>{title}</DocTitle> : null}
@@ -63,13 +63,13 @@ export function Doc({
         <div
           className={twMerge(
             'prose prose-gray prose-sm prose-p:leading-7 dark:prose-invert max-w-none',
-            isTocVisible && 'pr-4 lg:pr-6'
+            isTocVisible && 'pr-4 lg:pr-6',
           )}
         >
           <Markdown htmlMarkup={markup} />
         </div>
         <div className="h-12" />
-        <div className="w-full h-px bg-gray-500 opacity-30" />
+        <div className="h-px w-full bg-gray-500 opacity-30" />
         <div className="py-4 opacity-70">
           <a
             href={`https://github.com/${repo}/tree/${branch}/${filePath}`}
@@ -82,7 +82,7 @@ export function Doc({
       </div>
 
       {isTocVisible && (
-        <div className="max-w-52 w-full hidden 2xl:block transition-all">
+        <div className="hidden w-full max-w-52 transition-all 2xl:block">
           <Toc headings={headings} colorFrom={colorFrom} colorTo={colorTo} />
         </div>
       )}
