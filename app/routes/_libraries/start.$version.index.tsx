@@ -1,78 +1,19 @@
 import * as React from 'react'
 
-import { CgCornerUpLeft, CgSpinner } from 'react-icons/cg'
-import { PiTreeStructureBold, PiRocketLaunchDuotone } from 'react-icons/pi'
-import { TbServerBolt } from 'react-icons/tb'
-import {
-  FaBook,
-  FaDiscord,
-  FaGithub,
-  FaTshirt,
-  FaTwitter,
-  FaYinYang,
-} from 'react-icons/fa'
+import { CgSpinner } from 'react-icons/cg'
+import { FaBook, FaGithub, FaTwitter } from 'react-icons/fa'
 import { Await, Link, getRouteApi } from '@tanstack/react-router'
 import { Carbon } from '~/components/Carbon'
 import { Footer } from '~/components/Footer'
-import { TbZoomQuestion } from 'react-icons/tb'
 import SponsorPack from '~/components/SponsorPack'
 import { startProject } from '~/libraries/start'
 import { createFileRoute } from '@tanstack/react-router'
-import { Framework, getBranch } from '~/libraries'
 import { seo } from '~/utils/seo'
 import { partners } from '~/utils/partners'
 import { VscPreview } from 'react-icons/vsc'
-
-const menu = [
-  {
-    label: (
-      <div className="flex items-center gap-2">
-        <CgCornerUpLeft className="text-lg" /> TanStack
-      </div>
-    ),
-    to: '/',
-  },
-  {
-    label: (
-      <div className="flex items-center gap-1">
-        <VscPreview className="text-lg" /> Examples
-      </div>
-    ),
-    to: '../../router/latest/docs/framework/react/examples/start-basic',
-  },
-  {
-    label: (
-      <div className="flex items-center gap-1">
-        <FaBook className="text-lg" /> Docs
-      </div>
-    ),
-    to: '../../router/latest/docs/framework/react/start/overview',
-  },
-  // {
-  //   label: (
-  //     <div className="flex items-center gap-1">
-  //       <FaGithub className="text-lg" /> GitHub
-  //     </div>
-  //   ),
-  //   to: `https://github.com/${startProject.repo}`,
-  // },
-  {
-    label: (
-      <div className="flex items-center gap-1">
-        <FaDiscord className="text-lg" /> Discord
-      </div>
-    ),
-    to: 'https://tlinz.com/discord',
-  },
-  {
-    label: (
-      <div className="flex items-center gap-1">
-        <FaTshirt className="text-lg" /> Merch
-      </div>
-    ),
-    to: `https://cottonbureau.com/people/tanstack`,
-  },
-]
+import { twMerge } from 'tailwind-merge'
+import { getLibrary } from '~/libraries'
+import { LibraryFeatureHighlights } from '~/components/LibraryFeatureHighlights'
 
 export const Route = createFileRoute('/_libraries/start/$version/')({
   component: VersionIndex,
@@ -86,11 +27,10 @@ export const Route = createFileRoute('/_libraries/start/$version/')({
 
 const librariesRouteApi = getRouteApi('/_libraries')
 
+const library = getLibrary('start')
+
 export default function VersionIndex() {
   const { sponsorsPromise } = librariesRouteApi.useLoaderData()
-  const { version } = Route.useParams()
-  const branch = getBranch(startProject, version)
-  const [framework, setFramework] = React.useState<Framework>('react')
   const [isDark, setIsDark] = React.useState(true)
 
   React.useEffect(() => {
@@ -98,202 +38,86 @@ export default function VersionIndex() {
       //
     }
     setIsDark(window.matchMedia?.(`(prefers-color-scheme: dark)`).matches)
-  }, [])
+  }, [isDark])
 
-  const gradientText = `inline-block text-transparent bg-clip-text bg-linear-to-r ${startProject.colorFrom} ${startProject.colorTo}`
+  const gradientText = `text-transparent bg-clip-text bg-linear-to-r ${startProject.colorFrom} ${startProject.colorTo}`
 
   return (
-    <div className="flex max-w-full flex-col gap-20 md:gap-32">
-      <div className="mx-auto flex max-w-(--breakpoint-xl) flex-wrap items-center justify-center px-4 py-2 text-sm md:self-end md:text-base">
-        {menu?.map((item, i) => {
-          const label = (
-            <div className="p-2 opacity-90 hover:opacity-100">{item.label}</div>
-          )
-
-          return (
-            <div key={i} className="hover:underline">
-              {item.to.startsWith('http') ? (
-                <a href={item.to}>{label}</a>
-              ) : (
-                <Link to={item.to} params>
-                  {label}
-                </Link>
-              )}
-            </div>
-          )
-        })}
-      </div>
-      <div className="flex flex-col items-center gap-8 px-4 text-center">
-        <div className="flex items-center gap-2 lg:gap-4">
-          <h1
-            className={`relative inline-block text-4xl font-black md:text-6xl lg:text-7xl`}
-            style={{
-              viewTransitionName: `library-name`,
-            }}
-          >
-            <span className={gradientText}>TanStack Start</span>
-          </h1>
-        </div>
+    <div className="flex flex-col gap-20 md:gap-32 max-w-full pt-32">
+      <div className="flex flex-col items-center gap-8 text-center px-4">
+        <h1 className="font-black flex gap-3 items-center text-4xl md:text-6xl lg:text-7xl xl:text-8xl uppercase [letter-spacing:-.05em]">
+          <span>TanStack</span>
+          <span className={twMerge(gradientText)}>Start</span>
+        </h1>
         {/* <div className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-[150%]"> */}
-        <div className="animate-bounce rounded-md bg-black px-2 py-1 align-super text-sm leading-none font-black whitespace-nowrap text-white uppercase shadow-xl shadow-black/30 md:text-base lg:text-lg dark:bg-white dark:text-black">
+        <div
+          className={twMerge(
+            'text-sm',
+            'md:text-base font-black',
+            'lg:text-lg align-super text-white animate-bounce uppercase',
+            'dark:text-black bg-black dark:bg-white shadow-xl shadow-black/30 px-2 py-1 rounded-md',
+            'leading-none whitespace-nowrap'
+          )}
+        >
           STATUS: BETA
           {/* {version === 'latest' ? latestVersion : version} */}
         </div>
         {/* </div> */}
         <h2 className="max-w-md text-2xl font-bold md:text-3xl lg:max-w-2xl lg:text-5xl">
           Full-stack React framework{' '}
-          <span className="underline decoration-yellow-500 decoration-dashed decoration-3 underline-offset-2">
+          <span className="underline decoration-yellow-500 decoration-dashed underline-offset-2">
             powered by TanStack Router
           </span>{' '}
         </h2>
-        <p className="text max-w-[500px] opacity-90 lg:max-w-[600px] lg:text-xl">
-          Full-document SSR, Streaming, Server Functions, bundling and more,
-          powered by <strong>TanStack Router</strong>, <strong>Vinxi</strong>,
+        <p
+          className="text opacity-90 max-w-[500px]
+            lg:text-xl lg:max-w-[600px]"
+        >
+          SSR, Streaming, Server Functions, API Routes, bundling and more
+          powered by <strong>TanStack Router</strong>, <strong>Nitro</strong>,
           and <strong>Vite</strong>. Ready to deploy to your favorite hosting
           provider.
         </p>
-        <Link
-          to="../../router/latest/docs/framework/react/start/overview"
-          className={`rounded-sm bg-cyan-500 px-4 py-2 font-extrabold text-white uppercase`}
-        >
-          Get Started
-        </Link>
-      </div>
-      <div className="mx-auto grid max-w-[1200px] gap-12 p-8 text-lg md:grid-cols-2 xl:grid-cols-4">
-        <div className="flex flex-1 flex-col items-center gap-8">
-          <div className="text-center">
-            <PiTreeStructureBold
-              className="text-6xl text-cyan-700 motion-safe:animate-pulse dark:text-cyan-500"
-              style={{
-                animationDuration: '5s',
-                animationTimingFunction: 'ease-in-out',
-              }}
-            />
-          </div>
-          <div className="flex flex-col gap-4">
-            <h3 className="text-xl font-black uppercase">
-              Enterprise-Grade Routing
-            </h3>
-            <p className="text-sm leading-6 text-gray-800 dark:text-gray-200">
-              Built on TanStack Router, Start comes pre-packed with a{' '}
-              <span className="font-semibold text-cyan-700 dark:text-cyan-500">
-                fully type-safe and powerfully-unmatched routing system
-              </span>{' '}
-              that is designed to handle the beefiest of full-stack routing
-              requirements with ease. Start builds on top of Router's fully
-              inferred type safety to also provide type-safe full-stack APIs
-              that keep you in the fast lane.
-            </p>
-          </div>
-        </div>
-        <div className="flex flex-1 flex-col items-center gap-8">
-          <div className="grid grid-cols-1 grid-rows-1 text-center">
-            <TbServerBolt className="col-start-1 row-start-1 text-6xl text-cyan-700 dark:text-cyan-500" />
-            <div className="col-start-1 row-start-1 opacity-50">
-              <TbServerBolt
-                className="animate-ping text-6xl text-cyan-700 dark:text-cyan-500"
-                style={{
-                  animationDuration: '2s',
-                  animationTimingFunction: 'ease-out',
-                }}
-              />
-            </div>
-          </div>
-          <div className="flex flex-col gap-4">
-            <h3 className="text-xl font-black uppercase">
-              SSR, Streaming and Server RPCs
-            </h3>
-            <p className="text-sm leading-6 text-gray-800 dark:text-gray-200">
-              Who said rich and interactive applications can't have it all?
-              TanStack Start includes powerful capabilities for{' '}
-              <span className="font-semibold text-cyan-700 dark:text-cyan-500">
-                full-document SSR, streaming, server functions and RPCs
-              </span>
-              . No more choosing between server-side rendering and top-class
-              client-side interactivity. Command the server as you see fit.
-            </p>
-          </div>
-        </div>
-        <div className="flex flex-1 flex-col items-center gap-8">
-          <div className="text-center">
-            <FaYinYang
-              className="text-6xl text-cyan-700 motion-safe:animate-spin dark:text-cyan-500"
-              style={{
-                animationDuration: '10s',
-                animationTimingFunction: 'ease-in-out',
-              }}
-            />
-          </div>
-          <div className="flex flex-col gap-4">
-            <h3 className="text-xl font-black uppercase">
-              Client-Side First, 100% Server Capable
-            </h3>
-            <p className="text-sm leading-6 text-gray-800 dark:text-gray-200">
-              While other frameworks continue to compromise on the client-side
-              application experience we've cultivated as a front-end community
-              over the years, TanStack Start stays true to the{' '}
-              <span className="font-semibold text-cyan-700 dark:text-cyan-500">
-                client-side first developer experience,
-              </span>{' '}
-              while providing a{' '}
-              <span className="font-semibold text-cyan-700 dark:text-cyan-500">
-                full-featured server-side capable system
-              </span>{' '}
-              that won't make you compromise on user experience.
-            </p>
-          </div>
-        </div>
-        <div className="flex flex-1 flex-col items-center gap-8">
-          <div className="text-center">
-            <PiRocketLaunchDuotone
-              className="text-6xl text-cyan-700 motion-safe:animate-bounce dark:text-cyan-500"
-              style={{
-                animationDuration: '2.5s',
-                animationTimingFunction: 'ease-in-out',
-              }}
-            />
-          </div>
-          <div className="flex flex-col gap-4">
-            <h3 className="text-xl font-black uppercase">
-              Deploy Anywhere with Vinxi & Vite
-            </h3>
-            <p className="text-sm leading-6 text-gray-700 dark:text-gray-200">
-              With Vinxi and Vite under the hood, TanStack Start is designed to
-              be{' '}
-              <span className="font-semibold text-cyan-700 dark:text-cyan-500">
-                deployable anywhere JS can run
-              </span>
-              . Whether you're hosting on a traditional server, a serverless
-              platform, or even a CDN, Start seamlessly builds, bundles and
-              deploys your application with ease.
-            </p>
-          </div>
+        <div className="flex justify-center gap-4 flex-wrap">
+          <Link
+            to="./docs/framework/react/quick-start#impatient"
+            className={`py-2 px-4 bg-transparent text-cyan-600 dark:text-cyan-400 border-2 border-cyan-500 dark:border-cyan-600 rounded-sm uppercase font-extrabold`}
+          >
+            Try it in 60 seconds
+          </Link>
+          <Link
+            to="./docs/framework/react/overview"
+            className={`py-2 px-4 bg-cyan-500 dark:bg-cyan-600 rounded-sm text-white uppercase font-extrabold flex items-center`}
+          >
+            Get Started
+          </Link>
         </div>
       </div>
+      <LibraryFeatureHighlights featureHighlights={library.featureHighlights} />
       <div className="space-y-8 px-4">
         <div className="mr-1 text-center text-3xl font-black">
           When can I use it?
         </div>
-        <div className="mx-auto w-[800px] max-w-full space-y-4 rounded-xl bg-white p-8 leading-loose shadow-xl shadow-black/10 dark:bg-gray-700">
+        <div className="max-w-full p-8 w-[800px] mx-auto leading-loose space-y-4 bg-white dark:bg-black/40 rounded-xl shadow-xl shadow-black/10">
           <div>
             You can use <strong>TanStack Start BETA</strong> today! Although
-            currently in active development we do not expect any more breaking
-            changes. We invite you provide feedback to help help us on the
-            journey to 1.0! If you choose to ship a BETA Start app to
-            production, we recommend locking your dependencies to a specific
-            version and keeping up with the latest releases.
+            currently in active development, we do not expect any more breaking
+            changes. We invite you to provide feedback to help us on the journey
+            to 1.0! If you choose to ship a BETA Start app to production, we
+            recommend locking your dependencies to a specific version and
+            keeping up with the latest releases.
           </div>
         </div>
         <div className="mx-auto grid w-[600px] max-w-full grid-cols-2 items-center justify-center gap-2">
           <Link
-            to="../../router/latest/docs/framework/react/examples/start-basic"
-            className={`flex items-center gap-2 rounded-sm bg-cyan-900 px-4 py-2 font-extrabold text-white uppercase`}
+            to="/start/latest/docs/framework/react/examples/start-basic"
+            className={`flex items-center gap-2 py-2 px-4 bg-cyan-900 rounded-sm text-white uppercase font-extrabold`}
           >
             <VscPreview /> See an Example
           </Link>
           <Link
-            to="../../router/latest/docs/framework/react/start/overview"
-            className={`flex items-center gap-2 rounded-sm bg-cyan-800 px-4 py-2 font-extrabold text-white uppercase`}
+            to="/start/latest/docs/framework/react/overview"
+            className={`flex items-center gap-2 py-2 px-4 bg-cyan-800 rounded-sm text-white uppercase font-extrabold`}
           >
             <FaBook /> Try the BETA
           </Link>
@@ -483,10 +307,10 @@ export default function VersionIndex() {
                   key={partner.name}
                   href={partner.href}
                   target="_blank"
-                  className="group grid overflow-hidden rounded-lg border-gray-500/20 bg-white shadow-xl shadow-gray-500/20 dark:border dark:bg-gray-800 dark:shadow-none"
+                  className="shadow-xl shadow-gray-500/20 rounded-lg dark:border border-gray-500/20 bg-white dark:bg-black/40 dark:shadow-none group overflow-hidden grid"
                   rel="noreferrer"
                 >
-                  <div className="z-0 col-start-1 row-start-1 flex items-center justify-center bg-white transition-all duration-200 group-hover:blur-xs">
+                  <div className="z-0 row-start-1 col-start-1 flex items-center justify-center group-hover:blur-xs transition-all duration-200">
                     {partner.homepageImg}
                   </div>
                   <div className="z-10 col-start-1 row-start-1 flex max-w-full flex-col items-start gap-4 bg-white/70 p-4 text-sm opacity-0 transition-opacity duration-200 group-hover:opacity-100 dark:bg-gray-800/70">
@@ -619,8 +443,8 @@ export default function VersionIndex() {
         </div>
         <div>
           <Link
-            to="../../router/latest/docs/framework/react/start/overview"
-            className={`inline-block rounded-sm bg-cyan-500 px-4 py-2 font-extrabold text-white uppercase`}
+            to="/start/latest/docs/framework/react/overview"
+            className={`inline-block py-2 px-4 bg-cyan-500 rounded-sm text-white uppercase font-extrabold`}
           >
             Get Started!
           </Link>

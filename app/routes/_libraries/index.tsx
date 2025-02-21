@@ -5,29 +5,19 @@ import {
   createFileRoute,
   getRouteApi,
 } from '@tanstack/react-router'
-import { useSuspenseQuery } from '@tanstack/react-query'
-import { convexQuery } from '@convex-dev/react-query'
-import { useNpmDownloadCounter } from '@erquhart/convex-oss-stats/react'
-import NumberFlow from '@number-flow/react'
-import { api } from '../../../convex/_generated/api'
 import { Carbon } from '~/components/Carbon'
 import { twMerge } from 'tailwind-merge'
 import { CgSpinner } from 'react-icons/cg'
 import { Footer } from '~/components/Footer'
 import SponsorPack from '~/components/SponsorPack'
 import discordImage from '~/images/discord-logo-white.svg'
-import convexImageWhite from '~/images/convex-white.svg'
-import convexImageDark from '~/images/convex-dark.svg'
 import { useMutation } from '~/hooks/useMutation'
 import { sample } from '~/utils/utils'
 import { libraries } from '~/libraries'
 import logoColor from '~/images/logo-color-600w.png'
 import bytesImage from '~/images/bytes.svg'
-// import toyPalmChair from '~/images/toy-palm-chair.png'
-// import waves from '~/images/waves.png'
-// import background from '~/images/background.jpg'
 import { partners } from '../../utils/partners'
-import { FaCube, FaDownload, FaStar, FaUsers } from 'react-icons/fa'
+import OpenSourceStats from '~/components/OpenSourceStats'
 
 export const textColors = [
   `text-rose-500`,
@@ -79,143 +69,6 @@ async function bytesSignupServerFn({ email }: { email: string }) {
 
 const librariesRouteApi = getRouteApi('/_libraries')
 
-const StableCounter = ({ value }: { value?: number }) => {
-  const dummyString = Number(
-    Array(value?.toString().length ?? 1)
-      .fill('8')
-      .join(''),
-  ).toLocaleString()
-
-  return (
-    <>
-      {/* Dummy span to prevent layout shift */}
-      <span className="opacity-0">{dummyString}</span>
-      <span className="absolute -top-0.5 left-0">
-        <NumberFlow
-          transformTiming={{
-            duration: 1000,
-            easing: 'linear',
-          }}
-          value={value}
-          trend={1}
-          continuous
-          isolate
-          willChange
-        />
-      </span>
-    </>
-  )
-}
-
-const NpmDownloadCounter = ({
-  npmData,
-}: {
-  npmData: Parameters<typeof useNpmDownloadCounter>[0]
-}) => {
-  const liveNpmDownloadCount = useNpmDownloadCounter(npmData)
-  return <StableCounter value={liveNpmDownloadCount} />
-}
-
-const OssStats = () => {
-  const { data: github } = useSuspenseQuery(
-    convexQuery(api.stats.getGithubOwner, {
-      owner: 'tanstack',
-    }),
-  )
-  console.log('github', github)
-  const { data: npm } = useSuspenseQuery(
-    convexQuery(api.stats.getNpmOrg, {
-      name: 'tanstack',
-    }),
-  )
-
-  return (
-    <div>
-      <div className="grid grid-cols-1 items-center justify-center gap-8 rounded-xl bg-white/50 p-8 shadow-xl sm:grid-cols-2 xl:grid-cols-4 xl:place-items-center dark:bg-gray-700/30 dark:shadow-none">
-        <a
-          href="https://www.npmjs.com/org/tanstack"
-          target="_blank"
-          rel="noreferrer"
-          className="group flex items-center gap-4"
-        >
-          <FaDownload className="text-2xl transition-colors duration-200 group-hover:text-emerald-500" />
-          <div>
-            <div className="relative text-2xl font-bold opacity-80 transition-colors duration-200 group-hover:text-emerald-500">
-              <NpmDownloadCounter npmData={npm} />
-            </div>
-            <div className="text-sm font-medium italic opacity-50 transition-colors duration-200 group-hover:text-emerald-500">
-              NPM Downloads
-            </div>
-          </div>
-        </a>
-        <a
-          href="https://github.com/orgs/TanStack/repositories?q=sort:stars"
-          target="_blank"
-          rel="noreferrer"
-          className="group flex items-center gap-4"
-        >
-          <FaStar className="text-2xl transition-colors duration-200 group-hover:text-yellow-500" />
-          <div>
-            <div className="text-2xl leading-none font-bold opacity-80 transition-colors duration-200 group-hover:text-yellow-500">
-              <NumberFlow value={github?.starCount} />
-            </div>
-            <div className="-mt-1 text-sm font-medium italic opacity-50 transition-colors duration-200 group-hover:text-yellow-500">
-              Stars on Github
-            </div>
-          </div>
-        </a>
-        <div className="flex items-center gap-4">
-          <FaUsers className="text-2xl" />
-          <div className="">
-            <div className="text-2xl font-bold opacity-80">
-              <NumberFlow value={github?.contributorCount} />
-            </div>
-            <div className="-mt-1 text-sm font-medium italic opacity-50">
-              Contributors on GitHub
-            </div>
-          </div>
-        </div>
-        <div className="flex items-center gap-4">
-          <FaCube className="text-2xl" />
-          <div className="">
-            <div className="relative text-2xl font-bold opacity-80">
-              <NumberFlow value={github?.dependentCount} />
-            </div>
-            <div className="-mt-1 text-sm font-medium italic opacity-50">
-              Dependents on GitHub
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="flex justify-end px-4 py-2">
-        <a
-          href="https://www.convex.dev/?utm_source=tanstack"
-          className="group flex items-center gap-2"
-        >
-          <div className="h-2 w-2 animate-pulse rounded-full bg-green-500"></div>
-          <div className="flex items-center gap-1">
-            <span className="relative -top-px text-[.75rem] opacity-30">
-              Powered by
-            </span>
-            <img
-              className="opacity-30 group-hover:opacity-50 dark:hidden"
-              src={convexImageDark}
-              alt="Convex Logo"
-              width={80}
-            />
-            <img
-              className="hidden opacity-30 group-hover:opacity-50 dark:block"
-              src={convexImageWhite}
-              alt="Convex Logo"
-              width={80}
-            />
-          </div>
-        </a>
-      </div>
-    </div>
-  )
-}
-
 function Index() {
   const bytesSignupMutation = useMutation({
     fn: bytesSignupServerFn,
@@ -247,7 +100,10 @@ function Index() {
               className={`inline-block text-5xl font-black md:text-6xl lg:text-8xl`}
             >
               <span
-                className={`inline-block bg-linear-to-r bg-clip-text text-transparent ${gradient} mb-2 [letter-spacing:-.05em] uppercase underline decoration-gray-200 decoration-4 underline-offset-[.5rem] md:decoration-8 md:underline-offset-[1rem] dark:decoration-gray-800`}
+                className={`
+            inline-block text-black dark:text-white
+            mb-2 uppercase [letter-spacing:-.04em] pr-1.5
+            `}
               >
                 TanStack
               </span>
@@ -255,7 +111,7 @@ function Index() {
           </div>
           <h2 className="max-w-md text-2xl font-bold text-balance md:text-4xl lg:max-w-2xl lg:text-5xl">
             High-quality open-source software for{' '}
-            <span className="underline decoration-yellow-500 decoration-dashed decoration-3 underline-offset-2">
+            <span className="underline decoration-yellow-500 decoration-dashed underline-offset-2">
               web developers.
             </span>
           </h2>
@@ -266,8 +122,8 @@ function Index() {
           </p>
         </div>
         <div className="h-8" />
-        <div className="mx-auto w-fit">
-          <OssStats />
+        <div className="w-fit mx-auto">
+          <OpenSourceStats />
         </div>
         <div className="h-24" />
         <div className="px-4 md:mx-auto lg:max-w-(--breakpoint-lg)">
@@ -282,8 +138,10 @@ function Index() {
                   to={library.to ?? '#'}
                   params
                   className={twMerge(
-                    `rounded-lg border-4 border-transparent bg-white p-4 text-white shadow-lg transition-all md:p-8 dark:border dark:border-gray-800 dark:bg-gray-900`,
-                    library.cardStyles,
+                    `border-4 border-transparent rounded-lg shadow-lg p-4 md:p-8 text-white transition-all bg-white/80 dark:bg-black/40 dark:border dark:border-gray-800`,
+                    'hover:bg-white dark:hover:bg-black/60',
+                    'relative overflow-hidden',
+                    library.cardStyles
                   )}
                   style={{
                     zIndex: i,
@@ -297,30 +155,38 @@ function Index() {
                         return (
                           <div
                             className={twMerge(
-                              `text-2xl font-extrabold`,
+                              `flex items-center gap-1.5 text-[1.3rem] font-extrabold uppercase [letter-spacing:-.04em]`
                               // isPending && `[view-transition-name:library-name]`
                             )}
                             style={{
                               viewTransitionName: `library-name-${library.id}`,
                             }}
                           >
-                            {library.name}
+                            <span className="bg-current rounded-md leading-none flex items-center">
+                              <span className="font-black text-white dark:text-black text-xs leading-none p-1 px-1.5 uppercase">
+                                TanStack
+                              </span>
+                            </span>
+                            {library.name.replace('TanStack ', '')}
                           </div>
                         )
                       }}
                     />
-                    {library.badge ? (
-                      <div
-                        className={twMerge(
-                          `animate-pulse rounded-full bg-yellow-500 px-2 py-1 text-xs font-black text-white uppercase`,
-                          library.bgStyle,
-                        )}
-                      >
-                        {library.badge}
+                    {/* {library.badge ? (
+                      <div className={twMerge(`absolute top-0 right-0`)}>
+                        <div
+                          className={twMerge(
+                            `w-24 h-24 rounded-full translate-x-1/2 -translate-y-1/2`,
+                            library.bgStyle
+                          )}
+                        />
+                        <span className="inline-block transform rotate-45 uppercase text-white text-xs font-black italic animate-pulse absolute top-4 right-4">
+                          {library.badge}
+                        </span>
                       </div>
-                    ) : null}
+                    ) : null} */}
                   </div>
-                  <div className={`mt-2 text-lg font-light italic`}>
+                  <div className={`text-base italic font-normal mt-2`}>
                     {library.tagline}
                   </div>
                   <div className={`mt-2 text-sm text-black dark:text-white`}>
@@ -341,10 +207,10 @@ function Index() {
                   key={partner.name}
                   href={partner.href}
                   target="_blank"
-                  className="group grid overflow-hidden rounded-lg border-gray-500/20 bg-white shadow-xl shadow-gray-500/20 dark:border dark:bg-gray-800 dark:shadow-none"
+                  className="bg-white/80 shadow-xl shadow-gray-500/20 rounded-lg dark:border border-gray-500/20 dark:bg-black/40 dark:shadow-none group overflow-hidden grid"
                   rel="noreferrer"
                 >
-                  <div className="z-0 col-start-1 row-start-1 flex items-center justify-center bg-white transition-all duration-200 group-hover:blur-xs">
+                  <div className="z-0 row-start-1 col-start-1 flex items-center justify-center group-hover:blur-xs transition-all duration-200">
                     {partner.homepageImg}
                   </div>
                   <div className="z-10 col-start-1 row-start-1 flex max-w-full flex-col items-start gap-4 bg-white/70 p-4 text-sm opacity-0 transition-opacity duration-200 group-hover:opacity-100 dark:bg-gray-800/70">
@@ -363,7 +229,11 @@ function Index() {
               <a
                 key={course.name}
                 href={course.href}
-                className={`flex justify-between gap-2 rounded-lg border-2 border-transparent bg-white/90 p-4 shadow-xl shadow-green-700/10 transition-all hover:border-green-500 md:p-8 dark:bg-gray-800/90 dark:shadow-green-500/30`}
+                className={`flex gap-2 justify-between border-2 border-transparent rounded-lg p-4 md:p-8
+              transition-all bg-white/90 dark:bg-black/40
+              shadow-xl shadow-green-700/10 dark:shadow-green-500/30
+              hover:border-green-500
+              `}
                 target="_blank"
                 rel="noreferrer"
               >
@@ -470,8 +340,8 @@ function Index() {
           </div>
         </div>
         <div className="h-4" />
-        <div className="relative mx-auto max-w-(--breakpoint-lg) px-4">
-          <div className="rounded-md bg-white p-8 shadow-xl shadow-gray-900/10 md:p-14 dark:bg-gray-800">
+        <div className="px-4 mx-auto max-w-(--breakpoint-lg) relative">
+          <div className="rounded-md p-8 bg-white shadow-xl shadow-gray-900/10 md:p-14 dark:bg-black/40">
             {!bytesSignupMutation.submittedAt ? (
               <form
                 onSubmit={(e) => {

@@ -1,15 +1,7 @@
 import * as React from 'react'
 
-import { CgCornerUpLeft, CgSpinner } from 'react-icons/cg'
-import {
-  FaBolt,
-  FaBook,
-  FaCheckCircle,
-  FaCogs,
-  FaDiscord,
-  FaGithub,
-  FaTshirt,
-} from 'react-icons/fa'
+import { CgSpinner } from 'react-icons/cg'
+import { FaCheckCircle } from 'react-icons/fa'
 import {
   Await,
   Link,
@@ -17,67 +9,15 @@ import {
   getRouteApi,
 } from '@tanstack/react-router'
 import { virtualProject } from '~/libraries/virtual'
+import { getLibrary } from '~/libraries'
+import { LibraryFeatureHighlights } from '~/components/LibraryFeatureHighlights'
 import { Carbon } from '~/components/Carbon'
 import { Footer } from '~/components/Footer'
-import { IoIosBody } from 'react-icons/io'
 import SponsorPack from '~/components/SponsorPack'
 import { TbHeartHandshake } from 'react-icons/tb'
-import { VscPreview } from 'react-icons/vsc'
-import { Logo } from '~/components/Logo'
-import { getSponsorsForSponsorPack } from '~/server/sponsors'
 import { Framework, getBranch } from '~/libraries'
 import { seo } from '~/utils/seo'
-
-const menu = [
-  {
-    label: (
-      <div className="flex items-center gap-2">
-        <CgCornerUpLeft className="text-lg" /> TanStack
-      </div>
-    ),
-    to: '/',
-  },
-  {
-    label: (
-      <div className="flex items-center gap-1">
-        <VscPreview className="text-lg" /> Examples
-      </div>
-    ),
-    to: './docs/framework/react/examples/dynamic',
-  },
-  {
-    label: (
-      <div className="flex items-center gap-1">
-        <FaBook className="text-lg" /> Docs
-      </div>
-    ),
-    to: './docs/introduction',
-  },
-  {
-    label: (
-      <div className="flex items-center gap-1">
-        <FaGithub className="text-lg" /> GitHub
-      </div>
-    ),
-    to: `https://github.com/${virtualProject.repo}`,
-  },
-  {
-    label: (
-      <div className="flex items-center gap-1">
-        <FaDiscord className="text-lg" /> Discord
-      </div>
-    ),
-    to: 'https://tlinz.com/discord',
-  },
-  {
-    label: (
-      <div className="flex items-center gap-1">
-        <FaTshirt className="text-lg" /> Merch
-      </div>
-    ),
-    to: `https://cottonbureau.com/people/tanstack`,
-  },
-]
+import { twMerge } from 'tailwind-merge'
 
 export const Route = createFileRoute('/_libraries/virtual/$version/')({
   component: RouteComp,
@@ -90,6 +30,8 @@ export const Route = createFileRoute('/_libraries/virtual/$version/')({
 })
 
 const librariesRouteApi = getRouteApi('/_libraries')
+
+const library = getLibrary('virtual')
 
 export default function RouteComp() {
   const { sponsorsPromise } = librariesRouteApi.useLoaderData()
@@ -105,42 +47,18 @@ export default function RouteComp() {
   const gradientText = `inline-block text-transparent bg-clip-text bg-linear-to-r ${virtualProject.colorFrom} ${virtualProject.colorTo}`
 
   return (
-    <div className="flex max-w-full flex-col gap-20 md:gap-32">
-      <div className="mx-auto flex max-w-(--breakpoint-xl) flex-wrap items-center justify-center px-4 py-2 text-sm md:self-end md:text-base">
-        {menu?.map((item, i) => {
-          const label = (
-            <div className="p-2 opacity-90 hover:opacity-100">{item.label}</div>
-          )
-
-          return (
-            <div key={i} className="hover:underline">
-              {item.to.startsWith('http') ? (
-                <a href={item.to}>{label}</a>
-              ) : (
-                <Link to={item.to} params>
-                  {label}
-                </Link>
-              )}
-            </div>
-          )
-        })}
-      </div>
-      <div className="flex flex-col items-center gap-8 px-4 text-center">
-        <div className="flex items-center gap-2 lg:gap-4">
-          <h1
-            className={`inline-block text-4xl font-black md:text-6xl lg:text-7xl`}
-            style={{
-              viewTransitionName: `library-name`,
-            }}
-          >
-            <span className={gradientText}>TanStack Virtual</span>{' '}
-            <span className="animate-bounce align-super text-[.5em] text-black dark:text-white">
-              v3
-            </span>
-          </h1>
-        </div>
-        <h2 className="max-w-md text-2xl font-bold md:text-3xl lg:max-w-2xl lg:text-5xl">
-          <span className="underline decoration-yellow-500 decoration-dashed decoration-3 underline-offset-2">
+    <div className="flex flex-col gap-20 md:gap-32 max-w-full pt-32">
+      <div className="flex flex-col items-center gap-8 text-center px-4">
+        <h1 className="font-black flex gap-3 items-center text-4xl md:text-6xl lg:text-7xl xl:text-8xl uppercase [letter-spacing:-.05em]">
+          <span>TanStack</span>
+          <span className={twMerge(gradientText)}>Virtual</span>
+        </h1>
+        <h2
+          className="font-bold text-2xl max-w-md
+            md:text-3xl
+            lg:text-5xl lg:max-w-2xl"
+        >
+          <span className="underline decoration-dashed decoration-yellow-500 underline-offset-2">
             Headless
           </span>{' '}
           UI for Virtualizing Large Element Lists
@@ -157,65 +75,8 @@ export default function RouteComp() {
           Get Started
         </Link>
       </div>
-      <div className="mx-auto flex max-w-[1200px] flex-col gap-12 p-8 text-lg md:flex-row">
-        <div className="flex flex-1 flex-col items-center gap-8">
-          <div className="overflow-hidden text-center">
-            <IoIosBody className="-mt-5 mb-5 origin-top scale-125 text-6xl text-purple-400" />
-          </div>
-          <div className="flex flex-col gap-4">
-            <h3 className="text-center text-xl font-black uppercase">
-              Designed for zero design
-            </h3>
-            <p className="text-sm leading-6 text-gray-800 dark:text-gray-200">
-              Headless Virtualization means you're always in control of your{' '}
-              <span className="font-semibold text-violet-600 dark:text-violet-400">
-                markup, styles and components
-              </span>
-              . Go design and implement the most beautiful UI you can dream up
-              and let us take care of the hard parts.
-            </p>
-          </div>
-        </div>
-        <div className="flex flex-1 flex-col items-center gap-8">
-          <div className="text-center">
-            <FaBolt className="text-6xl text-purple-500" />
-          </div>
-          <div className="flex flex-col gap-4">
-            <h3 className="text-center text-xl font-black uppercase">
-              Big Power, Small Package
-            </h3>
-            <p className="text-sm leading-6 text-gray-800 dark:text-gray-200">
-              Don't be fooled by the small bundle size. TanStack Virtual uses
-              every byte to deliver powerful performance. After all,{' '}
-              <span className="font-semibold text-violet-700 dark:text-violet-400">
-                {' '}
-                60FPS is table stakes
-              </span>{' '}
-              these days and we refuse to sacrifice anything for that 🧈-y
-              smooth UX.
-            </p>
-          </div>
-        </div>
-        <div className="flex flex-1 flex-col items-center gap-8">
-          <div className="text-center">
-            <FaCogs className="text-6xl text-purple-600" />
-          </div>
-          <div className="flex flex-col gap-4">
-            <h3 className="text-center text-xl font-black uppercase">
-              Maximum Composability
-            </h3>
-            <p className="text-sm leading-6 text-gray-800 dark:text-gray-200">
-              With a single function/hook, you'll get limitless virtualization
-              for{' '}
-              <span className="font-semibold text-violet-700 dark:text-violet-400">
-                vertical, horizontal, and grid-style{' '}
-              </span>
-              layouts. The API is tiny (literally 1 function), but its
-              composability is not.
-            </p>
-          </div>
-        </div>
-      </div>
+
+      <LibraryFeatureHighlights featureHighlights={library.featureHighlights} />
 
       <div className="mx-auto px-4 sm:px-6 lg:px-8">
         <div className="pb-16 sm:text-center">
@@ -299,8 +160,13 @@ export default function RouteComp() {
           Partners
         </h3>
         <div className="h-8" />
-        <div className="flex flex-1 flex-col items-center divide-y-2 divide-gray-500/10 overflow-hidden rounded-lg bg-white text-center text-sm shadow-xl shadow-gray-500/20 dark:bg-gray-800 dark:shadow-none">
-          <span className="flex items-center gap-2 p-12 text-4xl font-black text-rose-500 uppercase">
+        <div
+          className="flex-1 flex flex-col items-center text-sm text-center
+                      bg-white/80 shadow-xl shadow-gray-500/20 rounded-lg
+                        divide-y-2 divide-gray-500/10 overflow-hidden
+                        dark:bg-black/40 dark:shadow-none"
+        >
+          <span className="flex items-center gap-2 p-12 text-4xl text-rose-500 font-black uppercase">
             Virtual <TbHeartHandshake /> You?
           </span>
           <div className="flex flex-col gap-4 p-4">

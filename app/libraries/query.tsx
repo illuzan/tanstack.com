@@ -1,5 +1,13 @@
 import { handleRedirects } from '~/utils/handleRedirects.server'
 import { Library } from '.'
+import { FaGithub, FaBolt, FaCogs } from 'react-icons/fa'
+import { VscPreview, VscWand } from 'react-icons/vsc'
+import { BiBookAlt } from 'react-icons/bi'
+import { twMerge } from 'tailwind-merge'
+
+const repo = 'tanstack/query'
+
+const textStyles = 'text-red-500 dark:text-red-400'
 
 export const queryProject = {
   id: 'query',
@@ -13,7 +21,7 @@ export const queryProject = {
   badge: undefined,
   bgStyle: 'bg-red-500',
   textStyle: 'text-red-500',
-  repo: 'tanstack/query',
+  repo,
   latestBranch: 'main',
   latestVersion: 'v5',
   availableVersions: ['v5', 'v4', 'v3'],
@@ -40,6 +48,97 @@ export const queryProject = {
       'from=reactQueryV3',
     )
   },
+  menu: [
+    {
+      icon: <VscPreview />,
+      label: 'Examples',
+      to: '/query/latest/docs/framework/react/examples/basic',
+    },
+    {
+      icon: <BiBookAlt />,
+      label: 'Docs',
+      to: '/query/latest/docs/framework/react/overview',
+    },
+    {
+      icon: <FaGithub />,
+      label: 'GitHub',
+      to: `https://github.com/${repo}`,
+    },
+  ],
+  featureHighlights: [
+    {
+      title: 'Declarative & Automatic',
+      icon: (
+        <VscWand
+          className={twMerge('motion-safe:animate-pulse', textStyles)}
+          style={{
+            animationDuration: '5s',
+            animationTimingFunction: 'ease-in-out',
+          }}
+        />
+      ),
+      description: (
+        <div>
+          Writing your data fetching logic by hand is over. Tell TanStack Query
+          where to get your data and how fresh you need it to be and the rest is
+          automatic. It handles{' '}
+          <span className={twMerge('font-semibold', textStyles)}>
+            caching, background updates and stale data out of the box with
+            zero-configuration
+          </span>
+          .
+        </div>
+      ),
+    },
+    {
+      title: 'Simple & Familiar',
+      icon: (
+        <FaBolt
+          className={twMerge('motion-safe:animate-bounce', textStyles)}
+          style={{
+            animationDuration: '2s',
+            animationTimingFunction: 'ease-in-out',
+          }}
+        />
+      ),
+      description: (
+        <div>
+          If you know how to work with promises or async/await, then you already
+          know how to use TanStack Query. There's{' '}
+          <span className={twMerge('font-semibold', textStyles)}>
+            no global state to manage, reducers, normalization systems or heavy
+            configurations to understand
+          </span>
+          . Simply pass a function that resolves your data (or throws an error)
+          and the rest is history.
+        </div>
+      ),
+    },
+    {
+      title: 'Extensible',
+      icon: (
+        <FaCogs
+          className={twMerge('motion-safe:animate-spin', textStyles)}
+          style={{
+            animationDuration: '10s',
+            animationTimingFunction: 'ease-in-out',
+          }}
+        />
+      ),
+      description: (
+        <div>
+          TanStack Query is configurable down to each observer instance of a
+          query with knobs and options to fit every use-case. It comes wired up
+          with{' '}
+          <span className={twMerge('font-semibold', textStyles)}>
+            dedicated devtools, infinite-loading APIs, and first class mutation
+            tools that make updating your data a breeze
+          </span>
+          . Don't worry though, everything is pre-configured for success!
+        </div>
+      ),
+    },
+  ],
 } satisfies Library
 
 // Redirect old query v3 docs

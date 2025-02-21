@@ -16,18 +16,28 @@ const footerLinks = [
     label: 'Nozzle.io - Keyword Rank Tracker',
     to: 'https://nozzle.io',
   },
+  {
+    label: 'Privacy Policy',
+    to: '/privacy',
+  },
+  {
+    label: 'Terms of Service',
+    to: '/terms',
+  },
 ]
 
 export function Footer() {
   return (
     <div
-      className={`mx-auto flex max-w-(--breakpoint-lg) flex-col items-start justify-center gap-4 rounded-t-lg bg-white p-8 text-sm shadow-xl shadow-black/10 dark:bg-gray-800`}
+      className={`flex flex-col items-start justify-center gap-4 p-8
+      max-w-(--breakpoint-lg) mx-auto text-sm
+      bg-white dark:bg-black/40 shadow-xl shadow-black/10 rounded-t-lg`}
     >
       <div className={`grid gap-1 sm:grid-cols-2 md:grid-cols-3`}>
         {footerLinks.map((item) => (
           <div key={item.to}>
             {item.to.startsWith('http') ? (
-              <a href={item.to} target="_blank">
+              <a href={item.to} target="_blank" rel="noreferrer">
                 {item.label}
               </a>
             ) : (

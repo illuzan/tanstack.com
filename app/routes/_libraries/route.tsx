@@ -3,7 +3,7 @@ import {
   Link,
   Outlet,
   createFileRoute,
-  useParams,
+  useLocation,
 } from '@tanstack/react-router'
 import { CgClose, CgMenuLeft, CgMusicSpeaker } from 'react-icons/cg'
 import { MdLibraryBooks, MdSupport } from 'react-icons/md'
@@ -13,12 +13,13 @@ import { sortBy } from '~/utils/utils'
 import logoColor100w from '~/images/logo-color-100w.png'
 import { FaDiscord, FaGithub, FaInstagram, FaTshirt } from 'react-icons/fa'
 import { getSponsorsForSponsorPack } from '~/server/sponsors'
-import { getLibrary, libraries } from '~/libraries'
+import { libraries } from '~/libraries'
 import { Scarf } from '~/components/Scarf'
 import { searchBoxParams, searchButtonParams } from '~/components/Orama'
 import { ClientOnlySearchButton } from '~/components/ClientOnlySearchButton'
 import { ThemeToggle, useThemeStore } from '~/components/ThemeToggle'
 import { TbBrandBluesky, TbBrandTwitter } from 'react-icons/tb'
+import { BiSolidCheckShield } from 'react-icons/bi'
 
 export const Route = createFileRoute('/_libraries')({
   staleTime: Infinity,
@@ -31,18 +32,18 @@ export const Route = createFileRoute('/_libraries')({
 })
 
 function LibrariesLayout() {
-  const { libraryId } = useParams({
-    strict: false,
+  const activeLibrary = useLocation({
+    select: (location) => {
+      return libraries.find((library) => {
+        return location.pathname.startsWith(library.to)
+      })
+    },
   })
-  const library = libraryId ? getLibrary(libraryId) : undefined
+
   const detailsRef = React.useRef<HTMLElement>(null!)
-
   const linkClasses = `flex items-center justify-between group px-2 py-1 rounded-lg hover:bg-gray-500/10 font-black`
-
   const [mounted, setMounted] = React.useState(false)
-
   const { mode: themeMode } = useThemeStore()
-
   const oramaThemeMode = themeMode === 'auto' ? 'system' : themeMode
 
   React.useEffect(() => {
@@ -67,66 +68,89 @@ function LibrariesLayout() {
                   </span>
                 </a>
               ) : (
-                <Link
-                  to={library.to}
-                  onClick={() => {
-                    detailsRef.current.removeAttribute('open')
-                  }}
-                >
-                  {(props) => {
-                    return (
-                      <div
-                        className={twMerge(
-                          linkClasses,
-                          props.isActive
-                            ? 'bg-gray-500/10 dark:bg-gray-500/30'
-                            : '',
-                        )}
-                      >
-                        <span
-                          style={{
-                            viewTransitionName: `library-name-${library.id}`,
-                          }}
+                <div>
+                  <Link
+                    to={library.to}
+                    onClick={() => {
+                      detailsRef.current.removeAttribute('open')
+                    }}
+                  >
+                    {(props) => {
+                      return (
+                        <div
+                          className={twMerge(
+                            linkClasses,
+                            props.isActive
+                              ? 'bg-gray-500/10 dark:bg-gray-500/30'
+                              : ''
+                          )}
                         >
                           <span
-                            className={twMerge(
-                              'font-light dark:font-bold dark:opacity-40',
-                              props.isActive
-                                ? `font-bold dark:opacity-100`
-                                : '',
-                            )}
+                            style={{
+                              viewTransitionName: `library-name-${library.id}`,
+                            }}
                           >
-                            {prefix}
-                          </span>{' '}
-                          <span
-                            className={twMerge(
-                              library.textStyle,
-                              // isPending &&
-                              //   `[view-transition-name:library-name]`
-                            )}
-                          >
-                            {name}
+                            <span
+                              className={twMerge(
+                                'font-light dark:font-bold dark:opacity-40',
+                                props.isActive
+                                  ? `font-bold dark:opacity-100`
+                                  : ''
+                              )}
+                            >
+                              {prefix}
+                            </span>{' '}
+                            <span
+                              className={twMerge(
+                                library.textStyle
+                                // isPending &&
+                                //   `[view-transition-name:library-name]`
+                              )}
+                            >
+                              {name}
+                            </span>
                           </span>
-                        </span>
-                        {library.badge ? (
-                          <span
-                            className={twMerge(
-                              `animate-pulse rounded-full bg-gray-500/10 px-2 py-px text-[.7rem] leading-5 font-black text-white uppercase transition-opacity group-hover:opacity-100 dark:bg-gray-500/20`,
-                              // library.badge === 'new'
-                              //   ? 'text-green-500'
-                              //   : library.badge === 'soon'
-                              //   ? 'text-cyan-500'
-                              //   : '',
-                              library.textStyle,
-                            )}
-                          >
-                            {library.badge}
-                          </span>
-                        ) : null}
-                      </div>
-                    )
-                  }}
-                </Link>
+                          {library.badge ? (
+                            <span
+                              className={twMerge(
+                                `px-2 py-px uppercase font-black bg-gray-500/10 dark:bg-gray-500/20 rounded-full text-[.7rem] group-hover:opacity-100 transition-opacity text-white animate-pulse`,
+                                // library.badge === 'new'
+                                //   ? 'text-green-500'
+                                //   : library.badge === 'soon'
+                                //   ? 'text-cyan-500'
+                                //   : '',
+                                library.textStyle
+                              )}
+                            >
+                              {library.badge}
+                            </span>
+                          ) : null}
+                        </div>
+                      )
+                    }}
+                  </Link>
+                  <div
+                    className={twMerge(
+                      library.to === activeLibrary?.to ? 'block' : 'hidden'
+                    )}
+                  >
+                    {library.menu?.map((item, i) => {
+                      return (
+                        <Link
+                          to={item.to}
+                          key={i}
+                          className={twMerge(
+                            'flex gap-2 items-center px-2 ml-2 my-1 py-0.5',
+                            'rounded-lg hover:bg-gray-500/10 dark:hover:bg-gray-500/30'
+                          )}
+                        >
+                          {item.icon}
+                          {item.label}
+                        </Link>
+                      )
+                    })}
+                  </div>
+                </div>
               )}
             </div>
           )
@@ -167,6 +191,11 @@ function LibrariesLayout() {
           icon: <FaGithub />,
           to: 'https://github.com/tanstack',
         },
+        {
+          label: 'Ethos',
+          icon: <BiSolidCheckShield />,
+          to: '/ethos',
+        },
       ].map((item, i) => {
         return (
           <Link
@@ -200,7 +229,7 @@ function LibrariesLayout() {
           alt=""
           className="w-[30px] overflow-hidden rounded-full border-2 border-black dark:border-none"
         />
-        <div className="font-black">TanStack</div>
+        <div className="font-black text-xl uppercase">TanStack</div>
       </Link>
       <div className="flex items-center gap-1">
         <a
@@ -229,7 +258,7 @@ function LibrariesLayout() {
   )
 
   const smallMenu = (
-    <div className="sticky top-0 z-20 bg-white lg:hidden dark:bg-gray-900">
+    <div className="lg:hidden bg-white/50 dark:bg-black/60 sticky top-0 z-20 backdrop-blur-[20px]">
       <details
         ref={detailsRef as any}
         id="docs-details"
@@ -242,7 +271,10 @@ function LibrariesLayout() {
             {logo}
           </div>
         </summary>
-        <div className="flex h-[0vh] flex-col gap-4 overflow-y-auto border-t border-gray-500/20 bg-gray-100 text-lg whitespace-nowrap dark:bg-gray-900">
+        <div
+          className="flex flex-col gap-4 whitespace-nowrap h-[0vh] overflow-y-auto
+          border-t border-gray-500/20 text-lg bg-white/80 dark:bg-black/20"
+        >
           <div className="p-2 pb-0">
             <ClientOnlySearchButton
               {...searchButtonParams}
@@ -259,8 +291,8 @@ function LibrariesLayout() {
 
   const largeMenu = (
     <>
-      <div className="sticky top-0 z-20 hidden h-screen min-w-[250px] flex-col border-gray-500/20 bg-white shadow-xl lg:flex dark:border-r dark:bg-gray-900">
-        <div className="flex items-center gap-2 border-b border-gray-500/10 p-4 text-2xl dark:border-gray-500/20">
+      <div className="min-w-[250px] hidden lg:flex flex-col h-screen sticky top-0 z-20 bg-white/50 dark:bg-black/30 shadow-xl dark:border-r border-gray-500/20">
+        <div className="p-4 flex gap-2 items-center text-2xl border-b border-gray-500/10 dark:border-gray-500/20">
           {logo}
         </div>
         <div className="p-2">
@@ -279,15 +311,13 @@ function LibrariesLayout() {
       </div>
     </>
   )
-  console.log('library', library)
   return (
     <div
       className={`flex min-h-screen w-full min-w-0 flex-col transition-all duration-300 lg:flex-row`}
     >
       {smallMenu}
       {largeMenu}
-      <div className="relative flex min-h-0 flex-1 justify-center overflow-x-hidden">
-        {library?.scarfId ? <Scarf id={library.scarfId} /> : null}
+      <div className="flex flex-1 min-h-0 relative justify-center overflow-x-hidden">
         <Outlet />
       </div>
       {mounted ? (
@@ -295,6 +325,7 @@ function LibrariesLayout() {
           <OramaSearchBox {...searchBoxParams} colorScheme={oramaThemeMode} />
         </div>
       ) : null}
+      {activeLibrary?.scarfId ? <Scarf id={activeLibrary.scarfId} /> : null}
     </div>
   )
 }

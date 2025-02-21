@@ -1,79 +1,18 @@
 import * as React from 'react'
-import { CgCornerUpLeft, CgSpinner } from 'react-icons/cg'
-import {
-  FaBolt,
-  FaBook,
-  FaCheckCircle,
-  FaCogs,
-  FaDiscord,
-  FaGithub,
-  FaTshirt,
-} from 'react-icons/fa'
+import { CgSpinner } from 'react-icons/cg'
+import { FaCheckCircle } from 'react-icons/fa'
 import { Link, createFileRoute, getRouteApi } from '@tanstack/react-router'
 import { tableProject } from '~/libraries/table'
 import { Carbon } from '~/components/Carbon'
 import { Footer } from '~/components/Footer'
-import { IoIosBody } from 'react-icons/io'
 import SponsorPack from '~/components/SponsorPack'
-import { VscPreview } from 'react-icons/vsc'
-import agGridImage from '~/images/ag-grid.png'
 import { Await } from '@tanstack/react-router'
-import { Framework, getBranch } from '~/libraries'
+import { Framework, getBranch, getLibrary } from '~/libraries'
 import { seo } from '~/utils/seo'
 import { getInitialSandboxFileName } from '~/utils/sandbox'
 import { partners } from '~/utils/partners'
-import { TbHeartHandshake } from 'react-icons/tb'
-
-const menu = [
-  {
-    label: (
-      <div className="flex items-center gap-2">
-        <CgCornerUpLeft className="text-lg" /> TanStack
-      </div>
-    ),
-    to: '/',
-  },
-  {
-    label: (
-      <div className="flex items-center gap-1">
-        <VscPreview className="text-lg" /> Examples
-      </div>
-    ),
-    to: './docs/framework/react/examples/basic',
-  },
-  {
-    label: (
-      <div className="flex items-center gap-1">
-        <FaBook className="text-lg" /> Docs
-      </div>
-    ),
-    to: './docs/introduction',
-  },
-  {
-    label: (
-      <div className="flex items-center gap-1">
-        <FaGithub className="text-lg" /> GitHub
-      </div>
-    ),
-    to: `https://github.com/${tableProject.repo}`,
-  },
-  {
-    label: (
-      <div className="flex items-center gap-1">
-        <FaDiscord className="text-lg" /> Discord
-      </div>
-    ),
-    to: 'https://tlinz.com/discord',
-  },
-  {
-    label: (
-      <div className="flex items-center gap-1">
-        <FaTshirt className="text-lg" /> Merch
-      </div>
-    ),
-    to: `https://cottonbureau.com/people/tanstack`,
-  },
-]
+import { twMerge } from 'tailwind-merge'
+import { LibraryFeatureHighlights } from '~/components/LibraryFeatureHighlights'
 
 export const Route = createFileRoute('/_libraries/table/$version/')({
   component: TableVersionIndex,
@@ -86,6 +25,8 @@ export const Route = createFileRoute('/_libraries/table/$version/')({
 })
 
 const librariesRouteApi = getRouteApi('/_libraries')
+
+const library = getLibrary('table')
 
 export default function TableVersionIndex() {
   const { sponsorsPromise } = librariesRouteApi.useLoaderData()
@@ -103,42 +44,18 @@ export default function TableVersionIndex() {
   const gradientText = `inline-block text-transparent bg-clip-text bg-linear-to-r ${tableProject.colorFrom} ${tableProject.colorTo}`
 
   return (
-    <div className="flex max-w-full flex-col gap-20 md:gap-32">
-      <div className="mx-auto flex max-w-(--breakpoint-xl) flex-wrap items-center justify-center px-4 py-2 text-sm md:self-end md:text-base">
-        {menu?.map((item, i) => {
-          const label = (
-            <div className="p-2 opacity-90 hover:opacity-100">{item.label}</div>
-          )
-
-          return (
-            <div key={i} className="hover:underline">
-              {item.to.startsWith('http') ? (
-                <a href={item.to}>{label}</a>
-              ) : (
-                <Link to={item.to} params>
-                  {label}
-                </Link>
-              )}
-            </div>
-          )
-        })}
-      </div>
-      <div className="flex flex-col items-center gap-8 px-4 text-center">
-        <div className="flex items-center gap-2 lg:gap-4">
-          <h1
-            className={`inline-block text-4xl font-black md:text-6xl lg:text-7xl`}
-            style={{
-              viewTransitionName: `library-name`,
-            }}
-          >
-            <span className={`${gradientText}`}>TanStack Table</span>{' '}
-            <span className="animate-bounce align-super text-[.5em] text-black dark:text-white">
-              v8
-            </span>
-          </h1>
-        </div>
-        <h2 className="max-w-md text-2xl font-bold md:text-3xl lg:max-w-2xl lg:text-5xl">
-          <span className="underline decoration-yellow-500 decoration-dashed decoration-3 underline-offset-2">
+    <div className="flex flex-col gap-20 md:gap-32 max-w-full pt-32">
+      <div className="flex flex-col items-center gap-8 text-center px-4">
+        <h1 className="font-black flex gap-3 items-center text-4xl md:text-6xl lg:text-7xl xl:text-8xl uppercase [letter-spacing:-.05em]">
+          <span>TanStack</span>
+          <span className={twMerge(gradientText)}>Table</span>
+        </h1>
+        <h2
+          className="font-bold text-2xl max-w-md
+            md:text-3xl
+            lg:text-5xl lg:max-w-2xl"
+        >
+          <span className="underline decoration-dashed decoration-yellow-500 underline-offset-2">
             Headless
           </span>{' '}
           UI for building powerful tables & datagrids
@@ -150,71 +67,13 @@ export default function TableVersionIndex() {
         </p>
         <Link
           to="./docs/introduction"
-          className={`rounded-sm bg-teal-500 px-4 py-2 font-extrabold text-white uppercase`}
+          className={`py-2 px-4 bg-blue-500 rounded-sm text-white uppercase font-extrabold`}
         >
           Get Started
         </Link>
       </div>
-      <div className="mx-auto flex max-w-[1200px] flex-col gap-12 p-8 text-lg md:flex-row">
-        <div className="flex flex-1 flex-col items-center gap-8">
-          <div className="overflow-hidden text-center">
-            <IoIosBody className="-mt-5 mb-5 origin-top scale-125 text-6xl text-teal-500" />
-          </div>
-          <div className="flex flex-col gap-4">
-            <h3 className="text-center text-xl font-black uppercase">
-              Designed for zero design
-            </h3>
-            <p className="text-sm leading-6 text-gray-800 dark:text-gray-200">
-              What good is a powerful table if that super hip designer you just
-              hired can't work their UI magic on it?{' '}
-              <span className="font-semibold text-teal-700 dark:text-teal-400">
-                TanStack Table is headless by design
-              </span>
-              , which means 100% control down to the very smallest HTML tag,
-              component, class and style. Pixel Perfection? Go for it!
-            </p>
-          </div>
-        </div>
-        <div className="flex flex-1 flex-col items-center gap-8">
-          <div className="text-center">
-            <FaBolt className="text-6xl text-blue-600" />
-          </div>
-          <div className="flex flex-col gap-4">
-            <h3 className="text-center text-xl font-black uppercase">
-              Big Power, Small Package
-            </h3>
-            <p className="text-sm leading-6 text-gray-800 dark:text-gray-200">
-              Don't be fooled by the small bundle size. TanStack Table is a
-              workhorse. It's built to materialize, filter, sort, group,
-              aggregate, paginate and display massive data sets using a very
-              small API surface. Wire up your new or existing tables and{' '}
-              <span className="font-semibold text-blue-700 dark:text-blue-400">
-                watch your users become instantly more productive
-              </span>
-              .
-            </p>
-          </div>
-        </div>
-        <div className="flex flex-1 flex-col items-center gap-8">
-          <div className="text-center">
-            <FaCogs className="text-6xl text-indigo-500" />
-          </div>
-          <div className="flex flex-col gap-4">
-            <h3 className="text-center text-xl font-black uppercase">
-              Extensible
-            </h3>
-            <p className="text-sm leading-6 text-gray-800 dark:text-gray-200">
-              TanStack table ships with excellent defaults to get you off the
-              ground as fast as possible, but nothing is stopping you from{' '}
-              <span className="font-semibold text-indigo-700 dark:text-indigo-400">
-                customizing and overriding literally everything to your liking
-              </span>
-              . Feeling tenacious enough to build your own Sheets/Excel/AirTable
-              clone? Be our guest 😉
-            </p>
-          </div>
-        </div>
-      </div>
+
+      <LibraryFeatureHighlights featureHighlights={library.featureHighlights} />
 
       <div className="mx-auto px-4 sm:px-6 lg:px-8">
         <div className="pb-16 sm:text-center">
@@ -319,10 +178,10 @@ export default function TableVersionIndex() {
                   key={partner.name}
                   href={partner.href}
                   target="_blank"
-                  className="group grid overflow-hidden rounded-lg border-gray-500/20 bg-white shadow-xl shadow-gray-500/20 dark:border dark:bg-gray-800 dark:shadow-none"
+                  className="shadow-xl shadow-gray-500/20 rounded-lg dark:border border-gray-500/20 bg-white dark:bg-black/40 dark:shadow-none group overflow-hidden grid"
                   rel="noreferrer"
                 >
-                  <div className="z-0 col-start-1 row-start-1 flex items-center justify-center bg-white transition-all duration-200 group-hover:blur-xs">
+                  <div className="z-0 row-start-1 col-start-1 flex items-center justify-center group-hover:blur-xs transition-all duration-200">
                     {partner.homepageImg}
                   </div>
                   <div className="z-10 col-start-1 row-start-1 flex max-w-full flex-col items-start gap-4 bg-white/70 p-4 text-sm opacity-0 transition-opacity duration-200 group-hover:opacity-100 dark:bg-gray-800/70">
@@ -439,8 +298,13 @@ export default function TableVersionIndex() {
         </div>
         <div>
           <Link
-            to="./docs/introduction"
-            className={`inline-block rounded-sm bg-teal-500 px-4 py-2 font-extrabold text-white uppercase`}
+            to="/$libraryId/$version/docs/$"
+            params={{
+              libraryId: 'table',
+              version,
+              _splat: 'introduction',
+            }}
+            className={`inline-block py-2 px-4 bg-teal-500 rounded-sm text-white uppercase font-extrabold`}
           >
             Get Started!
           </Link>

@@ -18,9 +18,9 @@ import { TanStackRouterDevtools } from '@tanstack/router-devtools'
 import { NotFound } from '~/components/NotFound'
 import { CgSpinner } from 'react-icons/cg'
 import { DefaultCatchBoundary } from '~/components/DefaultCatchBoundary'
-import background from '~/images/background.jpg'
 import { twMerge } from 'tailwind-merge'
 import { getThemeCookie, useThemeStore } from '~/components/ThemeToggle'
+import { useMounted } from '~/hooks/useMounted'
 
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient
@@ -42,6 +42,10 @@ export const Route = createRootRouteWithContext<{
         keywords:
           'tanstack,react,reactjs,react query,react table,open source,open source software,oss,software',
       }),
+      {
+        name: 'google-adsense-account',
+        content: 'ca-pub-9403278435468733',
+      },
     ],
     links: [
       { rel: 'stylesheet', href: appCss },
@@ -68,6 +72,12 @@ export const Route = createRootRouteWithContext<{
       },
       { rel: 'manifest', href: '/site.webmanifest', color: '#fffff' },
       { rel: 'icon', href: '/favicon.ico' },
+      { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+      { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossOrigin: '' },
+      {
+        rel: 'stylesheet',
+        href: 'https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap',
+      },
     ],
     scripts: [
       {
@@ -142,7 +152,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
     select: (s) => s.status === 'pending',
   })
 
-  const [showLoading, setShowLoading] = React.useState(false)
+  const [canShowLoading, setShowLoading] = React.useState(false)
 
   React.useEffect(() => {
     const timeout = setTimeout(() => {
@@ -155,21 +165,165 @@ function RootDocument({ children }: { children: React.ReactNode }) {
   }, [])
 
   const isRouterPage = useRouterState({
-    select: (s) => s.resolvedLocation.pathname.startsWith('/router'),
+    select: (s) => s.resolvedLocation?.pathname.startsWith('/router'),
   })
 
-  const showDevtools = showLoading && isRouterPage
-
-  const pathLength = useRouterState({
-    select: (s) =>
-      Math.max(
-        0,
-        s.location.pathname.replace('/docs/framework', '').split('/').length -
-          2,
-      ),
-  })
+  const showDevtools = canShowLoading && isRouterPage
 
   const themeClass = themeCookie === 'dark' ? 'dark' : ''
+
+  const canvasRef = React.useRef<HTMLCanvasElement>(null)
+
+  React.useEffect(() => {
+    const canvas = canvasRef.current
+
+    const morphDuration = 4000
+    const waitDuration = 1000 * 60 * 2
+
+    function easeInOutCubic(t: number, b: number, c: number, d: number) {
+      if ((t /= d / 2) < 1) return (c / 2) * t * t * t + b
+      return (c / 2) * ((t -= 2) * t * t + 2) + b
+    }
+
+    if (canvas) {
+      const ctx = canvas.getContext('2d')!
+
+      let rafId: ReturnType<typeof requestAnimationFrame> | null = null
+      let timeout: ReturnType<typeof setTimeout> | null = null
+      let startTime = performance.now()
+
+      function createBlobs() {
+        return shuffle([
+          {
+            color: { h: 10, s: 100, l: 50 },
+          },
+          {
+            color: { h: 40, s: 100, l: 50 },
+          },
+          {
+            color: { h: 150, s: 100, l: 50 },
+          },
+          {
+            color: { h: 200, s: 100, l: 50 },
+          },
+        ]).map((blob) => ({
+          ...blob,
+          x: Math.random() * canvas!.width,
+          y: Math.random() * canvas!.height,
+          r: Math.random() * 500 + 700,
+          colorH: blob.color.h,
+          colorS: blob.color.s,
+          colorL: blob.color.l,
+        }))
+      }
+
+      function shuffle<T>(array: T[]) {
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1))
+          ;[array[i], array[j]] = [array[j], array[i]]
+        }
+        return array
+      }
+
+      let currentBlobs = createBlobs()
+      let interBlobs = currentBlobs
+      let targetBlobs: ReturnType<typeof createBlobs> = []
+
+      function start() {
+        if (timeout) {
+          clearTimeout(timeout)
+        }
+        if (rafId) {
+          cancelAnimationFrame(rafId)
+        }
+        const parent = canvas!.parentElement
+        canvas!.width = parent!.clientWidth
+        canvas!.height = parent!.clientHeight
+
+        currentBlobs = interBlobs
+        targetBlobs = createBlobs()
+        startTime = performance.now()
+        animate()
+      }
+
+      function animate() {
+        ctx.clearRect(0, 0, canvas!.width, canvas!.height)
+
+        const time = performance.now() - startTime
+        const progress = easeInOutCubic(time, 0, 1, morphDuration)
+
+        // Draw the blobs
+        currentBlobs.forEach((blob, i) => {
+          const targetBlob = targetBlobs[i]
+          interBlobs[i].x = blob.x + (targetBlob.x - blob.x) * progress
+          interBlobs[i].y = blob.y + (targetBlob.y - blob.y) * progress
+
+          const gradient = ctx.createRadialGradient(
+            interBlobs[i].x,
+            interBlobs[i].y,
+            0,
+            interBlobs[i].x,
+            interBlobs[i].y,
+            interBlobs[i].r
+          )
+
+          interBlobs[i].colorH =
+            blob.colorH + (targetBlob.colorH - blob.colorH) * progress
+          interBlobs[i].colorS =
+            blob.colorS + (targetBlob.colorS - blob.colorS) * progress
+          interBlobs[i].colorL =
+            blob.colorL + (targetBlob.colorL - blob.colorL) * progress
+
+          gradient.addColorStop(
+            0,
+            `hsla(${interBlobs[i].colorH}, ${interBlobs[i].colorS}%, ${interBlobs[i].colorL}%, 1)`
+          )
+          gradient.addColorStop(
+            1,
+            `hsla(${interBlobs[i].colorH}, ${interBlobs[i].colorS}%, ${interBlobs[i].colorL}%, 0)`
+          )
+
+          ctx.fillStyle = gradient
+          ctx.beginPath()
+          ctx.arc(
+            interBlobs[i].x,
+            interBlobs[i].y,
+            interBlobs[i].r,
+            0,
+            Math.PI * 2
+          )
+          ctx.fill()
+        })
+
+        if (progress < 1) {
+          rafId = requestAnimationFrame(animate)
+        } else {
+          timeout = setTimeout(() => {
+            start()
+          }, waitDuration)
+        }
+      }
+
+      start()
+      window.addEventListener('resize', start)
+
+      return () => {
+        if (rafId) {
+          cancelAnimationFrame(rafId)
+        }
+        if (timeout) {
+          clearTimeout(timeout)
+        }
+        window.removeEventListener('resize', start)
+      }
+    }
+  }, [])
+
+  const isHomePage = useRouterState({
+    select: (s) => s.location.pathname === '/',
+  })
+
+  const mounted = useMounted()
 
   return (
     <html lang="en" className={themeClass}>
@@ -186,32 +340,33 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         ) : null}
       </head>
       <body>
-        <div className="pointer-events-none fixed inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-10 blur-xs" />
         <div
           className={twMerge(
-            'pointer-events-none fixed inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-10 transition-all duration-[2.5s] ease-in-out dark:opacity-20',
+            'fixed inset-0 z-0 opacity-20 pointer-events-none',
+            'transition-opacity duration-[2s] ease-linear',
             `[&+*]:relative`,
+            mounted
+              ? isHomePage
+                ? 'opacity-10 dark:opacity-20'
+                : 'opacity-10 dark:opacity-20'
+              : 'opacity-0'
           )}
-          style={{
-            backgroundImage: `url(${background})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'bottom',
-            backgroundRepeat: 'no-repeat',
-            filter: `blur-xs(${pathLength * 2}px)`,
-            transform: `scale(${1 + pathLength * 0.05})`,
-          }}
-        />
+        >
+          <canvas ref={canvasRef} />
+        </div>
         <React.Suspense fallback={null}>{children}</React.Suspense>
         {showDevtools ? (
           <TanStackRouterDevtools position="bottom-right" />
         ) : null}
-        {showLoading ? (
+        {canShowLoading ? (
           <div
-            className={`pointer-events-none fixed top-0 left-0 z-30 h-[300px] w-full transition-all duration-300 dark:h-[200px] dark:rounded-[100%] dark:!bg-white/10 ${
-              isLoading
-                ? '-translate-y-1/2 opacity-100 delay-0'
-                : '-translate-y-full opacity-0 delay-300'
-            }`}
+            className={`fixed top-0 left-0 h-[300px] w-full
+        transition-all duration-300 pointer-events-none
+        z-30 dark:h-[200px] dark:!bg-white/10 dark:rounded-[100%] ${
+          isLoading
+            ? 'delay-500 opacity-100 -translate-y-1/2'
+            : 'delay-0 opacity-0 -translate-y-full'
+        }`}
             style={{
               background: `radial-gradient(closest-side, rgba(0,10,40,0.2) 0%, rgba(0,0,0,0) 100%)`,
             }}

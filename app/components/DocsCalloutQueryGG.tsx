@@ -9,6 +9,7 @@ export function DocsCalloutQueryGG() {
       target="_blank"
       className="cursor-pointer"
       href="https://query.gg?s=tanstack"
+      rel="noreferrer"
     >
       <div className="space-y-3">
         <h6 className="text-[.7rem] font-black uppercase opacity-50">

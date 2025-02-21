@@ -63,7 +63,22 @@ export type Library = {
   handleRedirects?: (href: string) => void
   hideCodesandboxUrl?: true
   hideStackblitzUrl?: true
-  showVercelUrl?: true
+  showVercelUrl?: boolean
+  showNetlifyUrl?: boolean
+  menu: LibraryMenuItem[]
+  featureHighlights?: {
+    title: string
+    icon: React.ReactNode
+    description: React.ReactNode
+  }[]
+  docsRoot?: string
+  embedEditor?: 'codesandbox' | 'stackblitz'
+}
+
+export type LibraryMenuItem = {
+  icon: React.ReactNode
+  label: React.ReactNode
+  to: string
 }
 
 export const libraries = [
@@ -76,7 +91,7 @@ export const libraries = [
   rangerProject,
   storeProject,
   configProject,
-]
+] satisfies Library[]
 
 export function getLibrary(id: string) {
   const library = libraries.find((d) => d.id === id)
@@ -85,7 +100,7 @@ export function getLibrary(id: string) {
     throw new Error(`Library with id "${id}" not found`)
   }
 
-  return library
+  return library as Library
 }
 
 export function getFrameworkOptions(frameworkStrs: Framework[]) {

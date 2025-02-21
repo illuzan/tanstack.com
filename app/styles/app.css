@@ -3,6 +3,8 @@
 @variant dark (&:where(.dark, .dark *));
 
 @theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.03);
   --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.03);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05),
@@ -17,6 +19,17 @@
   --shadow-none: none;
 
   --color-discord: #536bbd;
+  --color-twine-50: #f8f5ee;
+  --color-twine-100: #eee6d3;
+  --color-twine-200: #dfcda9;
+  --color-twine-300: #cdac77;
+  --color-twine-400: #bd9051;
+  --color-twine-500: #ae7d44;
+  --color-twine-600: #956339;
+  --color-twine-700: #784b30;
+  --color-twine-800: #653f2e;
+  --color-twine-900: #58362b;
+  --color-twine-950: #321c16;
 
   /* Unitless line-heights causing issue */
   --text-xs--line-height: 1rem;
@@ -130,12 +143,13 @@
   }
 
   #docs-details[open] > summary + * {
-    height: 80vh;
+    height: auto;
+    max-height: calc(100vh - 62px);
   }
 
   .anchor-heading {
     text-decoration: none !important;
-    display: block;
+    display: inline;
   }
 
   .anchor-heading > *:after {

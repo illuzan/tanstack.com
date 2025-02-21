@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import headerCourse from '~/images/query-header-course.svg'
 import cornerTopLeft from '~/images/query-corner-top-left.svg'
 import cornerTopRight from '~/images/query-corner-top-right.svg'
@@ -33,8 +32,8 @@ export function QueryGGBanner() {
   }
 
   return (
-    <aside className="mx-auto flex w-full max-w-[1200px] items-center justify-between p-8">
-      <div className="relative w-full border-4 border-[#231f20] bg-[#f9f4da] xl:flex xl:gap-6">
+    <aside className="mx-auto w-full max-w-[1200px] px-8 flex justify-between items-center">
+      <div className="w-full xl:flex xl:gap-6 bg-[#f9f4da] border-4 border-[#231f20] relative">
         <a
           href="https://query.gg?s=tanstack"
           className="grid grid-cols-[70px_1fr_70px] pb-4 sm:grid-cols-[100px_1fr_100px] md:grid-cols-[140px_1fr_140px] xl:w-7/12 xl:grid-cols-[110px_1fr] 2xl:grid-cols-[150px_1fr]"

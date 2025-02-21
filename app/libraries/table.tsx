@@ -1,5 +1,14 @@
 import { handleRedirects } from '~/utils/handleRedirects.server'
 import { Library } from '.'
+import { VscPreview } from 'react-icons/vsc'
+import { FaGithub, FaBolt, FaCogs } from 'react-icons/fa'
+import { BiBookAlt } from 'react-icons/bi'
+import { IoIosBody } from 'react-icons/io'
+import { twMerge } from 'tailwind-merge'
+
+const repo = 'tanstack/table'
+
+const textStyles = 'text-blue-500 dark:text-blue-400'
 
 export const tableProject = {
   id: 'table',
@@ -12,11 +21,11 @@ export const tableProject = {
   badge: undefined,
   bgStyle: 'bg-blue-500',
   textStyle: 'text-blue-500',
-  repo: 'tanstack/table',
+  repo,
   latestBranch: 'main',
   latestVersion: 'v8',
   availableVersions: ['v8'],
-  colorFrom: 'from-teal-500',
+  colorFrom: 'from-cyan-500',
   colorTo: 'to-blue-600',
   textColor: 'text-blue-600',
   frameworks: [
@@ -40,6 +49,75 @@ export const tableProject = {
       'from=reactTableV7',
     )
   },
+  menu: [
+    {
+      icon: <VscPreview className="text-lg" />,
+      label: 'Examples',
+      to: '/table/latest/docs/framework/react/examples/basic',
+    },
+    {
+      icon: <BiBookAlt />,
+      label: 'Docs',
+      to: '/table/latest/docs/introduction',
+    },
+    {
+      icon: <FaGithub />,
+      label: 'Github',
+      to: `https://github.com/${repo}`,
+    },
+  ],
+  featureHighlights: [
+    {
+      title: 'Designed for zero design',
+      icon: (
+        <div className="text-center overflow-hidden">
+          <IoIosBody className={twMerge(textStyles)} />
+        </div>
+      ),
+      description: (
+        <div>
+          What good is a powerful table if that super hip designer you just
+          hired can't work their UI magic on it?{' '}
+          <span className={twMerge('font-semibold', textStyles)}>
+            TanStack Table is headless by design
+          </span>
+          , which means 100% control down to the very smallest HTML tag,
+          component, class and style. Pixel Perfection? Go for it!
+        </div>
+      ),
+    },
+    {
+      title: 'Big Power, Small Package',
+      icon: <FaBolt className={twMerge(textStyles)} />,
+      description: (
+        <div>
+          Don't be fooled by the small bundle size. TanStack Table is a
+          workhorse. It's built to materialize, filter, sort, group, aggregate,
+          paginate and display massive data sets using a very small API surface.
+          Wire up your new or existing tables and{' '}
+          <span className={twMerge('font-semibold', textStyles)}>
+            watch your users become instantly more productive
+          </span>
+          .
+        </div>
+      ),
+    },
+    {
+      title: 'Extensible',
+      icon: <FaCogs className={twMerge(textStyles)} />,
+      description: (
+        <div>
+          TanStack table ships with excellent defaults to get you off the ground
+          as fast as possible, but nothing is stopping you from{' '}
+          <span className={twMerge('font-semibold', textStyles)}>
+            customizing and overriding literally everything to your liking
+          </span>
+          . Feeling tenacious enough to build your own Sheets/Excel/AirTable
+          clone? Be our guest 😉
+        </div>
+      ),
+    },
+  ],
 } satisfies Library
 
 // prettier-ignore

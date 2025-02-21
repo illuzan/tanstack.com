@@ -1,78 +1,20 @@
 import * as React from 'react'
 
-import { CgCornerUpLeft, CgSpinner } from 'react-icons/cg'
-import {
-  FaBolt,
-  FaBook,
-  FaCheckCircle,
-  FaCogs,
-  FaDiscord,
-  FaGithub,
-  FaTshirt,
-} from 'react-icons/fa'
+import { CgSpinner } from 'react-icons/cg'
+import { FaCheckCircle } from 'react-icons/fa'
 import { Await, Link, getRouteApi } from '@tanstack/react-router'
 import { Carbon } from '~/components/Carbon'
 import { Footer } from '~/components/Footer'
-import { VscPreview, VscWand } from 'react-icons/vsc'
 import { TbHeartHandshake } from 'react-icons/tb'
 import SponsorPack from '~/components/SponsorPack'
 import { QueryGGBanner } from '~/components/QueryGGBanner'
 import { queryProject } from '~/libraries/query'
-import { LogoQueryGG } from '~/components/LogoQueryGG'
 import { createFileRoute } from '@tanstack/react-router'
-import { Framework, getBranch } from '~/libraries'
+import { Framework, getBranch, getLibrary } from '~/libraries'
 import { seo } from '~/utils/seo'
-
-const menu = [
-  {
-    label: (
-      <div className="flex items-center gap-2">
-        <CgCornerUpLeft className="text-lg" /> TanStack
-      </div>
-    ),
-    to: '/',
-  },
-  {
-    label: (
-      <div className="flex items-center gap-1">
-        <VscPreview className="text-lg" /> Examples
-      </div>
-    ),
-    to: './docs/framework/react/examples/basic',
-  },
-  {
-    label: (
-      <div className="flex items-center gap-1">
-        <FaBook className="text-lg" /> Docs
-      </div>
-    ),
-    to: './docs/',
-  },
-  {
-    label: (
-      <div className="flex items-center gap-1">
-        <FaGithub className="text-lg" /> GitHub
-      </div>
-    ),
-    to: `https://github.com/${queryProject.repo}`,
-  },
-  {
-    label: (
-      <div className="flex items-center gap-1">
-        <FaDiscord className="text-lg" /> Discord
-      </div>
-    ),
-    to: 'https://tlinz.com/discord',
-  },
-  {
-    label: (
-      <div className="flex items-center gap-1">
-        <FaTshirt className="text-lg" /> Merch
-      </div>
-    ),
-    to: `https://cottonbureau.com/people/tanstack`,
-  },
-]
+import { twMerge } from 'tailwind-merge'
+import { LibraryFeatureHighlights } from '~/components/LibraryFeatureHighlights'
+import { partners } from '~/utils/partners'
 
 export const Route = createFileRoute('/_libraries/query/$version/')({
   component: VersionIndex,
@@ -85,6 +27,8 @@ export const Route = createFileRoute('/_libraries/query/$version/')({
 })
 
 const librariesRouteApi = getRouteApi('/_libraries')
+
+const library = getLibrary('query')
 
 export default function VersionIndex() {
   const { sponsorsPromise } = librariesRouteApi.useLoaderData()
@@ -100,48 +44,21 @@ export default function VersionIndex() {
   const gradientText = `inline-block leading-snug text-transparent bg-clip-text bg-linear-to-r ${queryProject.colorFrom} ${queryProject.colorTo}`
 
   return (
-    <div className="relative flex min-h-0 flex-1 flex-col overflow-x-hidden">
-      <QueryGGBanner />
-      <div className="relative flex min-h-0 flex-1 justify-center overflow-x-hidden">
-        <div className="flex max-w-full flex-col gap-20 md:gap-32">
-          <div className="mx-auto flex max-w-(--breakpoint-xl) flex-wrap items-center justify-center px-4 py-2 text-sm md:self-end md:text-base">
-            {menu?.map((item, i) => {
-              const label = (
-                <div className="p-2 opacity-90 hover:opacity-100">
-                  {item.label}
-                </div>
-              )
-
-              return (
-                <div key={i} className="hover:underline">
-                  {item.to.startsWith('http') ? (
-                    <a href={item.to}>{label}</a>
-                  ) : (
-                    <Link to={item.to} params>
-                      {label}
-                    </Link>
-                  )}
-                </div>
-              )
-            })}
-          </div>
-          <div className="flex flex-col items-center gap-8 px-4 text-center">
-            <div className="flex items-center gap-2 lg:gap-4">
-              <h1
-                className={`inline-block text-4xl font-black md:text-6xl lg:text-7xl`}
-                style={{
-                  viewTransitionName: `library-name`,
-                }}
-              >
-                <span className={gradientText}>TanStack Query</span>{' '}
-                <span className="animate-bounce align-super text-[.5em] text-black dark:text-white">
-                  {version === 'latest' ? queryProject.latestVersion : version}
-                </span>
-              </h1>
-            </div>
-            <h2 className="max-w-md text-2xl font-bold md:text-3xl lg:max-w-2xl lg:text-5xl">
+    <div className="flex flex-1 flex-col min-h-0 relative overflow-x-hidden">
+      <div className="flex flex-1 min-h-0 relative justify-center overflow-x-hidden">
+        <div className="flex flex-col gap-20 md:gap-32 max-w-full py-32">
+          <div className="flex flex-col items-center gap-8 text-center px-4">
+            <h1 className="font-black flex gap-3 items-center text-4xl md:text-6xl lg:text-7xl xl:text-8xl uppercase [letter-spacing:-.05em]">
+              <span>TanStack</span>
+              <span className={twMerge(gradientText)}>Query</span>
+            </h1>
+            <h2
+              className="font-bold text-2xl max-w-md
+            md:text-3xl
+            lg:text-5xl lg:max-w-2xl"
+            >
               Powerful{' '}
-              <span className="underline decoration-yellow-500 decoration-dashed decoration-3 underline-offset-2">
+              <span className="underline decoration-yellow-500 decoration-dashed underline-offset-2">
                 asynchronous state management
               </span>{' '}
               for TS/JS, React, Solid, Vue, Svelte and Angular
@@ -156,84 +73,20 @@ export default function VersionIndex() {
               </strong>
               .
             </p>
-            <Link
-              to="./docs/"
-              className={`rounded-sm bg-red-500 px-4 py-2 font-extrabold text-white uppercase`}
-            >
-              Read the Docs
-            </Link>
-            <p>
-              (or check out{' '}
-              <a
-                href="https://query.gg?s=tanstack"
-                className={`${gradientText} underline`}
+            <div className="space-y-4">
+              <Link
+                to="./docs/"
+                className={`py-2 px-4 bg-red-500 rounded-sm text-white uppercase font-extrabold`}
               >
-                query.gg
-              </a>{' '}
-              – the official React Query course)
-            </p>
+                Read the Docs
+              </Link>
+              <p>(or check out our official course 👇)</p>
+            </div>
+            <QueryGGBanner />
           </div>
-          <div className="mx-auto flex max-w-[1200px] flex-col gap-12 p-8 text-lg md:flex-row">
-            <div className="flex flex-1 flex-col items-center gap-8">
-              <VscWand className="text-6xl text-red-500" />
-              <div className="flex flex-col gap-4">
-                <h3 className="text-center text-xl font-black uppercase">
-                  Declarative & Automatic
-                </h3>
-                <p className="text-sm leading-6 text-gray-800 dark:text-gray-200">
-                  Writing your data fetching logic by hand is over. Tell
-                  TanStack Query where to get your data and how fresh you need
-                  it to be and the rest is automatic. It handles{' '}
-                  <span className="font-semibold text-red-700 dark:text-red-400">
-                    caching, background updates and stale data out of the box
-                    with zero-configuration
-                  </span>
-                  .
-                </p>
-              </div>
-            </div>
-            <div className="flex flex-1 flex-col items-center gap-8">
-              <div className="text-center">
-                <FaBolt className="text-6xl text-orange-600" />
-              </div>
-              <div className="flex flex-col gap-4">
-                <h3 className="text-center text-xl font-black uppercase">
-                  Simple & Familiar
-                </h3>
-                <p className="text-sm leading-6 text-gray-800 dark:text-gray-200">
-                  If you know how to work with promises or async/await, then you
-                  already know how to use TanStack Query. There's{' '}
-                  <span className="font-semibold text-orange-700 dark:text-orange-400">
-                    no global state to manage, reducers, normalization systems
-                    or heavy configurations to understand
-                  </span>
-                  . Simply pass a function that resolves your data (or throws an
-                  error) and the rest is history.
-                </p>
-              </div>
-            </div>
-            <div className="flex flex-1 flex-col items-center gap-8">
-              <div className="text-center">
-                <FaCogs className="text-6xl text-amber-500" />
-              </div>
-              <div className="flex flex-col gap-4">
-                <h3 className="text-center text-xl font-black uppercase">
-                  Extensible
-                </h3>
-                <p className="text-sm leading-6 text-gray-800 dark:text-gray-200">
-                  TanStack Query is configurable down to each observer instance
-                  of a query with knobs and options to fit every use-case. It
-                  comes wired up with{' '}
-                  <span className="font-semibold text-amber-700 dark:text-amber-400">
-                    dedicated devtools, infinite-loading APIs, and first class
-                    mutation tools that make updating your data a breeze
-                  </span>
-                  . Don't worry though, everything is pre-configured for
-                  success!
-                </p>
-              </div>
-            </div>
-          </div>
+          <LibraryFeatureHighlights
+            featureHighlights={library.featureHighlights}
+          />
 
           <div className="mx-auto px-4 sm:px-6 lg:px-8">
             <div className="pb-16 sm:text-center">
@@ -326,29 +179,32 @@ export default function VersionIndex() {
             </marquee>
           </div>
 
-          <div className="mx-auto w-[500px] max-w-full px-4">
-            <h3 className="mt-8 text-center text-3xl leading-8 font-extrabold tracking-tight sm:text-4xl sm:leading-10 lg:leading-none">
+          <div className="px-4 lg:max-w-(--breakpoint-lg) md:mx-auto mx-auto">
+            <h3 className="text-center text-3xl leading-8 font-extrabold tracking-tight sm:text-4xl sm:leading-10 lg:leading-none mt-8">
               Partners
             </h3>
             <div className="h-8" />
-            <div className="flex flex-1 flex-col items-center divide-y-2 divide-gray-500/10 overflow-hidden rounded-lg bg-white text-center text-sm shadow-xl shadow-gray-500/20 dark:bg-gray-800 dark:shadow-none">
-              <span className="flex items-center gap-2 p-12 text-4xl font-black text-rose-500 uppercase">
-                Query <TbHeartHandshake /> You?
-              </span>
-              <div className="flex flex-col gap-4 p-4">
-                <div>
-                  We're looking for a TanStack Query OSS Partner to go above and
-                  beyond the call of sponsorship. Are you as invested in
-                  TanStack Query as we are? Let's push the boundaries of Query
-                  together!
-                </div>
-                <a
-                  href="mailto:partners@tanstack.com?subject=TanStack Query Partnership"
-                  className="text-sm font-black text-blue-500 uppercase"
-                >
-                  Let's chat
-                </a>
-              </div>
+            <div className={`grid grid-cols-1 gap-6 max-w-(--breakpoint-md) mx-auto`}>
+              {partners
+                .filter((d) => d.libraries?.includes('query'))
+                .map((partner) => {
+                  return (
+                    <a
+                      key={partner.name}
+                      href={partner.href}
+                      target="_blank"
+                      className="shadow-xl shadow-gray-500/20 rounded-lg dark:border border-gray-500/20 bg-white dark:bg-black/40 dark:shadow-none group overflow-hidden grid"
+                      rel="noreferrer"
+                    >
+                      <div className="z-0 row-start-1 col-start-1 flex items-center justify-center group-hover:blur-xs transition-all duration-200">
+                        {partner.homepageImg}
+                      </div>
+                      <div className="z-10 row-start-1 col-start-1 max-w-full p-4 text-sm flex flex-col gap-4 items-start opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-white/70 dark:bg-gray-800/70">
+                        {partner.content}
+                      </div>
+                    </a>
+                  )
+                })}
             </div>
           </div>
 

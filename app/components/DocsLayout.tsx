@@ -463,7 +463,7 @@ export function DocsLayout({
   )
 
   const smallMenu = (
-    <div className="sticky top-0 z-20 bg-white lg:hidden dark:bg-gray-900">
+    <div className="lg:hidden bg-white/50 sticky top-0 z-20 dark:bg-black/60 backdrop-blur-lg">
       <details
         ref={detailsRef as any}
         id="docs-details"
@@ -476,7 +476,11 @@ export function DocsLayout({
             {logo}
           </div>
         </summary>
-        <div className="flex h-[0vh] flex-col gap-4 overflow-y-auto border-t border-gray-500/20 bg-gray-100 p-4 text-lg whitespace-nowrap dark:bg-gray-900">
+        <div
+          className="flex flex-col gap-4 p-4 whitespace-nowrap h-[0vh] overflow-y-auto
+          border-t border-gray-500/20 bg-white/20 text-lg
+          dark:bg-black/20"
+        >
           <div className="flex gap-4">
             <Select
               label={frameworkConfig.label}
@@ -504,7 +508,7 @@ export function DocsLayout({
   )
 
   const largeMenu = (
-    <div className="sticky top-0 z-20 hidden h-screen max-w-[300px] flex-col gap-4 border-gray-500/20 bg-white shadow-xl transition-all duration-500 lg:flex xl:max-w-[350px] 2xl:max-w-[400px] dark:border-r dark:bg-gray-900/50">
+    <div className="bg-white/50 dark:bg-black/30 shadow-xl max-w-[300px] xl:max-w-[350px] 2xl:max-w-[400px] hidden lg:flex flex-col gap-4 h-screen sticky top-0 z-20 dark:border-r border-gray-500/20 transition-all duration-500">
       <div
         className="flex items-center gap-2 px-4 pt-4 text-2xl"
         style={{
@@ -561,15 +565,17 @@ export function DocsLayout({
       </div>
       {smallMenu}
       {largeMenu}
-      <div
-        className={twMerge(
-          `relative flex min-h-[88dvh] w-full max-w-full min-w-0 justify-center lg:min-h-0`,
-          !isExample && 'mx-auto w-[1208px]',
-        )}
-      >
-        {children}
-        <div className="fixed bottom-3 z-10 flex flex-wrap items-center px-1 text-xs md:text-sm print:hidden">
-          <div className="flex flex-wrap justify-end px-1">
+      <div className="flex flex-col max-w-full min-w-0 w-full min-h-0 relative">
+        <div
+          className={twMerge(
+            `max-w-full min-w-0 flex justify-center w-full min-h-[88dvh] lg:min-h-0`,
+            !isExample && 'mx-auto w-[1208px]'
+          )}
+        >
+          {children}
+        </div>
+        <div className="sticky flex items-center flex-wrap bottom-2 z-10 right-0 text-xs md:text-sm px-1 print:hidden">
+          <div className="w-1/2 px-1 flex justify-end flex-wrap">
             {prevItem ? (
               <Link
                 to={prevItem.to}
@@ -605,8 +611,8 @@ export function DocsLayout({
       </div>
       <div className="sticky top-0 -ml-2 hidden max-h-screen w-64 shrink-0 overflow-y-auto pl-2 md:block">
         <div className="ml-auto flex flex-col space-y-4">
-          <div className="flex flex-col divide-y divide-gray-500/20 rounded-bl-lg border border-t-0 border-r-0 border-gray-500/20 bg-white shadow-xl dark:bg-gray-900/30">
-            <div className="p-3 text-center font-black uppercase opacity-50">
+          <div className="bg-white dark:bg-black/40 border-gray-500/20 shadow-xl divide-y divide-gray-500/20 flex flex-col border border-r-0 border-t-0 rounded-bl-lg">
+            <div className="uppercase font-black text-center p-3 opacity-50">
               Our Partners
             </div>
             {!partners.some((d) => d.libraries?.includes(libraryId as any)) ? (
@@ -639,7 +645,7 @@ export function DocsLayout({
                       <a
                         href={partner.href}
                         target="_blank"
-                        className="flex cursor-pointer items-center justify-center px-4"
+                        className="px-4 flex flex-col items-center justify-center cursor-pointer gap-1"
                         rel="noreferrer"
                       >
                         <div className="mx-auto max-w-[150px]">
@@ -665,12 +671,13 @@ export function DocsLayout({
                           />
                         </div>
                       </a>
+                      {partner.sidebarAfterImg || null}
                     </div>
                   )
                 })
             )}
           </div>
-          <div className="flex flex-col divide-y divide-gray-500/20 rounded-l-lg border-t border-b border-l border-gray-500/20 bg-white p-4 shadow-xl dark:bg-gray-900/30">
+          <div className="p-4 bg-white dark:bg-black/40 border-b border-gray-500/20 shadow-xl divide-y divide-gray-500/20 flex flex-col border-t border-l rounded-l-lg">
             {libraryId === 'query' ? (
               <DocsCalloutQueryGG />
             ) : (
@@ -678,7 +685,7 @@ export function DocsLayout({
             )}
           </div>
 
-          <div className="flex flex-col space-y-2 rounded-l-lg border-t border-b border-l border-gray-500/20 bg-white p-4 shadow-xl dark:bg-gray-900/20">
+          <div className="bg-white dark:bg-black/40 border-gray-500/20 shadow-xl flex flex-col border-t border-l border-b p-4 space-y-2 rounded-l-lg">
             <Carbon />
             <div className="self-center rounded-sm bg-gray-500/10 px-2 py-1 text-[.7rem] text-gray-500 italic opacity-50 transition-opacity hover:opacity-100 dark:bg-gray-500/20">
               This ad helps to keep us from burning out and rage-quitting OSS

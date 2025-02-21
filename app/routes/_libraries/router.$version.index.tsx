@@ -1,71 +1,20 @@
 import * as React from 'react'
-import { CgSpinner, CgTimelapse } from 'react-icons/cg'
-import {
-  FaBook,
-  FaCheckCircle,
-  FaDiscord,
-  FaGithub,
-  FaTshirt,
-} from 'react-icons/fa'
+import { CgSpinner } from 'react-icons/cg'
+import { FaCheckCircle } from 'react-icons/fa'
 import {
   Await,
   Link,
   createFileRoute,
   getRouteApi,
 } from '@tanstack/react-router'
-import { TbHeartHandshake, TbZoomQuestion } from 'react-icons/tb'
-import { VscPreview } from 'react-icons/vsc'
-import { RiLightbulbFlashLine } from 'react-icons/ri'
 import { routerProject } from '~/libraries/router'
-import { Carbon } from '~/components/Carbon'
 import { Footer } from '~/components/Footer'
 import SponsorPack from '~/components/SponsorPack'
-import { Framework, getBranch } from '~/libraries'
+import { Framework, getBranch, getLibrary } from '~/libraries'
 import { seo } from '~/utils/seo'
 import { partners } from '~/utils/partners'
-
-const menu = [
-  {
-    label: (
-      <div className="flex items-center gap-1">
-        <VscPreview className="text-lg" /> Examples
-      </div>
-    ),
-    to: './docs/framework/react/examples/kitchen-sink-file-based',
-  },
-  {
-    label: (
-      <div className="flex items-center gap-1">
-        <FaBook className="text-lg" /> Docs
-      </div>
-    ),
-    to: './docs/framework/react/overview',
-  },
-  {
-    label: (
-      <div className="flex items-center gap-1">
-        <FaGithub className="text-lg" /> GitHub
-      </div>
-    ),
-    to: `https://github.com/${routerProject.repo}`,
-  },
-  {
-    label: (
-      <div className="flex items-center gap-1">
-        <FaDiscord className="text-lg" /> Discord
-      </div>
-    ),
-    to: 'https://tlinz.com/discord',
-  },
-  {
-    label: (
-      <div className="flex items-center gap-1">
-        <FaTshirt className="text-lg" /> Merch
-      </div>
-    ),
-    to: `https://cottonbureau.com/people/tanstack`,
-  },
-]
+import { twMerge } from 'tailwind-merge'
+import { LibraryFeatureHighlights } from '~/components/LibraryFeatureHighlights'
 
 export const Route = createFileRoute('/_libraries/router/$version/')({
   component: RouterVersionIndex,
@@ -78,6 +27,8 @@ export const Route = createFileRoute('/_libraries/router/$version/')({
 })
 
 const librariesRouteApi = getRouteApi('/_libraries')
+
+const library = getLibrary('router')
 
 function RouterVersionIndex() {
   const { sponsorsPromise } = librariesRouteApi.useLoaderData()
@@ -93,46 +44,28 @@ function RouterVersionIndex() {
   const gradientText = `inline-block text-transparent bg-clip-text bg-linear-to-r ${routerProject.colorFrom} ${routerProject.colorTo}`
 
   return (
-    <div className="flex max-w-full flex-col gap-20 md:gap-32">
-      <div className="mx-auto flex max-w-(--breakpoint-xl) flex-wrap items-center justify-center px-4 py-2 text-sm md:self-end md:text-base">
-        {menu?.map((item, i) => {
-          const label = (
-            <div className="p-2 opacity-90 hover:opacity-100">{item.label}</div>
-          )
-
-          return (
-            <div key={i} className="hover:underline">
-              {item.to.startsWith('http') ? (
-                <a href={item.to}>{label}</a>
-              ) : (
-                <Link to={item.to} params>
-                  {label}
-                </Link>
-              )}
-            </div>
-          )
-        })}
-      </div>
-      <div className="flex flex-col items-center gap-8 px-4 text-center">
-        <div className="flex items-center gap-2 lg:gap-4">
-          <h1
-            className={`inline-block text-4xl font-black md:text-6xl lg:text-7xl`}
-            style={{
-              viewTransitionName: `library-name`,
-            }}
-          >
-            <span className={gradientText}>TanStack Router</span>
-          </h1>
-        </div>
-        <h2 className="max-w-md text-2xl font-bold md:text-3xl lg:max-w-2xl lg:text-5xl">
-          <span className="underline decoration-yellow-500 decoration-dashed decoration-3 underline-offset-2">
+    <div className="flex flex-col gap-20 md:gap-32 max-w-full pt-32">
+      <div className="flex flex-col items-center gap-8 text-center px-4">
+        <h1 className="font-black flex gap-3 items-center text-4xl md:text-6xl lg:text-7xl xl:text-8xl uppercase [letter-spacing:-.05em]">
+          <span>TanStack</span>
+          <span className={twMerge(gradientText)}>Router</span>
+        </h1>
+        <h2
+          className="font-bold text-2xl max-w-md
+            md:text-3xl
+            lg:text-5xl lg:max-w-2xl"
+        >
+          <span className="underline decoration-dashed decoration-yellow-500 underline-offset-2">
             Modern and scalable
           </span>{' '}
-          routing for React applications
+          routing for React and Solid applications
         </h2>
-        <p className="text max-w-sm opacity-90 lg:max-w-2xl lg:text-xl">
-          A fully type-safe React router with built-in data fetching,
-          stale-while revalidate caching and first-class search-param APIs.
+        <p
+          className="text opacity-90 max-w-sm
+            lg:text-xl lg:max-w-2xl"
+        >
+          A fully type-safe router with built-in data fetching, stale-while
+          revalidate caching and first-class search-param APIs.
         </p>
         <Link
           to="./docs/framework/react/overview"
@@ -141,80 +74,9 @@ function RouterVersionIndex() {
           Get Started
         </Link>
       </div>
-
-      <div className="mx-auto flex max-w-[1200px] flex-col gap-12 p-8 text-lg md:flex-row">
-        <div className="flex flex-1 flex-col items-center gap-8">
-          <div className="text-center">
-            <RiLightbulbFlashLine className="scale-125 animate-pulse text-6xl text-lime-500" />
-          </div>
-          <div className="flex flex-col gap-4 text-center">
-            <h3 className="text-xl font-black uppercase">
-              Typesafe & powerful, yet familiarly simple
-            </h3>
-            <p className="text-sm leading-6 text-gray-800 dark:text-gray-200">
-              TanStack Router builds on modern routing patterns made popular by
-              other tools, but has been re-engineered from the ground up to be{' '}
-              <span className="font-semibold text-lime-600 dark:text-lime-400">
-                100% typesafe without compromising on DX
-              </span>
-              . You <em>can</em> have your cake and eat it too!
-            </p>
-          </div>
-        </div>
-        <div className="flex flex-1 flex-col items-center gap-8">
-          <div className="text-center">
-            <CgTimelapse
-              className="text-6xl text-teal-500 motion-safe:animate-spin"
-              style={{
-                animationDuration: '3s',
-                animationTimingFunction: 'ease-in-out',
-              }}
-            />
-          </div>
-          <div className="flex flex-col gap-4 text-center">
-            <h3 className="text-xl font-black uppercase">
-              Built-in Data Fetching with Caching
-            </h3>
-            <p className="text-sm leading-6 text-gray-800 dark:text-gray-200">
-              Hoist your data fetching and avoid waterfalls with TanStack
-              Router's loader API and get{' '}
-              <span className="font-semibold text-teal-500 dark:text-teal-400">
-                instant navigations with built-in caching and automatic
-                preloading
-              </span>
-              . Need something more custom? Router's API is{' '}
-              <span className="font-semibold text-teal-500 dark:text-teal-400">
-                designed to work with your favorite client-side cache libraries!
-              </span>{' '}
-              Your users will notice the difference when your pages not only
-              load in parallel but also stay up to date over time.
-            </p>
-          </div>
-        </div>
-        <div className="flex flex-1 flex-col items-center gap-8">
-          <div className="text-center">
-            <TbZoomQuestion className="text-6xl text-emerald-500" />
-          </div>
-          <div className="flex flex-col gap-4 text-center">
-            <h3 className="text-xl font-black uppercase">
-              Search Param APIs to make your state-manager jealous
-            </h3>
-            <p className="text-sm leading-6 text-gray-800 dark:text-gray-200">
-              Instead of throwing you to the URLSearchParam wolves, TanStack
-              Router outfits you with state-manager-grade search param APIs.
-              With{' '}
-              <span className="font-semibold text-emerald-500 dark:text-emerald-400">
-                schemas, validation, full type-safety and pre/post manipulation
-              </span>{' '}
-              you'll wonder why you're not storing everything in the URL.
-              Goodbye in-memory state 👋!
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div className="mx-auto px-4 md:mx-auto lg:max-w-(--breakpoint-lg)">
-        <h3 className="mt-8 text-center text-3xl leading-8 font-extrabold tracking-tight sm:text-4xl sm:leading-10 lg:leading-none">
+      <LibraryFeatureHighlights featureHighlights={library.featureHighlights} />
+      <div className="px-4 lg:max-w-(--breakpoint-lg) md:mx-auto mx-auto">
+        <h3 className="text-center text-3xl leading-8 font-extrabold tracking-tight sm:text-4xl sm:leading-10 lg:leading-none mt-8">
           Partners
         </h3>
         <div className="h-8" />
@@ -227,10 +89,10 @@ function RouterVersionIndex() {
                   key={partner.name}
                   href={partner.href}
                   target="_blank"
-                  className="group grid overflow-hidden rounded-lg border-gray-500/20 bg-white shadow-xl shadow-gray-500/20 dark:border dark:bg-gray-800 dark:shadow-none"
+                  className="shadow-xl shadow-gray-500/20 rounded-lg dark:border border-gray-500/20 bg-white dark:bg-black/40 dark:shadow-none group overflow-hidden grid"
                   rel="noreferrer"
                 >
-                  <div className="z-0 col-start-1 row-start-1 flex items-center justify-center bg-white transition-all duration-200 group-hover:blur-xs">
+                  <div className="z-0 row-start-1 col-start-1 flex items-center justify-center group-hover:blur-xs transition-all duration-200">
                     {partner.homepageImg}
                   </div>
                   <div className="z-10 col-start-1 row-start-1 flex max-w-full flex-col items-start gap-4 bg-white/70 p-4 text-sm opacity-0 transition-opacity duration-200 group-hover:opacity-100 dark:bg-gray-800/70">
